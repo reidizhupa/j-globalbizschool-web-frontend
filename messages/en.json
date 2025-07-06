@@ -2,7 +2,13 @@
     "locale": "en",
     "HomePage": {
         "title": "Hello world!",
-        "about": "Go to the about page"
+        "about": "Go to the about page",
+        "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
+        "clickFreeTrial": "Click for free trial"
+    },
+    "Authentication": {
+        "login": "Login",
+        "joinPrograms": "Join Programs"
     },
     "title": "dio"
 }

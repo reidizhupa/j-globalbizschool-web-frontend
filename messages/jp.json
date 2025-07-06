@@ -2,7 +2,13 @@
     "locale": "jp",
     "HomePage": {
         "title": "Pagina Giapponese !",
-        "about": ", vai alla pagina di informazioni"
+        "about": ", vai alla pagina di informazioni",
+        "heroDescription": "J-Global\nビジネススクールへ\nようこそ!",
+        "clickFreeTrial": "無料トライアルはこちら"
+    },
+    "Authentication": {
+        "login": "ログイン",
+        "joinPrograms": "​プログラムを受講する"
     },
     "title": "dio"
 }
