@@ -50,7 +50,7 @@ export default function LanguageSwitcher() {
 				<div className="relative" ref={dropdownRef}>
 					<button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 px-4 py-2 rounded-full border- border-gray-500 backdrop-blur-md hover:border-[#285677]/30 transition-all duration-200">
 						<Image src={`/flags/${currentLocale}.png`} alt={currentLocale} width={20} height={14} className="rounded-sm object-cover" />
-						<span className="text-lg font-bold text-gray-700">{getLanguageName(currentLocale)}</span>
+						<span className="text-lg text-gray-700">{getLanguageName(currentLocale)}</span>
 						<svg className={`w-4 h-4 text-gray-700 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
 						</svg>
@@ -122,10 +122,10 @@ export default function LanguageSwitcher() {
 
 							{/* Auth */}
 							<div className="flex flex-col items-center gap-4">
-								<Link href="/login" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 border border-[#f7a520] rounded-full text-[#f7a520] text-sm hover:bg-[#285677]/10">
+								<Link href="https://fms.j-globalbizschool.com/fmi/webd/IBSApplication?script=login" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 border border-[#f7a520] rounded-full text-[#f7a520] text-sm hover:bg-[#285677]/10">
 									{t("login")}
 								</Link>
-								<Link href="/register" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 bg-[#f7a520] text-white rounded-full text-sm hover:bg-[#f7a520]">
+								<Link href="https://fms.j-globalbizschool.com/fmi/webd/IBSApplication" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 bg-[#f7a520] text-white rounded-full text-sm hover:bg-[#f7a520]">
 									{t("joinPrograms")}
 								</Link>
 							</div>
