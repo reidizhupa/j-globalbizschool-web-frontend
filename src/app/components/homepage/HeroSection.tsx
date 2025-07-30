@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 
 export default function Header() {
 	const [isScrolled, setIsScrolled] = useState(false);
-	const t = useTranslations("Authentication");
 	const tHome = useTranslations("HomePage");
 
 	useEffect(() => {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-
+import Image from "next/image";
 const FreeTrialSection = () => {
 	return (
 		<div className="mt-0 mb-15 overflow-hidden">
@@ -14,7 +14,7 @@ const FreeTrialSection = () => {
 				{/* Background Image with opacity */}
 				<div className="absolute inset-0 -z-10">
 					<div className="w-full h-full bg-[#1f497cd8] absolute inset-0 z-10" />
-					<img src="/img/prova3.png" alt="Background" className="w-full h-full object-cover opacity-20" />
+					<Image src="/img/prova3.png" alt="Background" className="w-full h-full object-cover opacity-20" />
 				</div>
 
 				<div className="max-w-2xl mx-auto relative z-20">

@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -10,7 +10,7 @@ const Instructors = () => {
 		{
 			name: "Dr. Sarah L. Birchley",
 			role: "Business School Director, Instructor, Coach",
-			image: "/img/instructors/sarah-birchley.jpg",
+			image: "/img/instructorsf/sarah-birchley.jpg",
 		},
 		{
 			name: "Nathan DeWitt",
@@ -65,7 +65,7 @@ const Instructors = () => {
 						<SwiperSlide key={index}>
 							<div className="flex flex-col items-center w-full">
 								<div className="mb-4 w-32 h-32 rounded-full bg-gray-200 overflow-hidden">
-									<img src={instructor.image} alt={instructor.name} className="w-full h-full object-cover" />
+									<Image src={instructor.image} alt={instructor.name} className="w-full h-full object-cover" />
 								</div>
 								<h3 className="text-lg font-semibold text-gray-800 text-center">{instructor.name}</h3>
 								<p className="text-sm text-gray-600 mt-1 text-center">{instructor.role}</p>

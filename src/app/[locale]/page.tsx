@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import getRequestConfig from "@/i18n/request";
 import HeroSection from "@/app/components/homepage/HeroSection";
 import JGlobalBusinessSchool from "@/app/components/homepage/WhyUs";
@@ -9,6 +8,7 @@ import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGri
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
+import { escapeHtml } from "@/utils/escapeHtml";
 type GenerateMetadataParams = {
 	params: {
 		locale: string;
@@ -24,9 +24,8 @@ export async function generateMetadata({ params }: GenerateMetadataParams) {
 		requestLocale: Promise.resolve(locale),
 	});
 
-	console.log(messages, "messages");
 	return {
-		title: (messages.messages && messages.messages["title"]) || "Default Title",
+		title: escapeHtml(messages.messages && messages.messages["title"]) || "Default Title",
 	};
 }
 
@@ -153,7 +152,6 @@ const globalLeadership: CardGridData = {
 	],
 };
 export default function HomePage() {
-	const t = useTranslations("HomePage");
 	return (
 		<>
 			<HeroSection />

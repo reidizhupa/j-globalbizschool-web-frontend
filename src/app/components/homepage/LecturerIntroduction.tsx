@@ -26,7 +26,7 @@ export default function LecturerIntroduction() {
 						</div>
 
 						{/* Bio */}
-						<p>Originally from the UK, Jon currently lectures on global business skills at Hitotsubashi University. After coming to Japan in 1990, he taught international business communication skills as a cross-cultural business instructor at major training companies, and then in media/marketing companies. He established the training and consulting company J-Global Co., Ltd. in 2010. Utilizing his extensive business experience in Japan, he has provided services to over 100 Japanese and foreign companies. We offer bilingual workshops in Japanese/English with the aim of spreading the "J-Global" best-mix way of working, which combines the strengths of Japanese and other countries.' business styles</p>
+						<p>Originally from the UK, Jon currently lectures on global business skills at Hitotsubashi University. After coming to Japan in 1990, he taught international business communication skills as a cross-cultural business instructor at major training companies, and then in media/marketing companies. He established the training and consulting company J-Global Co., Ltd. in 2010. Utilizing his extensive business experience in Japan, he has provided services to over 100 Japanese and foreign companies. We offer bilingual workshops in Japanese/English with the aim of spreading the &quot;&quot;J-Global&quot; best-mix way of working, which combines the strengths of Japanese and other countries.&apos; business styles</p>
 
 						{/* Coaching Callout (still compact) */}
 						<div className="bg-blue-50 border-l-4 border-[#1f497c] p-4 rounded-xl shadow-sm mt-2">
