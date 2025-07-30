@@ -22,13 +22,16 @@ export default function Header() {
 	return (
 		<div className="relative">
 			{/* Floating background shapes */}
-			<div className="absolute inset-0 -z-10 overflow-hidden">
-				<div className="absolute top-[-80px] left-[-100px] w-[400px] h-[400px] bg-blue-100 rounded-full opacity-40 blur-3xl"></div>
-				<div className="absolute bottom-[-80px] right-[-100px] w-[500px] h-[500px] bg-indigo-200 rounded-full opacity-30 blur-3xl"></div>
-			</div>
 
 			{/* Full-height hero section */}
-			<section className="relative h-screen bg-cover  bg-no-repeat " style={{ backgroundImage: "url('/img/hello.png')" }}>
+			<section
+				className="relative h-screen bg-cover bg-no-repeat"
+				style={{
+					backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), #1f497c), url('/img/hello.png')`,
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+				}}
+			>
 				{" "}
 				{/* Navbar */}
 				<nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-6"}`}>
@@ -63,18 +66,22 @@ export default function Header() {
 							</div>
 
 							{/* Image Section */}
-							<div className="relative flex justify-center lg:justify-end">
+							<div className="hidden md:flex relative justify-center lg:justify-end">
 								<div data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] overflow-hidden">
-									<Image src="/img/banner-image.webp" alt="Online English Conversation" fill className="object-cover object-center" priority sizes="(max-width: 768px) 500px, 700px" />
+									<Image src="/img/bello.png" alt="Online English Conversation" fill className="object-cover object-center" priority sizes="(max-width: 768px) 500px, 700px" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
+			<div className="relative bg-blue-50/50" style={{ transform: "scaleY(-1)" }}>
+				<svg viewBox="0 0 1440 120" className="w-full text-[#1f497c]" fill="currentColor" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M0,64 C360,96 1080,32 1440,64 L1440,120 L0,120 Z" />
+				</svg>
+			</div>
 
 			{/* Content Spacer */}
-			<div className="relative z-10 bg-white">{/* Page content */}</div>
 		</div>
 	);
 }

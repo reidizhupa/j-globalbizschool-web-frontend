@@ -45,7 +45,7 @@ export default function LanguageSwitcher() {
 	return (
 		<div className="relative z-50">
 			{/* Desktop View */}
-			<div className="hidden md:flex items-center gap-5">
+			<div className="hidden lg:flex items-center gap-5">
 				{/* Language Selector */}
 				<div className="relative" ref={dropdownRef}>
 					<button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 px-4 py-2 rounded-full border- border-gray-500 backdrop-blur-md hover:border-[#285677]/30 transition-all duration-200">
@@ -84,7 +84,7 @@ export default function LanguageSwitcher() {
 			</div>
 
 			{/* Mobile View */}
-			<div className="md:hidden flex items-center">
+			<div className="lg:hidden flex items-center">
 				<button onClick={() => setMenuOpen(true)} className="text-gray-800 p-2 rounded-md hover:bg-gray-100 transition">
 					<Menu className="w-6 h-6" />
 				</button>
