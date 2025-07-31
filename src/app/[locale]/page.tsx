@@ -1,4 +1,3 @@
-import getRequestConfig from "@/i18n/request";
 import HeroSection from "@/app/components/homepage/HeroSection";
 import JGlobalBusinessSchool from "@/app/components/homepage/WhyUs";
 import JGlobalAchievements from "@/app/components/homepage/Achievements";
@@ -8,26 +7,6 @@ import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGri
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
-import { escapeHtml } from "@/utils/escapeHtml";
-type GenerateMetadataParams = {
-	params: {
-		locale: string;
-	};
-};
-
-export async function generateMetadata({ params }: GenerateMetadataParams) {
-	const { locale } = await params;
-
-	const configFn = await getRequestConfig;
-
-	const messages = await configFn({
-		requestLocale: Promise.resolve(locale),
-	});
-
-	return {
-		title: escapeHtml(messages.messages && messages.messages["title"]) || "Default Title",
-	};
-}
 
 const globalPrograms: CardGridData = {
 	title: "Global Communication",
