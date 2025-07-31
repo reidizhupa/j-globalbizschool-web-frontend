@@ -44,7 +44,7 @@ export default function Header() {
 					</div>
 				</nav>
 				{/* Hero Content */}
-				<div className="h-full flex items-center pt-32 md:pt-20">
+				<div className="h-full flex items-center pt-20">
 					<div className="container mx-auto px-6">
 						<div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 max-w-6xl mx-auto">
 							{/* Text Section */}
