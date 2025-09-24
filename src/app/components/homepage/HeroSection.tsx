@@ -20,22 +20,15 @@ export default function Page() {
 		<div className="relative min-h-screen overflow-hidden">
 			{/* Background Image */}
 			{/* Background Image */}
-			<div className="absolute inset-0 -z-20 bg-[#00a4ff26]">
-				<Image
-					src="/img/bg-10.png"
-					alt="Background pattern"
-					fill
-					className="object-cover" // or "object-repeat"
-					priority
-				/>
-			</div>
+
 			<div className="absolute inset-0 -z-20">
 				<Image
-					src="/img/bg-11.png"
+					src="/img/sun-tornado.svg"
 					alt="Background pattern"
 					fill
 					className="object-cover" // or "object-repeat"
 					priority
+					style={{ opacity: 0.7 }}
 				/>
 			</div>
 
@@ -55,26 +48,26 @@ export default function Page() {
 			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
 				{/* Left Side */}
 				<div className="flex flex-1 flex-col items-center sm:items-start">
-					<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+					<h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
 						Welcome to <br />
-						<span className="bg-gradient-to-r from-[#1f497c] to-[#3a6bb7] bg-clip-text text-transparent">J-Global</span> Business School
+						<span className="text-[#1f497c] ">J-Global</span> Business School
 					</h1>
 					<p className="mt-6 max-w-lg text-lg text-gray-600">Join a new generation of global leaders through mentorship, innovation, and skills that empower you to thrive in a connected world.</p>
 
 					<div className="mt-8 flex flex-wrap justify-center gap-4 sm:justify-start">
-						<Link href="#" className="rounded-full bg-[#d74100] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-indigo-700">
+						<Link href="#" className="rounded-full bg-[#d74100] px-6 py-3  font-semibold text-white shadow-lg transition hover:bg-indigo-700">
 							Get Started
 						</Link>
-						<Link href="#" className="rounded-full border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition hover:border-indigo-500 hover:text-indigo-600">
+						<Link href="#" className="rounded-full border border-gray-300 px-6 py-3 font-medium text-gray-700 transition hover:border-indigo-500 hover:text-indigo-600">
 							Learn More
 						</Link>
 					</div>
 				</div>
 
 				{/* Right Side */}
-				<div className="relative flex-1">
-					<div className="relative mx-auto w-full max-w-md">
-						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" width={600} height={500} className="z-10 rounded-3xl shadow-2xl" priority />
+				<div className="flex-1 flex justify-center sm:justify-end px-6 sm:px-0 mb-10 sm:mb-0">
+					<div className="relative w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden rounded-[50%_20%_50%_20%] shadow-2xl">
+						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" fill className="object-cover" priority />
 					</div>
 				</div>
 			</section>
