@@ -2,14 +2,9 @@ import Link from "next/link";
 import React from "react";
 const FreeTrialSection = () => {
 	return (
-		<div className="mt-0 mb-15 overflow-hidden">
+		<div className="mt-0 mb-20 overflow-hidden">
 			{" "}
-			<div className="relative block bg-blue-50/50" style={{ transform: "scaleX(-1)" }}>
-				<svg viewBox="0 0 1440 120" className="w-full text-[#1f497cd8]" fill="currentColor" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M0,64 C360,96 1080,32 1440,64 L1440,120 L0,120 Z" />
-				</svg>
-			</div>
-			<div className="relative  w-full py-0  px-4  ">
+			<div className="relative  w-full py-10  px-4  ">
 				{/* Background Image with opacity */}
 				<div className="absolute inset-0 -z-10">
 					<div className="w-full h-full bg-[#1f497cd8] absolute inset-0 z-10" />
@@ -30,16 +25,11 @@ const FreeTrialSection = () => {
 						</div>
 					</div>
 					<div className="text-center">
-						<Link href="/free-trial" className="inline-block text-2xl text-white bg-[#f7a520] font-bold py-4 px-13 rounded-full hover:bg-[#f7a520]/90 transition-colors">
+						<Link href="/free-trial" className="inline-block text-2xl text-white bg-[#d74100] font-bold py-4 px-13 rounded-full hover:bg-[#f7a520]/90 transition-colors">
 							無料体験に登録
 						</Link>
 					</div>
 				</div>
-			</div>
-			<div className="relative" style={{ transform: "scaleY(-1)" }}>
-				<svg viewBox="0 0 1440 120" className="w-full text-[#1f497cd8]" fill="currentColor" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M0,64 C360,96 1080,32 1440,64 L1440,120 L0,120 Z" />
-				</svg>
 			</div>
 		</div>
 	);

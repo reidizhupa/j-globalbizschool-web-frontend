@@ -7,6 +7,7 @@ import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGri
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
+import ClientLogos from "@/app/components/homepage/ClientLogos";
 
 const globalPrograms: CardGridData = {
 	title: "Global Communication",
@@ -168,6 +169,7 @@ export default function HomePage() {
 			</div>
 			<LecturerIntroduction />
 			<Instructors />
+			<ClientLogos />
 		</>
 	);
 }

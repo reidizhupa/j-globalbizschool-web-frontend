@@ -1,86 +1,83 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import LanguageSwitcher from "../LanguageSwitcher";
-import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
-export default function Header() {
-	const [isScrolled, setIsScrolled] = useState(false);
-	const tHome = useTranslations("HomePage");
+export default function Page() {
+	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
 		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 40);
+			setScrolled(window.scrollY > 10); // change 10 to any offset you like
 		};
+
 		window.addEventListener("scroll", handleScroll);
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
-
 	return (
-		<div className="relative">
-			{/* Floating background shapes */}
+		<div className="relative min-h-screen overflow-hidden">
+			{/* Background Image */}
+			{/* Background Image */}
+			<div className="absolute inset-0 -z-20 bg-[#00a4ff26]">
+				<Image
+					src="/img/bg-10.png"
+					alt="Background pattern"
+					fill
+					className="object-cover" // or "object-repeat"
+					priority
+				/>
+			</div>
+			<div className="absolute inset-0 -z-20">
+				<Image
+					src="/img/bg-11.png"
+					alt="Background pattern"
+					fill
+					className="object-cover" // or "object-repeat"
+					priority
+				/>
+			</div>
 
-			{/* Full-height hero section */}
-			<section
-				className="relative h-screen bg-cover bg-no-repeat"
-				style={{
-					backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), #1f497c), url('/img/hello.png')`,
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}
-			>
-				{" "}
-				{/* Navbar */}
-				<nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md py-3" : "bg-transparent py-6"}`}>
-					<div className={`container mx-auto px-6 flex items-center justify-between pb-4 ${!isScrolled ? "md:border-b-2 md:border-gray-300/55" : ""}`}>
-						<Link href="/" className="relative w-[180px] h-[60px] md:w-[220px] md:h-[70px]">
-							<Image src="/logo.png" alt="Company Logo" fill sizes="(max-width: 768px) 180px, 220px" className="object-contain object-left" priority />
-						</Link>
-						<div className="flex items-center gap-4">
-							<LanguageSwitcher />
-						</div>
+			{/* Navbar */}
+			<header className={`fixed top-0 left-0 right-0 z-50 mx-auto flex w-full items-center justify-between px-6 py-2 transition-colors duration-300 ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
+				<div className="max-w-7xl flex w-full items-center justify-between mx-auto">
+					<Link href="/" className="flex items-center">
+						<Image src="/logo.png" alt="Prebuilt UI Logo" width={120} height={40} className="h-auto w-auto object-contain" priority />
+					</Link>
+					<div className="flex items-center space-x-4">
+						<LanguageSwitcher />
 					</div>
-				</nav>
-				{/* Hero Content */}
-				<div className="h-full flex items-center pt-20">
-					<div className="container mx-auto px-6">
-						<div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-14 max-w-6xl mx-auto">
-							{/* Text Section */}
-							<div className="space-y-6 text-center lg:text-left">
-								<h1 data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000" className="whitespace-pre-line text-4xl md:text-6xl leading-normal font-extrabold text-white" style={{ textShadow: `1px 1px 0 #777, 2px 2px 0 #999, 3px 3px 3px rgba(0,0,0,0.2),0 0 6px rgba(255, 255, 255, 0.4)` }}>
-									{tHome("heroDescription")}
-								</h1>
+				</div>
+			</header>
 
-								{/* CTA Button */}
-								<div className="relative inline-block mt-4">
-									<Link data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000" href="/free-trial" className="bg-[#f7a520] text-white md:text-2xl text-lg  font-bold rounded-full px-6 py-3 shadow-md border-[7px] border-[#fbcb65]/70 flex items-center gap-2 transition-colors duration-300 hover:bg-[#ffb648] hover:border-[#f7a520]">
-										{tHome("clickFreeTrial")}
-										<svg className="w-5 h-5 stroke-current" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-										</svg>
-									</Link>
-								</div>
-							</div>
+			{/* Hero Section */}
+			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
+				{/* Left Side */}
+				<div className="flex flex-1 flex-col items-center sm:items-start">
+					<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+						Welcome to <br />
+						<span className="bg-gradient-to-r from-[#1f497c] to-[#3a6bb7] bg-clip-text text-transparent">J-Global</span> Business School
+					</h1>
+					<p className="mt-6 max-w-lg text-lg text-gray-600">Join a new generation of global leaders through mentorship, innovation, and skills that empower you to thrive in a connected world.</p>
 
-							{/* Image Section */}
-							<div className="hidden md:flex relative justify-center lg:justify-end">
-								<div data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" className="relative w-[300px] h-[300px] md:w-[500px] md:h-[500px] overflow-hidden">
-									<Image src="/img/bello.png" alt="Online English Conversation" fill className="object-cover object-center" priority sizes="(max-width: 768px) 500px, 700px" />
-								</div>
-							</div>
-						</div>
+					<div className="mt-8 flex flex-wrap justify-center gap-4 sm:justify-start">
+						<Link href="#" className="rounded-full bg-[#d74100] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-indigo-700">
+							Get Started
+						</Link>
+						<Link href="#" className="rounded-full border border-gray-300 px-6 py-3 text-sm font-medium text-gray-700 transition hover:border-indigo-500 hover:text-indigo-600">
+							Learn More
+						</Link>
+					</div>
+				</div>
+
+				{/* Right Side */}
+				<div className="relative flex-1">
+					<div className="relative mx-auto w-full max-w-md">
+						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" width={600} height={500} className="z-10 rounded-3xl shadow-2xl" priority />
 					</div>
 				</div>
 			</section>
-			<div className="relative bg-blue-50/50" style={{ transform: "scaleY(-1)" }}>
-				<svg viewBox="0 0 1440 120" className="w-full text-[#1f497c]" fill="currentColor" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M0,64 C360,96 1080,32 1440,64 L1440,120 L0,120 Z" />
-				</svg>
-			</div>
-
-			{/* Content Spacer */}
 		</div>
 	);
 }

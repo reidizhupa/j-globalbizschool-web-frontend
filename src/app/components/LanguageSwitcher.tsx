@@ -74,10 +74,10 @@ export default function LanguageSwitcher() {
 
 				{/* Auth Buttons */}
 				<div className="flex gap-3">
-					<Link href="/login" className="px-5 py-2.5 rounded-full border border-[#f7a520] bg-white text-[#f7a520] text-lg font-bold hover:bg-[#285677]/10 transition">
+					<Link href="/login" className="px-5 py-2.5 rounded-full border border-[#d74100] bg-white text-[#d74100] text-sm font-bold hover:bg-[#285677]/10 transition">
 						{t("login")}
 					</Link>
-					<Link href="/register" className="px-5 py-2.5 rounded-full bg-[#f7a520] text-white text-lg font-bold hover:bg-[#f7a520] transition shadow-sm hover:shadow-md">
+					<Link href="/register" className="px-5 py-2.5 rounded-full bg-[#d74100] text-white text-sm font-bold hover:bg-[#d74100] transition shadow-sm hover:shadow-md">
 						{t("joinPrograms")}
 					</Link>
 				</div>
