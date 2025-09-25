@@ -58,7 +58,7 @@ export default function Page() {
 						<Link href="#" className="rounded-full bg-[#d74100] px-6 py-3  font-semibold text-white shadow-lg transition hover:bg-indigo-700">
 							Get Started
 						</Link>
-						<Link href="#" className="rounded-full border border-gray-300 px-6 py-3 font-medium text-gray-700 transition hover:border-indigo-500 hover:text-indigo-600">
+						<Link href="#" className="rounded-full border  border-gray-300 px-6 py-3 font-medium text-white transition hover:border-indigo-500 hover:text-indigo-600">
 							Learn More
 						</Link>
 					</div>

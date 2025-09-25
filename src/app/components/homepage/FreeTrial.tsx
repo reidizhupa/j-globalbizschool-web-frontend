@@ -7,7 +7,7 @@ const FreeTrialSection = () => {
 			<div className="relative  w-full py-10  px-4  ">
 				{/* Background Image with opacity */}
 				<div className="absolute inset-0 -z-10">
-					<div className="w-full h-full bg-[#1f497cd8] absolute inset-0 z-10" />
+					<div className="w-full h-full bg-[#3a70c6de] absolute inset-0 z-10" />
 					<img src="/img/prova3.png" alt="Background" className="w-full h-full object-cover opacity-20" />
 				</div>
 
