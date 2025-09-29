@@ -67,7 +67,7 @@ export default function Page() {
 				{/* Right Side */}
 				<div className="flex-1 flex justify-center sm:justify-end px-6 sm:px-0 mb-10 sm:mb-0">
 					<div className="relative w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden rounded-[50%_20%_50%_20%] shadow-2xl">
-						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" fill className="object-cover" priority />
+						<Image src="/img/gril.jpg" alt="Students collaborating" fill className="object-cover" priority />
 					</div>
 				</div>
 			</section>
