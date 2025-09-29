@@ -20,7 +20,7 @@ export default function Page() {
 		<div className="relative min-h-screen overflow-hidden">
 			{/* Background Image */}
 			{/* Background Image */}
-			<div className="absolute inset-0 -z-20 bg-[#00a4ff26]">
+			<div className="absolute inset-0 -z-20 ">
 				<Image
 					src="/img/bg-10.png"
 					alt="Background pattern"
@@ -52,7 +52,7 @@ export default function Page() {
 			</header>
 
 			{/* Hero Section */}
-			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
+			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-40 sm:text-left">
 				{/* Left Side */}
 				<div className="flex flex-1 flex-col items-center sm:items-start">
 					<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
@@ -74,17 +74,9 @@ export default function Page() {
 				{/* Right Side */}
 				{/* Right Side */}
 				<div className="relative flex-1 flex justify-center sm:justify-end px-6 sm:px-0">
-					<div className="relative w-[400px] sm:w-[400px] md:w-[500px] overflow-hidden rounded-[50%_20%_50%_20%] shadow-2xl border-8 border-[#1f497c]">
-						{/* Abstract angled lines */}
-						<div className="absolute -top-6 -left-6 w-32 h-32 border-t-2 border-l-2 border-[#1f497c] rotate-12"></div>
-						<div className="absolute -bottom-6 -right-6 w-32 h-32 border-b-2 border-r-2 border-pink-400 -rotate-12"></div>
-
-						{/* Subtle circular accent */}
-						<div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-indigo-100/20 blur-2xl -z-10"></div>
-						<div className="absolute -bottom-12 -left-8 w-32 h-32 rounded-full bg-pink-100/20 blur-2xl -z-10"></div>
-
+					<div className="relative w-[400px] sm:w-[400px] md:w-[450px] md:h-[450px]  overflow-hidden rounded-[50%_20%_50%_20%] shadow-2xl ">
 						{/* Main Image */}
-						<Image src="/img/girl.png" alt="Students collaborating" width={1300} height={875} className="relative z-10 object-cover" priority />
+						<Image src="/img/gril.jpg" alt="Students collaborating" width={1300} height={875} className="relative z-10 h-full object-cover" priority />
 					</div>
 				</div>
 			</section>
