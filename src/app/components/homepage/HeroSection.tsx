@@ -20,7 +20,7 @@ export default function Page() {
 		<div className="relative min-h-screen overflow-hidden">
 			{/* Background Image */}
 			{/* Background Image */}
-			<div className="absolute inset-0 -z-20 bg-[#00a4ff26]">
+			<div className="absolute inset-0 -z-20 ">
 				<Image
 					src="/img/bg-10.png"
 					alt="Background pattern"
@@ -54,10 +54,10 @@ export default function Page() {
 			{/* Hero Section */}
 			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
 				{/* Left Side */}
-				<div className="flex flex-1 flex-col items-center sm:items-start">
-					<h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+				<div className="flex flex-2 flex-col items-center sm:items-start">
+					<h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
 						Welcome to <br />
-						<span className="bg-gradient-to-r from-[#1f497c] to-[#3a6bb7] bg-clip-text text-transparent">J-Global</span> Business School
+						<span className="bg-gradient-to-r from-[#1f497c] to-[#3a6bb7] bg-clip-text text-transparent">J-Global</span> <br /> Business School
 					</h1>
 					<p className="mt-6 max-w-lg text-lg text-gray-600">Join a new generation of global leaders through mentorship, innovation, and skills that empower you to thrive in a connected world.</p>
 
@@ -73,8 +73,9 @@ export default function Page() {
 
 				{/* Right Side */}
 				<div className="relative flex-1">
-					<div className="relative mx-auto w-full max-w-md">
-						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" width={600} height={500} className="z-10 rounded-3xl shadow-2xl" priority />
+					{/* Image container */}
+					<div className="relative overflow-hidden pb-0  rounded-full bg-gray-200 group">
+						<img src="/img/gril.png"></img>
 					</div>
 				</div>
 			</section>
