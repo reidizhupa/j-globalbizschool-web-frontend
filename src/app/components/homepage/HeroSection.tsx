@@ -72,9 +72,19 @@ export default function Page() {
 				</div>
 
 				{/* Right Side */}
-				<div className="relative flex-1">
-					<div className="relative mx-auto w-full max-w-md">
-						<Image src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop" alt="Students collaborating" width={600} height={500} className="z-10 rounded-3xl shadow-2xl" priority />
+				{/* Right Side */}
+				<div className="relative flex-1 flex justify-center sm:justify-end px-6 sm:px-0">
+					<div className="relative w-[400px] sm:w-[400px] md:w-[500px] overflow-hidden rounded-[50%_20%_50%_20%] shadow-2xl border-8 border-[#1f497c]">
+						{/* Abstract angled lines */}
+						<div className="absolute -top-6 -left-6 w-32 h-32 border-t-2 border-l-2 border-[#1f497c] rotate-12"></div>
+						<div className="absolute -bottom-6 -right-6 w-32 h-32 border-b-2 border-r-2 border-pink-400 -rotate-12"></div>
+
+						{/* Subtle circular accent */}
+						<div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-indigo-100/20 blur-2xl -z-10"></div>
+						<div className="absolute -bottom-12 -left-8 w-32 h-32 rounded-full bg-pink-100/20 blur-2xl -z-10"></div>
+
+						{/* Main Image */}
+						<Image src="/img/girl.png" alt="Students collaborating" width={1300} height={875} className="relative z-10 object-cover" priority />
 					</div>
 				</div>
 			</section>
