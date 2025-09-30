@@ -20,18 +20,10 @@ export default function Page() {
 		<div className="relative min-h-screen overflow-hidden">
 			{/* Background Image */}
 			{/* Background Image */}
-			<div className="absolute inset-0 -z-20 ">
+
+			<div className="absolute inset-0 opacity-60 -z-20">
 				<Image
-					src="/img/bg-10.png"
-					alt="Background pattern"
-					fill
-					className="object-cover" // or "object-repeat"
-					priority
-				/>
-			</div>
-			<div className="absolute inset-0 -z-20">
-				<Image
-					src="/img/bg-11.png"
+					src="/img/bg-12.png"
 					alt="Background pattern"
 					fill
 					className="object-cover" // or "object-repeat"
