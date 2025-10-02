@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const logos = [
 	{ src: "/img/adidas.avif", alt: "Adidas" },
 	{ src: "/img/fujitsu.jpg", alt: "Fujitsu" },

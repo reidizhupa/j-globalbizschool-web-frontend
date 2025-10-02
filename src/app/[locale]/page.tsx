@@ -7,8 +7,6 @@ import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGri
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
-import ClientLogos from "@/app/components/homepage/ClientLogos";
-import { getTranslations } from "next-intl/server";
 
 import type { Metadata, ResolvingMetadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
