@@ -14,7 +14,7 @@ export default function Page() {
 	const tHome = useTranslations("homepage");
 
 	return (
-		<div className="relative min-h-[100dvh] overflow-hidden">
+		<div className="relative min-h-screen overflow-hidden">
 			{/* Background Image */}
 			<div className="absolute inset-0 -z-20">
 				<Image
