@@ -7,8 +7,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
 	const requested = await requestLocale;
 	const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-	return {
-		locale,
-		messages: (await import(`../../messages/${locale}.json`)).default,
-	};
+	// Load all categories needed for the project
+	const seo = (await import(`../../messages/${locale}/seo.json`)).default;
+	const homepage = (await import(`../../messages/${locale}/homepage.json`)).default;
+	const authentication = (await import(`../../messages/${locale}/authentication.json`)).default;
+
+	// Merge into one messages object
+	const messages = { authentication, homepage, seo };
+
+	return { locale, messages };
 });

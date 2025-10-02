@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 const ThematicProgrammes = () => {
-	const tHome = useTranslations("HomePage");
+	const tHome = useTranslations("homepage");
 	const locale = useLocale();
 	const imagePath = `/img/minimba_${locale}.png`;
 

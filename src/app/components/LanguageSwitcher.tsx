@@ -6,6 +6,7 @@ import { usePathname, useRouter, Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Menu, X } from "lucide-react";
+import { getLink } from "@/lib/links";
 
 export default function LanguageSwitcher() {
 	const router = useRouter();
@@ -14,7 +15,7 @@ export default function LanguageSwitcher() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
-	const t = useTranslations("Authentication");
+	const t = useTranslations("authentication");
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -50,14 +51,14 @@ export default function LanguageSwitcher() {
 				<div className="relative" ref={dropdownRef}>
 					<button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 px-4 py-2 rounded-full border- border-gray-500 backdrop-blur-md hover:border-[#285677]/30 transition-all duration-200">
 						<Image src={`/flags/${currentLocale}.png`} alt={currentLocale} width={20} height={14} className="rounded-sm object-cover" />
-						<span className="text-lg text-gray-700">{getLanguageName(currentLocale)}</span>
+						<span className="text-gray-700">{getLanguageName(currentLocale)}</span>
 						<svg className={`w-4 h-4 text-gray-700 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
 							<path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
 						</svg>
 					</button>
 
 					{isOpen && (
-						<div className="absolute right-0 z-50 mt-2 w-48 rounded-lg bg-transparent shadow-lg border border-gray-100 overflow-hidden animate-fade-in">
+						<div className="absolute right-0 z-50 mt-2 w-48 rounded-lg bg-white shadow-lg border border-gray-100 overflow-hidden animate-fade-in">
 							<ul className="py-1">
 								{routing.locales.map((locale) => (
 									<li key={locale}>
@@ -74,10 +75,10 @@ export default function LanguageSwitcher() {
 
 				{/* Auth Buttons */}
 				<div className="flex gap-3">
-					<Link href="/login" className="px-5 py-2.5 rounded-full border border-[#f7a520] bg-white text-[#f7a520] text-lg font-bold hover:bg-[#285677]/10 transition">
+					<Link href={getLink("login", currentLocale)} className="px-5 py-2.5 rounded-full border border-[#d74100] bg-white text-[#d74100] text-sm font-bold hover:bg-[#285677]/10 transition">
 						{t("login")}
 					</Link>
-					<Link href="/register" className="px-5 py-2.5 rounded-full bg-[#f7a520] text-white text-lg font-bold hover:bg-[#f7a520] transition shadow-sm hover:shadow-md">
+					<Link href={getLink("joinPrograms", currentLocale)} className="px-5 py-2.5 rounded-full bg-[#d74100] text-white text-sm font-bold hover:bg-[#d74100] transition shadow-sm hover:shadow-md">
 						{t("joinPrograms")}
 					</Link>
 				</div>

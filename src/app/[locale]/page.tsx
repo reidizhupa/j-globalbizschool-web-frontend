@@ -7,6 +7,28 @@ import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGri
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
+import ClientLogos from "@/app/components/homepage/ClientLogos";
+import { getTranslations } from "next-intl/server";
+
+import type { Metadata, ResolvingMetadata } from "next";
+import { generatePageMetadata } from "@/lib/seo";
+import LogoSection from "../components/homepage/LogoSection";
+
+export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
+	/*
+
+	------ CASE OF OVERRIDING SOME PARTS OF THE METADATA
+
+	const baseMetadata = await generatePageMetadata(props, parent, "seo");
+  const overrides = {
+    title: "About Us - My Company",
+
+  };
+  return { ...baseMetadata, ...overrides };
+  */
+
+	return generatePageMetadata(props, parent, "seo");
+}
 
 const globalPrograms: CardGridData = {
 	title: "Global Communication",
@@ -134,6 +156,7 @@ export default function HomePage() {
 	return (
 		<>
 			<HeroSection />
+			<LogoSection />
 			<JGlobalBusinessSchool />
 			<JGlobalAchievements />
 			<FreeTrial />
@@ -155,7 +178,7 @@ export default function HomePage() {
 				{/* Content */}
 				<CardGridSection {...globalPrograms} />
 				<CardGridSection {...globalTeamwork} />
-				<CardGridSection {...globalLeadership} showWave={false} />
+				<CardGridSection {...globalLeadership} />
 			</div>
 
 			<div className="rotate-180">
