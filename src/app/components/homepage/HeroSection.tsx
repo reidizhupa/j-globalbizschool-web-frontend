@@ -40,7 +40,7 @@ export default function Page() {
 			</header>
 
 			{/* Hero Section */}
-			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
+			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-25 text-center sm:flex-row sm:pt-44 sm:text-left">
 				{/* Left Side */}
 				<div className="flex flex-1 flex-col items-center sm:items-start">
 					<h1 className="text-[2.7rem] font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl">
