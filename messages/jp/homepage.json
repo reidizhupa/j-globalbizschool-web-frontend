@@ -1,6 +1,6 @@
 {
     "HeroSection": {
-        "heading": "<blue>J Global</blue> <br></br> ビジネススクール<br></br>へようこそ",
+        "heading": "<blue>J Global</blue> <br></br> <div>ビジネススクール</div><br></br>へようこそ",
         "subheading": "スキルと挑戦で、世界をつなぐ新世代リーダーに。",
         "heroCTA": "無料トライアルはこちら",
         "heroSecondaryCTA": "詳しく見る"
@@ -12,7 +12,6 @@
         "feature2": "無料体験に登録",
         "cta": "無料体験に登録"
     },
-    "about": ", vai alla pagina di informazioni",
     "heroDescription": "J-Global\nビジネススクールへ\nようこそ!",
     "clickFreeTrial": "無料トライアルはこちら",
     "whyChooseUs": "J-Globalビジネススクールとは?",
