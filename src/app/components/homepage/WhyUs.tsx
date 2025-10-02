@@ -2,10 +2,10 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export default function JGlobalBusinessSchool() {
-	const tHome = useTranslations("HomePage");
+	const tHome = useTranslations("homepage");
 
 	return (
-		<div className="relative bg-blue-50/50 overflow-hidden">
+		<div id="why-us" className="relative bg-blue-50/50 overflow-hidden">
 			{/* Hero Section */}
 			<section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-15 pt-15 text-center">
 				<div className="relative inline-block" data-aos="fade-up" data-aos-duration="800">
@@ -52,7 +52,7 @@ export default function JGlobalBusinessSchool() {
 							iconSrc: "/icons/language.png",
 							gradient: "from-blue-100 to-blue-50",
 						},
-					].map(({ title, text, iconBg, iconSrc, gradient }, i) => (
+					].map(({ title, text, iconBg, iconSrc }, i) => (
 						<div key={i} className="relative group bg-white p-8 rounded-3xl border border-gray-100 shadow-lg overflow-hidden flex flex-col items-center text-center" data-aos="fade-up" data-aos-delay={200 + i * 200} data-aos-duration="500">
 							{/* Decorative corner accent */}
 
