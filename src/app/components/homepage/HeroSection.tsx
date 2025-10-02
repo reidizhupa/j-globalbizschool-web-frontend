@@ -14,7 +14,7 @@ export default function Page() {
 	const tHome = useTranslations("homepage");
 
 	return (
-		<div className="relative min-h-screen overflow-hidden">
+		<div className="relative min-h-[100dvh] overflow-hidden">
 			{/* Background Image */}
 			<div className="absolute inset-0 -z-20">
 				<Image
@@ -43,7 +43,7 @@ export default function Page() {
 			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-32 text-center sm:flex-row sm:pt-44 sm:text-left">
 				{/* Left Side */}
 				<div className="flex flex-1 flex-col items-center sm:items-start">
-					<h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
+					<h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl">
 						{tHome.rich("HeroSection.heading", {
 							blue: (chunks) => <span className="text-[#1f497c]">{chunks}</span>,
 							br: () => <br />,
