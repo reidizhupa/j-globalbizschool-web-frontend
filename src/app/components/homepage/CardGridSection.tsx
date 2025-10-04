@@ -26,21 +26,31 @@ export type CardGridData = {
 export default function CardGridSection({ level, title, description, align = "center", cards }: CardGridData) {
 	return (
 		<div className="relative overflow-hidden py-6">
-			<div className="max-w-7xl mx-auto  bg-white/40 p-10 rounded-4xl">
+			{/* Content Box */}
+			<div
+				className={clsx("relative z-10 max-w-7xl bg-white/70 p-10 rounded-4xl shadow-lg", {
+					"ml-0 mr-auto": align === "left",
+					"mx-auto": align === "center",
+					"ml-auto mr-0": align === "right",
+				})}
+			>
+				<div className="absolute inset-0 bg-[url('/img/topography.svg')] bg-cover bg-center opacity-2"></div>
+
 				{/* Header */}
 				<section
-					className={clsx("mb-10 flex flex-col", {
-						"items-start": align === "left",
-						"items-center": align === "center",
-						"items-end": align === "right",
+					className={clsx("mb-10 flex items-center  flex-col", {
+						"md:items-start": align === "left",
+						"md:items-center": align === "center",
+						"md:items-end": align === "right",
 					})}
 				>
-					<span className="inline-block px-3 py-1 mb-3 text-sm font-bold text-white rounded-full bg-gradient-to-r from-[#285677] via-[#3a6b8f] to-[#5282a4]">{level}</span>
-					<h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 flex items-center gap-2">{title}</h2>
+					<span className="inline-block px-3 py-1 mb-3 text-sm font-bold text-white rounded-full  bg-[#215ca5] ">{level}</span>
+					<h2 className="text-4xl md:text-5xl font-extrabold text-[#215ca5] mb-4 flex items-center gap-2">{title}</h2>
 					<p
-						className={clsx("text-gray-500 text-lg max-w-3xl leading-relaxed", {
-							"text-right": align === "right",
-							"mx-auto": align === "center",
+						className={clsx("text-gray-500  text-center text-lg max-w-4xl leading-relaxed", {
+							"md:text-right": align === "right",
+							"md:text-left": align === "left",
+							"md:mx-auto": align === "center",
 						})}
 					>
 						{description}
@@ -54,7 +64,7 @@ export default function CardGridSection({ level, title, description, align = "ce
 							<div className="relative aspect-[4/3] w-full h-full shadow-2xl">
 								<Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300" />
 								{/* Title overlapping the image */}
-								<h3 className="absolute bottom-2 left-2 right-2 text-center text-sm font-semibold text-white bg-gray-800/60 px-2 py-1 rounded-md shadow-sm">{card.title}</h3>
+								<h3 className="absolute bottom-2 left-2 right-2 text-center text-md font-semibold text-white bg-gray-800/60 px-2 py-1 rounded-md shadow-sm">{card.title}</h3>
 							</div>
 						</Link>
 					))}

@@ -17,7 +17,7 @@ export default function JGlobalAchievements() {
 					<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-15 pt-5 text-center">
 						<div className="relative inline-block" data-aos="fade-up" data-aos-duration="600">
 							<h1 className="text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-10">
-								<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1f497c] to-[#3a6bb7] relative z-10"> {tHome("achievements")}</span>
+								<span className="bg-clip-text text-[#215ca5] relative z-10"> {tHome("achievements")}</span>
 							</h1>
 						</div>
 						<p className="text-xl md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto relative" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
