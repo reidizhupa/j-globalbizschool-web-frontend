@@ -2,7 +2,6 @@ import HeroSection from "@/app/components/homepage/HeroSection";
 import JGlobalBusinessSchool from "@/app/components/homepage/WhyUs";
 import JGlobalAchievements from "@/app/components/homepage/Achievements";
 import FreeTrial from "@/app/components/homepage/FreeTrial";
-import ThematicProgrammes from "@/app/components/homepage/ThematicProgrammes";
 import CardGridSection, { CardGridData } from "@/app/components/homepage/CardGridSection";
 import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
@@ -29,6 +28,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 }
 
 const globalPrograms: CardGridData = {
+	level: "Level 1",
 	title: "Global Communication",
 	description: "Activate your career by mastering global communication. Develop a global mindset and confidence to connect across cultures. Enhance active listening, clear information sharing, and positive body language. Gain an edge with scheduling, planning, presenting, and English communication skills, ready to excel in global business. Includes country culture biz nites - Includes “travelling” virtually to a different county each week",
 	stats: [
@@ -38,31 +38,31 @@ const globalPrograms: CardGridData = {
 	cards: [
 		{
 			id: "CO1",
-			title: "Introduction to Global Communication",
+			title: "Intercultural Skills",
 			image: "/img/globals/C01.jpg",
 			link: "/courses/co1",
 		},
 		{
 			id: "CO2",
-			title: "Knowledge for working in a global company",
+			title: "Global Mindset",
 			image: "/img/globals/C02.png",
 			link: "/courses/co2",
 		},
 		{
 			id: "CO3",
-			title: "Mindset for success in global business",
+			title: "Growth Mindset",
 			image: "/img/globals/C03.webp",
 			link: "/courses/co3",
 		},
 		{
 			id: "CO4",
-			title: "Persuasive and clear presentations in a global environment",
+			title: "Presentation",
 			image: "/img/globals/C04.jpg",
 			link: "/courses/co4",
 		},
 		{
 			id: "BIZNITE",
-			title: "International Biz Nite",
+			title: "Country Biz Nites",
 			image: "/img/globals/biz-nite.jpg",
 			link: "/events/biz-nite",
 		},
@@ -70,6 +70,7 @@ const globalPrograms: CardGridData = {
 };
 
 const globalTeamwork: CardGridData = {
+	level: "Level 2:",
 	title: "Global Teamwork",
 	description: "Elevate your career with effective teamwork skills. Focus on emotional intelligence, self-management, and win-win negotiation, building on strengths. Master feedback, project basics, and interactive meetings.Excel in supporting and facilitating diverse virtual teams, becoming a global collaboration expert.Includes team business games every two weeks",
 	stats: [
@@ -79,31 +80,31 @@ const globalTeamwork: CardGridData = {
 	cards: [
 		{
 			id: "L12",
-			title: "Global Teamwork Skills",
+			title: "Teambuilding",
 			image: "/img/globals/L12.webp",
 			link: "/courses/co1",
 		},
 		{
 			id: "CO6",
-			title: "Win-win Negotiating & Problem Solving",
+			title: "Negotiation",
 			image: "/img/globals/C06.jpg",
 			link: "/courses/co2",
 		},
 		{
 			id: "F01",
-			title: "Value-Selling Across Cultures",
+			title: "Global Sales",
 			image: "/img/globals/F01.avif",
 			link: "/courses/co3",
 		},
 		{
 			id: "F08",
-			title: "Project Management Across Cultures",
+			title: "Global Projects",
 			image: "/img/globals/F08.jpg",
 			link: "/courses/co4",
 		},
 		{
 			id: "C09",
-			title: "Global Business Role-playing games.",
+			title: "Business Game",
 			image: "/img/globals/C09.png",
 			link: "/events/biz-nite",
 		},
@@ -111,6 +112,7 @@ const globalTeamwork: CardGridData = {
 };
 
 const globalLeadership: CardGridData = {
+	level: "Level 3:",
 	title: "Global Leadership",
 	description: "Unleash your global leadership potential. Acquire comprehensive leadership skills, including performance management, coaching, and strategic vision. Inspire diverse global employees, enhance project management capabilities, and excel in complex challenges.",
 	stats: [
@@ -120,31 +122,31 @@ const globalLeadership: CardGridData = {
 	cards: [
 		{
 			id: "L01",
-			title: "Global Teamwork Skills",
+			title: "Coaching",
 			image: "/img/globals/L01.png",
 			link: "/courses/co1",
 		},
 		{
 			id: "L08",
-			title: "Win-win Negotiating & Problem Solving",
+			title: "Strategy",
 			image: "/img/globals/L08.jpg",
 			link: "/courses/co2",
 		},
 		{
 			id: "I01",
-			title: "Value-Selling Across Cultures",
+			title: "Mini Internship",
 			image: "/img/globals/C06.jpg",
 			link: "/courses/co3",
 		},
 		{
 			id: "L02",
-			title: "Project Management Across Cultures",
+			title: "Practical Thinking",
 			image: "/img/globals/L02.avif",
 			link: "/courses/co4",
 		},
 		{
 			id: "L03",
-			title: "Global Business Role-playing games.",
+			title: "Mini MBA",
 			image: "/img/globals/C09.png",
 			link: "/events/biz-nite",
 		},
@@ -154,38 +156,18 @@ export default function HomePage() {
 	return (
 		<>
 			<HeroSection />
-			<LogoSection />
 			<JGlobalBusinessSchool />
 			<JGlobalAchievements />
+			<LogoSection />
+
 			<FreeTrial />
-			<ThematicProgrammes />
-			<svg viewBox="0 0 1440 120" className="w-full" preserveAspectRatio="none">
-				{/* Bottom darker curve */}
-				<path d="M0,0 C360,80 1080,80 1440,0 L1440,120 L0,120 Z" fill="#dde8ff" opacity="1" />
-				{/* Top lighter curve */}
-				<path d="M0,0 C360,100 1080,100 1440,0 L1440,120 L0,120 Z" fill="currentColor" className="text-blue-100" />
-			</svg>
-
-			<div className="relative bg-blue-50">
-				{/* Top fade */}
-				<div className="absolute top-0 left-0 right-0 h-100 bg-gradient-to-b from-blue-100 to-blue-50 pointer-events-none" />
-
-				{/* Bottom fade */}
-				<div className="absolute bottom-0 left-0 right-0 h-100 bg-gradient-to-t from-blue-100 to-blue-50 pointer-events-none" />
-
-				{/* Content */}
-				<CardGridSection {...globalPrograms} />
-				<CardGridSection {...globalTeamwork} />
-				<CardGridSection {...globalLeadership} />
-			</div>
-
-			<div className="rotate-180">
-				<svg viewBox="0 0 1440 120" className="w-full" preserveAspectRatio="none">
-					{/* Bottom darker curve */}
-					<path d="M0,0 C360,80 1080,80 1440,0 L1440,120 L0,120 Z" fill="#dde8ff" opacity="1" />
-					{/* Top lighter curve */}
-					<path d="M0,0 C360,100 1080,100 1440,0 L1440,120 L0,120 Z" fill="currentColor" className="text-blue-100" />
-				</svg>
+			<div className="bg-[#dbe9ff] pt-20">
+				<div className="bg-[url('/img/bg_continuation.png')] bg-cover bg-center bg-no-repeat">
+					{/* Content */}
+					<CardGridSection {...globalPrograms} align="left" />
+					<CardGridSection {...globalTeamwork} align="right" />
+					<CardGridSection {...globalLeadership} align="left" />
+				</div>
 			</div>
 			<LecturerIntroduction />
 			<Instructors />

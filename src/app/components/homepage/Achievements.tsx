@@ -6,7 +6,7 @@ export default function JGlobalAchievements() {
 
 	return (
 		<div>
-			<section className="relative overflow-hidden bg-blue-50/50 py-5">
+			<section className="relative overflow-hidden  py-5">
 				{/* Background image layer */}
 
 				<div className="absolute inset-0 z-0 mix-blend-multiply" />

@@ -11,7 +11,7 @@ const FreeTrialSection = () => {
 	const currentLocale = useLocale();
 
 	return (
-		<div className="mt-0 mb-20 overflow-hidden">
+		<div className="mt-0 overflow-hidden">
 			<div className="relative w-full py-10 px-4">
 				{/* Background Image with opacity */}
 				<div className="absolute inset-0 -z-10">
