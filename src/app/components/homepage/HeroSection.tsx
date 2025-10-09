@@ -52,7 +52,7 @@ export default function Page() {
 					</h1>
 
 					<div className="mt-8 flex flex-wrap justify-center gap-4 sm:justify-start">
-						<Link href={getLink("joinPrograms", currentLocale)} className="rounded-full bg-[#d74100] px-6 py-3  font-semibold text-white shadow-lg transition hover:bg-indigo-700">
+						<Link href={getLink("freeTrial", currentLocale)} className="rounded-full bg-[#d74100] px-6 py-3  font-semibold text-white shadow-lg transition hover:bg-indigo-700">
 							{tHome("HeroSection.heroCTA")}
 						</Link>
 						<a href="#why-us" className="rounded-full border  border-gray-300 px-6 py-3 font-medium text-white transition hover:border-indigo-500 hover:text-indigo-600">

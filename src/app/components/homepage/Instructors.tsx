@@ -1,10 +1,10 @@
 "use client";
+import { useTranslations } from "next-intl";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 
 const Instructors = () => {
+	const tHome = useTranslations("homepage.LecturerIntroduction");
+
 	const instructors = [
 		{
 			name: "Dr. Sarah L. Birchley",
@@ -39,39 +39,21 @@ const Instructors = () => {
 	];
 
 	return (
-		<section className="py-12 px-4 bg-white">
-			<div className="max-w-7xl mx-auto">
-				<h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">In addition, instructors with specialized knowledge will support you!</h2>
+		<section className="py-16 px-6 bg-white">
+			<div className="max-w-7xl mx-auto text-center">
+				<h2 className="text-3xl font-bold text-gray-800 mb-12">{tHome("otherLectures")}</h2>
 
-				<Swiper
-					modules={[Autoplay]}
-					spaceBetween={24}
-					slidesPerView={1}
-					breakpoints={{
-						640: { slidesPerView: 2 },
-						768: { slidesPerView: 3 },
-						1024: { slidesPerView: 4 },
-						1280: { slidesPerView: 6 },
-					}}
-					autoplay={{
-						delay: 2500,
-						disableOnInteraction: false,
-					}}
-					loop={true}
-					className="pb-4"
-				>
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-0 place-items-center">
 					{instructors.map((instructor, index) => (
-						<SwiperSlide key={index}>
-							<div className="flex flex-col items-center w-full">
-								<div className="mb-4 w-32 h-32 rounded-full bg-gray-200 overflow-hidden">
-									<img src={instructor.image} alt={instructor.name} className="w-full h-full object-cover" />
-								</div>
-								<h3 className="text-lg font-semibold text-gray-800 text-center">{instructor.name}</h3>
-								<p className="text-sm text-gray-600 mt-1 text-center">{instructor.role}</p>
+						<div key={index} className="flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
+							<div className="w-24 h-24 lg:w-32 lg:h-32 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-gray-100">
+								<img src={instructor.image} alt={instructor.name} className="w-full h-full object-cover" />
 							</div>
-						</SwiperSlide>
+							<h3 className="text-sm font-semibold text-gray-800">{instructor.name}</h3>
+							<p className="text-xs text-gray-600 mt-1">{instructor.role}</p>
+						</div>
 					))}
-				</Swiper>
+				</div>
 			</div>
 		</section>
 	);

@@ -16,9 +16,9 @@ export default function JGlobalAchievements() {
 					{/* Hero Section */}
 					<section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-15 pt-5 text-center">
 						<div className="relative inline-block" data-aos="fade-up" data-aos-duration="600">
-							<h1 className="text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-10">
+							<h2 className="text-4xl md:text-5xl lg:text-5xl font-extrabold tracking-tight text-gray-900 mb-10">
 								<span className="bg-clip-text text-[#215ca5] relative z-10"> {tHome("achievements")}</span>
-							</h1>
+							</h2>
 						</div>
 						<p className="text-xl md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto relative" data-aos="fade-up" data-aos-delay="200" data-aos-duration="600">
 							{tHome("achievementsDescription")}

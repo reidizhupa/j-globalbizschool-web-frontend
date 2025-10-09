@@ -12,6 +12,15 @@
         "feature2": "Sign up for the free trial",
         "cta": "Sign Up for Free Trial"
     },
+    "LecturerIntroduction": {
+        "lecturerIntroduction": "Lecturer Introduction",
+        "name": "Jon Lynch",
+        "description": "Originally from the UK, Jon currently lectures on global business skills at Hitotsubashi University. After coming to Japan in 1990, he taught international business communication skills as a cross-cultural business instructor at major training companies, and then in media/marketing companies. He established the training and consulting company J-Global Co., Ltd. in 2010. Utilizing his extensive business experience in Japan, he has provided services to over 100 Japanese and foreign companies. We offer bilingual workshops in Japanese/English with the aim of spreading the \"J-Global\" best-mix way of working, which combines the strengths of Japanese and other countries.' business styles",
+        "description2": "We will discuss your career path ideas together in a relaxing 20 minute conversation while creating a mind map to visually and logically show your thoughts. Either Japanese or English is OK, and you can enjoy this service whether or not you decide to participate in our programs.",
+        "coachingSupport": "Jon will also support you with free online 1-1 coaching!",
+        "bookCoaching": "Book a free online 1-1 coaching session!",
+        "otherLectures": "In addition, instructors with specialized knowledge will support you!"
+    },
     "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
     "clickFreeTrial": "Click for free trial",
     "whyChooseUs": "Why Choose J-Global",
