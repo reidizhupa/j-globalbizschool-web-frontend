@@ -29,6 +29,20 @@
             "hisakoMiyamori": "コーチ・サクセスサポーター"
         }
     },
+    "footer": {
+        "company": "会社情報",
+        "companyName": "J-グローバル株式会社",
+        "office": "オフィス",
+        "officeAddress": "〒151-0064 東京都渋谷区上原1-3-9",
+        "contact": "お問い合わせ",
+        "call": "電話",
+        "email": "メール",
+        "links": "リンク",
+        "contactUs": "お問い合わせ",
+        "privacyPolicy": "プライバシーポリシー",
+        "companyProfile": "会社概要",
+        "copyright": "全著作権所有"
+    },
     "heroDescription": "J-Global\nビジネススクールへ\nようこそ!",
     "clickFreeTrial": "無料トライアルはこちら",
     "whyChooseUs": "J-Globalビジネススクールとは?",

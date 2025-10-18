@@ -38,15 +38,15 @@ export default function CardGridSection({ level, title, description, stats, alig
 
 				{/* Header */}
 				<section
-					className={clsx("mb-10 flex flex-col items-center px-5", {
+					className={clsx("mb-10 flex flex-col md:px-5", {
 						"md:items-start": align === "left" || align === "right",
 						"md:items-center": align === "center",
 					})}
 				>
 					<span className="inline-block px-3 py-1 mb-3 text-sm font-bold text-white rounded-full bg-[#215ca5]">{level}</span>
-					<h2 className="text-4xl font-extrabold text-[#215ca5] mb-4 flex items-center gap-2">{title}</h2>
+					<h2 className="text-4xl max-w-fit font-extrabold text-[#215ca5] mb-4 flex  gap-2">{title}</h2>
 					<p
-						className={clsx("text-gray-500 text-center text-lg max-w-4xl leading-relaxed", {
+						className={clsx("text-gray-500 text-left text-lg max-w-4xl leading-relaxed", {
 							"md:text-left": align === "right" || align === "left",
 							"md:mx-auto": align === "center",
 						})}
@@ -59,8 +59,7 @@ export default function CardGridSection({ level, title, description, stats, alig
 						<div
 							className={clsx("flex flex-wrap gap-3 mt-6", {
 								"justify-center": align === "center",
-								"justify-start": align === "left",
-								"justify-end": align === "right",
+								"justify-start": align === "left" || align === "right",
 							})}
 						>
 							{stats.map((item, index) => (
@@ -74,7 +73,7 @@ export default function CardGridSection({ level, title, description, stats, alig
 				</section>
 
 				{/* Cards Grid */}
-				<section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-5 rounded-3xl">
+				<section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:p-5 rounded-3xl">
 					{cards.map((card) => (
 						<Link key={card.id} href={card.link} className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" style={{ boxShadow: "0 0 10px rgba(31, 73, 124, 0.1)" }}>
 							<div className="relative aspect-[4/3] w-full h-full shadow-2xl">

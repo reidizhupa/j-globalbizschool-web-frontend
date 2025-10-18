@@ -26,7 +26,7 @@ export default function LecturerIntroduction() {
 					<div className="flex flex-col gap-4 text-gray-800 text-sm sm:text-base w-full">
 						{/* Name */}
 						<div>
-							<h3 className="text-xl font-bold text-[#285677]">{tHome("name")}</h3>
+							<h3 className="text-xl text-center md:text-start  font-bold text-[#285677]">{tHome("name")}</h3>
 						</div>
 
 						{/* Bio */}

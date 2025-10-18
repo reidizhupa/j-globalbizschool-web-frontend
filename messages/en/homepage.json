@@ -29,6 +29,20 @@
             "hisakoMiyamori": "Coach, Success Supporter"
         }
     },
+    "footer": {
+        "company": "Company",
+        "companyName": "J-Global, Inc.",
+        "office": "Office",
+        "officeAddress": "1-3-9 Uehara, Shibuya-ku, Tokyo, 151-0064, Japan",
+        "contact": "Contact",
+        "call": "Call",
+        "email": "Email",
+        "links": "Links",
+        "contactUs": "Contact Us",
+        "privacyPolicy": "Privacy Policy",
+        "companyProfile": "Company Profile",
+        "copyright": "All Rights Reserved"
+    },
     "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
     "clickFreeTrial": "Click for free trial",
     "whyChooseUs": "Why Choose J-Global",
