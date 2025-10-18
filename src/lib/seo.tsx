@@ -42,12 +42,14 @@ export async function generatePageMetadata(props: PageProps, parent: ResolvingMe
 			images: t("title") ? [t("title")] : undefined,
 		},
 
-		// Favicon & PWA manifest
 		icons: {
 			icon: "/favicon/favicon.ico",
 			shortcut: "/favicon/favicon.ico",
 			apple: "/favicon/apple-touch-icon.png",
 		},
-		manifest: "/favicon/manifest.json", // <- points to your manifest file
+		manifest: "/favicon/manifest.json",
+		appleWebApp: {
+			title: "J-Global Business School",
+		},
 	};
 }

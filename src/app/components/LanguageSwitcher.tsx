@@ -7,6 +7,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Menu, X } from "lucide-react";
 import { getLink } from "@/lib/links";
+import ApplicationForm from "./ApplicationForm";
+import Modal from "./Modal";
 
 export default function LanguageSwitcher() {
 	const router = useRouter();
@@ -16,6 +18,7 @@ export default function LanguageSwitcher() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const t = useTranslations("authentication");
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -78,9 +81,14 @@ export default function LanguageSwitcher() {
 					<Link href={getLink("login", currentLocale)} className="px-5 py-2.5 rounded-full border border-[#d74100] bg-white text-[#d74100] text-sm font-bold hover:bg-[#285677]/10 transition">
 						{t("login")}
 					</Link>
-					<Link href={getLink("joinPrograms", currentLocale)} className="px-5 py-2.5 rounded-full bg-[#d74100] text-white text-sm font-bold hover:bg-[#d74100] transition shadow-sm hover:shadow-md">
+					<button onClick={() => setIsModalOpen(true)} className="px-5 py-2.5 rounded-full bg-[#d74100] text-white text-sm font-bold hover:bg-[#d74100]/90 transition shadow-sm hover:shadow-md">
 						{t("joinPrograms")}
-					</Link>
+					</button>
+
+					{/* Modal */}
+					<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={t("joinPrograms")}>
+						<ApplicationForm onClose={() => setIsModalOpen(false)} />
+					</Modal>
 				</div>
 			</div>
 

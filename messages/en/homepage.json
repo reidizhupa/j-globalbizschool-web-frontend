@@ -19,7 +19,15 @@
         "description2": "We will discuss your career path ideas together in a relaxing 20 minute conversation while creating a mind map to visually and logically show your thoughts. Either Japanese or English is OK, and you can enjoy this service whether or not you decide to participate in our programs.",
         "coachingSupport": "Jon will also support you with free online 1-1 coaching!",
         "bookCoaching": "Book a free online 1-1 coaching session!",
-        "otherLectures": "In addition, instructors with specialized knowledge will support you!"
+        "otherLectures": "In addition, instructors with specialized knowledge will support you!",
+        "roles": {
+            "sarahBirchley": "Business School Director, Instructor, Coach",
+            "nathanDeWitt": "Instructor",
+            "grahamLenz": "Coach, Success Supporter",
+            "mizuhoShimada": "Community Coach",
+            "ikemOkoboshi": "Coach, Success Supporter",
+            "hisakoMiyamori": "Coach, Success Supporter"
+        }
     },
     "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
     "clickFreeTrial": "Click for free trial",

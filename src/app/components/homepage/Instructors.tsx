@@ -8,32 +8,32 @@ const Instructors = () => {
 	const instructors = [
 		{
 			name: "Dr. Sarah L. Birchley",
-			role: "Business School Director, Instructor, Coach",
+			role: tHome("roles.sarahBirchley"),
 			image: "/img/instructors/sarah-birchley.jpg",
 		},
 		{
 			name: "Nathan DeWitt",
-			role: "Instructor",
+			role: tHome("roles.nathanDeWitt"),
 			image: "/img/instructors/nathan-dewitt.jpg",
 		},
 		{
 			name: "Graham Lenz",
-			role: "Coach, Success Supporter",
+			role: tHome("roles.grahamLenz"),
 			image: "/img/instructors/graham-lenz.avif",
 		},
 		{
 			name: "Mizuho Shimada",
-			role: "Community Coach",
+			role: tHome("roles.mizuhoShimada"),
 			image: "/img/instructors/mizuho-shimada.avif",
 		},
 		{
 			name: "Ikem Okoboshi",
-			role: "Coach, Success Supporter",
+			role: tHome("roles.ikemOkoboshi"),
 			image: "/img/instructors/ikem-okoboshi.png",
 		},
 		{
 			name: "Hisako Miyamori",
-			role: "Coach, Success Supporter",
+			role: tHome("roles.hisakoMiyamori"),
 			image: "/img/instructors/hisako-miyamori.avif",
 		},
 	];

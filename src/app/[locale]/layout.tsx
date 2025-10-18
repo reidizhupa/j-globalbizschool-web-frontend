@@ -1,7 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import "../globals.css";
+import "@/app/globals.css";
 import Aoscompo from "../utils/aos";
 import { Noto_Sans_JP } from "next/font/google";
 

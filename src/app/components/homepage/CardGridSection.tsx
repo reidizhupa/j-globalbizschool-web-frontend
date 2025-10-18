@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import clsx from "clsx";
+import { Link } from "@/i18n/navigation";
 
 export type StatsItem = { icon: React.ReactNode; label: string };
 
@@ -23,7 +23,7 @@ export type CardGridData = {
 	align?: "left" | "center" | "right";
 };
 
-export default function CardGridSection({ level, title, description, align = "center", cards }: CardGridData) {
+export default function CardGridSection({ level, title, description, stats, align = "center", cards }: CardGridData) {
 	return (
 		<div className="relative overflow-hidden py-6">
 			{/* Content Box */}
@@ -38,32 +38,47 @@ export default function CardGridSection({ level, title, description, align = "ce
 
 				{/* Header */}
 				<section
-					className={clsx("mb-10 flex items-center  flex-col", {
-						"md:items-start": align === "left",
+					className={clsx("mb-10 flex flex-col items-center px-5", {
+						"md:items-start": align === "left" || align === "right",
 						"md:items-center": align === "center",
-						"md:items-end": align === "right",
 					})}
 				>
-					<span className="inline-block px-3 py-1 mb-3 text-sm font-bold text-white rounded-full  bg-[#215ca5] ">{level}</span>
+					<span className="inline-block px-3 py-1 mb-3 text-sm font-bold text-white rounded-full bg-[#215ca5]">{level}</span>
 					<h2 className="text-4xl font-extrabold text-[#215ca5] mb-4 flex items-center gap-2">{title}</h2>
 					<p
-						className={clsx("text-gray-500  text-center text-lg max-w-4xl leading-relaxed", {
-							"md:text-right": align === "right",
-							"md:text-left": align === "left",
+						className={clsx("text-gray-500 text-center text-lg max-w-4xl leading-relaxed", {
+							"md:text-left": align === "right" || align === "left",
 							"md:mx-auto": align === "center",
 						})}
 					>
 						{description}
 					</p>
+
+					{/* --- Stats Badges --- */}
+					{stats && stats.length > 0 && (
+						<div
+							className={clsx("flex flex-wrap gap-3 mt-6", {
+								"justify-center": align === "center",
+								"justify-start": align === "left",
+								"justify-end": align === "right",
+							})}
+						>
+							{stats.map((item, index) => (
+								<div key={index} className="flex items-center gap-2 px-4 py-2 bg-[#215ca5]/10 text-[#215ca5] rounded-full text-sm font-medium hover:bg-[#215ca5]/20 transition">
+									{item.icon && <span className="text-[#215ca5]">{item.icon}</span>}
+									<span>{item.label}</span>
+								</div>
+							))}
+						</div>
+					)}
 				</section>
 
 				{/* Cards Grid */}
-				<section className=" grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-5 rounded-3xl">
+				<section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-5 rounded-3xl">
 					{cards.map((card) => (
 						<Link key={card.id} href={card.link} className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" style={{ boxShadow: "0 0 10px rgba(31, 73, 124, 0.1)" }}>
 							<div className="relative aspect-[4/3] w-full h-full shadow-2xl">
 								<Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300" />
-								{/* Title overlapping the image */}
 								<h3 className="absolute bottom-0 left-0 right-0 text-center text-md font-semibold text-white bg-gradient-to-t from-gray-900/80 to-transparent px-3 py-1 rounded-md shadow-sm">{card.title}</h3>
 							</div>
 						</Link>

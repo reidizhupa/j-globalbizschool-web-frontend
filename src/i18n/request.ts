@@ -12,9 +12,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
 	const homepage = (await import(`../../messages/${locale}/homepage.json`)).default;
 	const authentication = (await import(`../../messages/${locale}/authentication.json`)).default;
 	const levels = (await import(`../../messages/${locale}/levels.json`)).default;
+	const freeTrialForm = (await import(`../../messages/${locale}/freeTrialForm.json`)).default;
 
 	// Merge into one messages object
-	const messages = { authentication, homepage, seo, levels };
+	const messages = { authentication, homepage, seo, levels, freeTrialForm };
 
 	return { locale, messages };
 });

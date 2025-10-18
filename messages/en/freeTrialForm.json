@@ -1,0 +1,9 @@
+{
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Submit",
+    "success": "Your application has been submitted successfully!",
+    "error": "Something went wrong. Please try again."
+}

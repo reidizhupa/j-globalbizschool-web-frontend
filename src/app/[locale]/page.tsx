@@ -12,6 +12,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import LogoSection from "../components/homepage/LogoSection";
 import { useTranslations } from "next-intl";
 import FeturedIn from "../components/homepage/FeaturedIn";
+import Footer from "../components/Footer";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
 	/*
@@ -37,38 +38,38 @@ export default function HomePage() {
 		title: tLevels("globalCommunication"),
 		description: tLevels("globalCommunicationDescription"),
 		stats: [
-			{ icon: <BookOpen className="w-4 h-4" />, label: "24 Programs" },
-			{ icon: <Briefcase className="w-4 h-4" />, label: "70 Workshops" },
+			{ icon: <BookOpen className="w-4 h-4" />, label: tLevels("programsCount", { count: 24 }) },
+			{ icon: <Briefcase className="w-4 h-4" />, label: tLevels("workshopsCount", { count: 70 }) },
 		],
 		cards: [
 			{
 				id: "CO1",
 				title: tLevels("interculturalSkills"),
-				image: "/img/globals/C01.jpg",
+				image: "/img/globals/intercultural-skills-C01.jpg",
 				link: "/courses/co1",
 			},
 			{
 				id: "CO2",
 				title: tLevels("globalMindset"),
-				image: "/img/globals/C02.png",
+				image: "/img/globals/global-mindset-C02.png",
 				link: "/courses/co2",
 			},
 			{
 				id: "CO3",
 				title: tLevels("growthMindset"),
-				image: "/img/globals/C03.webp",
+				image: "/img/globals/growth-mindset-C03.webp",
 				link: "/courses/co3",
 			},
 			{
 				id: "CO4",
 				title: tLevels("presentation"),
-				image: "/img/globals/C04.jpg",
+				image: "/img/globals/presentation-C04.jpg",
 				link: "/courses/co4",
 			},
 			{
 				id: "BIZNITE",
 				title: tLevels("countryBizNites"),
-				image: "/img/globals/biz-nite.jpg",
+				image: "/img/globals/country-biz-nites.jpg",
 				link: "/events/biz-nite",
 			},
 		],
@@ -79,39 +80,39 @@ export default function HomePage() {
 		title: tLevels("globalTeamwork"),
 		description: tLevels("globalTeamworkDescription"),
 		stats: [
-			{ icon: <BookOpen className="w-4 h-4" />, label: "23 Programs" },
-			{ icon: <Briefcase className="w-4 h-4" />, label: "65 Workshops" },
+			{ icon: <BookOpen className="w-4 h-4" />, label: tLevels("programsCount", { count: 23 }) },
+			{ icon: <Briefcase className="w-4 h-4" />, label: tLevels("workshopsCount", { count: 65 }) },
 		],
 		cards: [
 			{
 				id: "L12",
 				title: tLevels("teamBuilding"),
 				image: "/img/globals/L12.webp",
-				link: "/courses/co1",
+				link: "/programs/global-teamwork/l12-team-building",
 			},
 			{
 				id: "CO6",
 				title: tLevels("negotiation"),
 				image: "/img/globals/C06.jpg",
-				link: "/courses/co2",
+				link: "/programs/global-teamwork/C06-negotiation",
 			},
 			{
 				id: "F01",
 				title: tLevels("globalSales"),
 				image: "/img/globals/F01.avif",
-				link: "/courses/co3",
+				link: "/programs/global-teamwork/F01-global-sales",
 			},
 			{
 				id: "F08",
 				title: tLevels("globalProjects"),
 				image: "/img/globals/F08.jpg",
-				link: "/courses/co4",
+				link: "/programs/global-teamwork/F08-global-projects",
 			},
 			{
 				id: "C09",
 				title: tLevels("businessGame"),
 				image: "/img/globals/C09.png",
-				link: "/events/biz-nite",
+				link: "/programs/global-teamwork/c09-business-game",
 			},
 		],
 	};
@@ -119,10 +120,10 @@ export default function HomePage() {
 	const globalLeadership: CardGridData = {
 		level: tLevels("level3"),
 		title: tLevels("globalLeadership"),
-		description: "Unleash your global leadership potential. Acquire comprehensive leadership skills, including performance management, coaching, and strategic vision. Inspire diverse global employees, enhance project management capabilities, and excel in complex challenges.",
+		description: tLevels("globalLeadershipDescription"),
 		stats: [
-			{ icon: <BookOpen className="w-4 h-4" />, label: "14 Programs" },
-			{ icon: <Briefcase className="w-4 h-4" />, label: "40 Workshops" },
+			{ icon: <BookOpen className="w-4 h-4" />, label: tLevels("programsCount", { count: 14 }) },
+			{ icon: <Briefcase className="w-4 h-4" />, label: tLevels("workshopsCount", { count: 40 }) },
 		],
 		cards: [
 			{
@@ -186,6 +187,7 @@ export default function HomePage() {
 			<LecturerIntroduction />
 			<Instructors />
 			<FeturedIn />
+			<Footer />
 		</>
 	);
 }

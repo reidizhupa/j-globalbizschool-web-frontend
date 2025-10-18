@@ -19,7 +19,15 @@
         "description2": "あなたのキャリアパスを一緒に考え、マインドマップを作りながら楽しくお話させていただきます。日本語でも英語でもOKです。プログラムに参加する／しないに関係なく、ご自身の考えを整理するための20～30分になります。お気軽にお申し込みください。",
         "coachingSupport": "無料オンラインコーチングもジョンが担当します！",
         "bookCoaching": "無料コーチング予約！",
-        "otherLectures": "その他にも専門知識を持った講師陣がサポートいたします！"
+        "otherLectures": "その他にも専門知識を持った講師陣がサポートいたします！",
+        "roles": {
+            "sarahBirchley": "ビジネススクールディレクター・講師・コーチ",
+            "nathanDeWitt": "講師",
+            "grahamLenz": "コーチ・サクセスサポーター",
+            "mizuhoShimada": "コミュニティコーチ",
+            "ikemOkoboshi": "コーチ・サクセスサポーター",
+            "hisakoMiyamori": "コーチ・サクセスサポーター"
+        }
     },
     "heroDescription": "J-Global\nビジネススクールへ\nようこそ!",
     "clickFreeTrial": "無料トライアルはこちら",
