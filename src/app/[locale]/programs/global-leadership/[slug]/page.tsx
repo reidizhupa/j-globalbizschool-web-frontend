@@ -4,7 +4,7 @@ import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDeta
 
 const workshopData: Workshop = {
 	title: "Global Teamwork Skills: L12",
-	image: "/img/globals/l12.webp",
+	image: "/img/globals/L12.webp",
 	purpose: ["Leverage both Japanese and global business strengths to build trust and influence.", "Bring together diverse values and working styles to create high-performing teams based on mutual understanding."],
 	participants: "For those who want to lead teams smoothly in a global environment and achieve results in project management and global team leadership.",
 	objectives: ["Understand Japan’s team-based work culture and communication style.", "Establish effective hybrid teamwork across cultures.", "Enhance skills for effective feedback and trust-building."],
