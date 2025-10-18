@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import React from "react";
-import { getLink } from "@/lib/links";
+import { getLink } from "@/utils/helpers";
 
 const FreeTrialSection = () => {
 	const t = useTranslations("homepage"); // namespace

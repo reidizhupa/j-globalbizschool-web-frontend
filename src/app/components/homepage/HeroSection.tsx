@@ -4,8 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { useLocale, useTranslations } from "next-intl";
-import { getLink } from "@/lib/links";
 import { useScroll } from "@/app/hoooks/useScroll";
+import { getLink } from "@/utils/helpers";
 
 export default function Page() {
 	const currentLocale = useLocale();

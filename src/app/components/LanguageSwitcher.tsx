@@ -6,9 +6,9 @@ import { usePathname, useRouter, Link } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { Menu, X } from "lucide-react";
-import { getLink } from "@/lib/links";
 import ApplicationForm from "./ApplicationForm";
 import Modal from "./Modal";
+import { getLink } from "@/utils/helpers";
 
 export default function LanguageSwitcher() {
 	const router = useRouter();
