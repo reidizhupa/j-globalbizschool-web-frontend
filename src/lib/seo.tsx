@@ -47,7 +47,7 @@ export async function generatePageMetadata(props: PageProps, parent: ResolvingMe
 			shortcut: "/favicon/favicon.ico",
 			apple: "/favicon/apple-touch-icon.png",
 		},
-		manifest: "/favicon/manifest.json",
+		manifest: "/favicon/site.webmanifest",
 		appleWebApp: {
 			title: "J-Global Business School",
 		},
