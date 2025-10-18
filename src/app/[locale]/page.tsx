@@ -15,23 +15,25 @@ import FeturedIn from "../components/homepage/FeaturedIn";
 import Footer from "../components/Footer";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
-	/*
-
-	------ CASE OF OVERRIDING SOME PARTS OF THE METADATA
-
-	const baseMetadata = await generatePageMetadata(props, parent, "seo");
-  const overrides = {
-    title: "About Us - My Company",
-
-  };
-  return { ...baseMetadata, ...overrides };
-  */
-
 	return generatePageMetadata(props, parent, "seo");
 }
 
 export default function HomePage() {
 	const tLevels = useTranslations("levels");
+
+	// === DEBUG: Check environment variable ===
+	const hasVar = !!process.env.GOOGLE_SERVICE_ACCOUNT;
+	const length = process.env.GOOGLE_SERVICE_ACCOUNT?.length || 0;
+	const allGoogleKeys = Object.keys(process.env).filter((k) => k.includes("GOOGLE"));
+	const firstChars = process.env.GOOGLE_SERVICE_ACCOUNT?.substring(0, 100);
+
+	console.log("=== HOMEPAGE ENV DEBUG ===");
+	console.log("Has GOOGLE_SERVICE_ACCOUNT:", hasVar);
+	console.log("Length:", length);
+	console.log("All GOOGLE keys:", allGoogleKeys);
+	console.log("First 100 chars:", firstChars);
+	console.log("========================");
+	// === END DEBUG ===
 
 	const globalPrograms: CardGridData = {
 		level: tLevels("level1"),
@@ -158,36 +160,62 @@ export default function HomePage() {
 			},
 		],
 	};
+
 	return (
 		<>
-			<HeroSection />
-			<JGlobalBusinessSchool />
-			<JGlobalAchievements />
-			<LogoSection />
+			{/* === DEBUG OUTPUT - REMOVE AFTER TESTING === */}
+			<div
+				style={{
+					position: "fixed",
+					top: 0,
+					left: 0,
+					right: 0,
+					background: hasVar ? "#d4edda" : "#f8d7da",
+					color: hasVar ? "#155724" : "#721c24",
+					padding: "20px",
+					zIndex: 9999,
+					borderBottom: "3px solid " + (hasVar ? "#28a745" : "#dc3545"),
+					fontFamily: "monospace",
+					fontSize: "12px",
+				}}
+			>
+				<strong style={{ fontSize: "16px" }}>{hasVar ? "✅ GOOGLE_SERVICE_ACCOUNT IS SET" : "❌ GOOGLE_SERVICE_ACCOUNT NOT SET"}</strong>
+				<div>Length: {length} characters</div>
+				<div>Keys found: {allGoogleKeys.join(", ") || "None"}</div>
+				<div>First 100 chars: {firstChars || "N/A"}</div>
+			</div>
+			<div style={{ marginTop: "150px" }}>
+				{/* === END DEBUG === */}
 
-			<FreeTrial />
-			<div className="bg-[#dbe9ff] pt-20">
-				<div className="bg-[url('/img/bg_continuation.png')] bg-cover bg-center bg-no-repeat">
-					<h1 className="text-4xl md:text-5xl flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
-						<span className="bg-clip-text  relative z-10"> Unlimited opportunites</span>
-					</h1>
-					{/* Content */}
-					<div data-aos="fade-right" data-aos-duration="600">
-						<CardGridSection {...globalPrograms} align="left" />
-					</div>
+				<HeroSection />
+				<JGlobalBusinessSchool />
+				<JGlobalAchievements />
+				<LogoSection />
 
-					<div data-aos="fade-left" data-aos-duration="600">
-						<CardGridSection {...globalTeamwork} align="right" />
-					</div>
-					<div data-aos="fade-right" data-aos-duration="600">
-						<CardGridSection {...globalLeadership} align="left" />
+				<FreeTrial />
+				<div className="bg-[#dbe9ff] pt-20">
+					<div className="bg-[url('/img/bg_continuation.png')] bg-cover bg-center bg-no-repeat">
+						<h1 className="text-4xl md:text-5xl flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
+							<span className="bg-clip-text  relative z-10"> Unlimited opportunites</span>
+						</h1>
+						{/* Content */}
+						<div data-aos="fade-right" data-aos-duration="600">
+							<CardGridSection {...globalPrograms} align="left" />
+						</div>
+
+						<div data-aos="fade-left" data-aos-duration="600">
+							<CardGridSection {...globalTeamwork} align="right" />
+						</div>
+						<div data-aos="fade-right" data-aos-duration="600">
+							<CardGridSection {...globalLeadership} align="left" />
+						</div>
 					</div>
 				</div>
+				<LecturerIntroduction />
+				<Instructors />
+				<FeturedIn />
+				<Footer />
 			</div>
-			<LecturerIntroduction />
-			<Instructors />
-			<FeturedIn />
-			<Footer />
 		</>
 	);
 }
