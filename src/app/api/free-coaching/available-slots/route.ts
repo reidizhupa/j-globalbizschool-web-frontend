@@ -66,8 +66,8 @@ export async function POST(req: NextRequest) {
 
 		// --- Authenticate with Google ---
 		const auth = new google.auth.JWT({
-			email: serviceAccount.client_email,
-			key: serviceAccount.private_key, // literal \n in env
+			email: process.env.GOOGLE_SERVICE_CLIENT_EMAIL,
+			key: process.env.GOOGLE_SERVICE_PRIVATE_KEY,
 			scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
 		});
 
