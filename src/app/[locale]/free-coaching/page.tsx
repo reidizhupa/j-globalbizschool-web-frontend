@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import Image from "next/image";
-import { FaCheckCircle, FaClock, FaLaptop, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaExclamationTriangle, FaArrowLeft } from "react-icons/fa";
+import { FaCheckCircle, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaExclamationTriangle } from "react-icons/fa";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import { Link } from "@/i18n/navigation";
 import "react-phone-input-2/lib/style.css";
@@ -88,7 +88,7 @@ export default function FreeCoachingPage() {
 			if (data.error) throw new Error(data.error);
 
 			next();
-		} catch (err: any) {
+		} catch (err: unknown) {
 			alert("Booking failed: " + err.message);
 		} finally {
 			setLoading(false);
