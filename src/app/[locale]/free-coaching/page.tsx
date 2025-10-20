@@ -89,9 +89,11 @@ export default function FreeCoachingPage() {
 
 			next();
 		} catch (err: unknown) {
-			alert("Booking failed: " + err.message);
-		} finally {
-			setLoading(false);
+			if (err instanceof Error) {
+				alert("Booking failed: " + err.message);
+			} else {
+				alert("Booking failed");
+			}
 		}
 	};
 
