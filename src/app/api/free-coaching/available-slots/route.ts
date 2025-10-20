@@ -50,18 +50,6 @@ export async function POST(req: NextRequest) {
 			return new Response(JSON.stringify({ error: "Missing date" }), { status: 400 });
 		}
 
-		console.log(
-			"Environment variables available:",
-			Object.keys(process.env).filter((key) => key.includes("GOOGLE"))
-		);
-		console.log("GOOGLE_SERVICE_ACCOUNT exists?", !!process.env.GOOGLE_SERVICE_ACCOUNT);
-		console.log("GOOGLE_SERVICE_ACCOUNT length?", process.env.GOOGLE_SERVICE_ACCOUNT?.length);
-
-		const serviceAccountStr = process.env.GOOGLE_SERVICE_ACCOUNT;
-		if (!serviceAccountStr) {
-			throw new Error("Missing GOOGLE_SERVICE_ACCOUNT environment variable.");
-		}
-
 		// --- Authenticate with Google ---
 		const auth = new google.auth.JWT({
 			email: process.env.GOOGLE_SERVICE_CLIENT_EMAIL,

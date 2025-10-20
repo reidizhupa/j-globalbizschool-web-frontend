@@ -18,3 +18,11 @@ body {
 	color: var(--foreground);
 	font-family: var(--font-noto);
 }
+
+.flag-dropdown {
+	@apply rounded-tl-full; /* Tailwind width, height, rounded */
+}
+
+.selected-flag {
+	@apply rounded-tl-full; /* Tailwind width, height, rounded */
+}
