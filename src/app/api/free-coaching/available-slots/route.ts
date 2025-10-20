@@ -62,8 +62,6 @@ export async function POST(req: NextRequest) {
 			throw new Error("Missing GOOGLE_SERVICE_ACCOUNT environment variable.");
 		}
 
-		const serviceAccount = JSON.parse(serviceAccountStr);
-
 		// --- Authenticate with Google ---
 		const auth = new google.auth.JWT({
 			email: process.env.GOOGLE_SERVICE_CLIENT_EMAIL,

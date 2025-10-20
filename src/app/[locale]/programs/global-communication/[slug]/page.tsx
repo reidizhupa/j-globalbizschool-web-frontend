@@ -23,46 +23,7 @@ const fallbackWorkshop: Workshop = {
 		},
 	],
 };
-// Server component to fetch FileMaker data
-async function fetchWorkshopBySlug(slug: string): Promise<Workshop> {
-	try {
-		const url = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/fmp/records/programs`;
-		const res = await fetch(url, { cache: "no-store" });
 
-		if (!res.ok) return fallbackWorkshop;
-
-		const fmData = await res.json();
-
-		const records = fmData?.response?.data || [];
-		// Print all LearningProgramCodes
-		console.log(records);
-
-		// Find the record where LearningProgramCode matches the slug
-		const record = records.find((r: any) => r.fieldData["LearningProgram::LearningProgramCode"]?.toLowerCase() === slug.toLowerCase())?.fieldData;
-		console.log(record);
-		if (!record) return fallbackWorkshop;
-
-		const workshop: Workshop = {
-			title: record.title || fallbackWorkshop.title,
-			image: record.image || fallbackWorkshop.image,
-			purpose: record.purpose || fallbackWorkshop.purpose,
-			participants: record.participants || fallbackWorkshop.participants,
-			objectives: record.objectives || fallbackWorkshop.objectives,
-			language: record.language || fallbackWorkshop.language,
-			sessions: record.sessions || fallbackWorkshop.sessions,
-		};
-
-		return workshop;
-	} catch (err) {
-		console.error("Failed to fetch or map FileMaker data:", err);
-		return fallbackWorkshop;
-	}
-}
-
-export default async function ProgramPage({ params: rawParams }: { params: any }) {
-	const params = await rawParams; // <-- await here
-	const slug = params.slug;
-	const workshop = await fetchWorkshopBySlug(slug);
-
-	return <WorkshopDetail workshop={workshop} />;
+export default async function ProgramPage() {
+	return <WorkshopDetail workshop={fallbackWorkshop} />;
 }
