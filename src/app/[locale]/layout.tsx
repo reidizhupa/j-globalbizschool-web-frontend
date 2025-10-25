@@ -3,14 +3,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import Aoscompo from "../utils/aos";
-import { Noto_Sans_JP } from "next/font/google";
-
-const notoSansJP = Noto_Sans_JP({
-	subsets: ["latin"],
-	weight: ["400", "500", "700", "900"],
-	display: "swap",
-	variable: "--font-noto",
-});
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
 	// Ensure that the incoming `locale` is valid
@@ -21,7 +13,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
 
 	return (
 		<html lang={locale}>
-			<body className={`${notoSansJP.variable}`}>
+			<body>
 				<NextIntlClientProvider>
 					<Aoscompo>{children}</Aoscompo>{" "}
 				</NextIntlClientProvider>
