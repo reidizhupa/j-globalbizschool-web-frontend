@@ -16,6 +16,7 @@ export interface WorkshopSession {
 
 export interface Workshop {
 	title: string;
+	subtitle: string;
 	image: string;
 	purpose: string[];
 	participants: string;
@@ -69,7 +70,7 @@ export default function WorkshopDetail({ workshop }: WorkshopDetailProps) {
 				<div className="relative max-w-6xl mx-auto px-6 py-20 mt-10 grid lg:grid-cols-2 gap-12 items-center">
 					<div className="space-y-6">
 						<h1 className="text-5xl lg:text-6xl font-bold leading-tight">{workshop.title}</h1>
-						<p className="text-xl text-blue-100 leading-relaxed">{workshop.participants}</p>
+						<p className="text-lg text-blue-100 leading-relaxed">{workshop.subtitle}</p>
 						<button className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow hover:bg-[#d74100] transition flex items-center justify-center gap-2">
 							Register Now <FaArrowRight />
 						</button>
@@ -89,25 +90,57 @@ export default function WorkshopDetail({ workshop }: WorkshopDetailProps) {
 						{[
 							{ icon: <FaBullseye />, color: "bg-blue-100 text-blue-600", title: "Program Purpose", content: workshop.purpose },
 							{ icon: <FaGlobe />, color: "bg-green-100 text-green-600", title: "Learning Objectives", content: workshop.objectives },
-							{ icon: <FaUsers />, color: "bg-orange-100 text-orange-500", title: "Target Participants", content: [workshop.participants] },
-							{ icon: <FaLanguage />, color: "bg-purple-100 text-purple-600", title: "Language Requirement", content: [workshop.language] },
-						].map((section, idx) => (
-							<div key={idx} className="flex items-start gap-4 pb-6 border-b border-gray-200 last:border-none rounded-lg p-2">
-								<div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${section.color}`}>{section.icon}</div>
-								<div className="flex-1">
-									<h3 className="text-2xl font-semibold text-gray-900 mb-6">{section.title}</h3>
-									<div className="flex flex-wrap gap-2">
-										{section.content.map((item, j) => (
-											<span key={j} className="inline-flex items-center gap-1 px-3 text-gray-800  rounded-full">
-												<div className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></div>
-												{item}
-											</span>
-										))}
+							{ icon: <FaUsers />, color: "bg-orange-100 text-orange-500", title: "Target Participants", content: workshop.participants },
+							{ icon: <FaLanguage />, color: "bg-purple-100 text-purple-600", title: "Language Requirement", content: workshop.language },
+						]
+							.filter((section) => {
+								let isNonEmpty = false;
+
+								if (Array.isArray(section.content)) {
+									// Remove undefined, null, empty strings, and trim whitespace
+									const filteredArray = section.content
+										.filter((item) => item !== undefined && item !== null)
+										.map((item) => item.toString().trim())
+										.filter(Boolean);
+
+									section.content = filteredArray; // update content
+									isNonEmpty = filteredArray.length > 0;
+								} else if (section.content !== undefined && section.content !== null) {
+									isNonEmpty = section.content.toString().trim() !== "";
+								}
+
+								return isNonEmpty;
+							})
+
+							.map((section, idx) => (
+								<div key={idx} className="flex items-start gap-4 pb-6 border-b border-gray-200 last:border-none rounded-lg p-2">
+									<div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${section.color}`}>{section.icon}</div>
+									<div className="flex-1">
+										<h3 className="text-2xl font-semibold text-gray-900 mb-6">{section.title}</h3>
+										<div className="flex flex-col gap-2">
+											{Array.isArray(section.content)
+												? section.content.map((item, i) => (
+														<span key={i} className="inline-flex items-center gap-1 px-3 text-gray-800 rounded-full">
+															<div className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></div>
+															{item}
+														</span>
+												  ))
+												: section.content
+														?.split("●")
+														.filter(Boolean)
+														.map((line, i) => (
+															<span key={i} className="inline-flex items-center gap-1 px-3 text-gray-800 rounded-full">
+																<div className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></div>
+																{line.trim()}
+															</span>
+														))}
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
 					</div>
+
+					<div className="flex justify-center font-bold text-3xl">Available Workshops</div>
 
 					{/* Sessions */}
 					<div className="space-y-16">

@@ -10,10 +10,9 @@ import Instructors from "@/app/components/homepage/Instructors";
 import type { Metadata, ResolvingMetadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import LogoSection from "../components/homepage/LogoSection";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import FeturedIn from "../components/homepage/FeaturedIn";
 import Footer from "../components/Footer";
-import { getProgramLink } from "@/utils/helpers";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
 	/*
@@ -33,7 +32,6 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 
 export default function HomePage() {
 	const tLevels = useTranslations("levels");
-	const currentLocale = useLocale();
 
 	const globalPrograms: CardGridData = {
 		level: tLevels("level1"),
@@ -48,31 +46,31 @@ export default function HomePage() {
 				id: "CO1",
 				title: tLevels("interculturalSkills"),
 				image: "/img/globals/intercultural-skills-C01.jpg",
-				link: getProgramLink("C01", currentLocale),
+				link: "/programs/global-communication/C01",
 			},
 			{
 				id: "CO2",
 				title: tLevels("globalMindset"),
 				image: "/img/globals/global-mindset-C02.png",
-				link: getProgramLink("C02", currentLocale),
+				link: "/programs/global-communication/C02",
 			},
 			{
 				id: "CO3",
 				title: tLevels("growthMindset"),
 				image: "/img/globals/growth-mindset-C03.webp",
-				link: getProgramLink("C03", currentLocale),
+				link: "/programs/global-communication/C03",
 			},
 			{
 				id: "CO4",
 				title: tLevels("presentation"),
 				image: "/img/globals/presentation-C04.jpg",
-				link: getProgramLink("C04", currentLocale),
+				link: "/programs/global-communication/C04",
 			},
 			{
 				id: "BIZNITE",
 				title: tLevels("countryBizNites"),
 				image: "/img/globals/country-biz-nites.jpg",
-				link: getProgramLink("E-AU01", currentLocale),
+				link: "/programs/global-communication/E-AU01",
 			},
 		],
 	};
@@ -90,31 +88,31 @@ export default function HomePage() {
 				id: "L12",
 				title: tLevels("teamBuilding"),
 				image: "/img/globals/L12.webp",
-				link: getProgramLink("L12", currentLocale),
+				link: "/programs/global-teamwork/L12",
 			},
 			{
 				id: "CO6",
 				title: tLevels("negotiation"),
 				image: "/img/globals/C06.jpg",
-				link: getProgramLink("C06", currentLocale),
+				link: "/programs/global-teamwork/C06",
 			},
 			{
 				id: "F01",
 				title: tLevels("globalSales"),
 				image: "/img/globals/F01.avif",
-				link: getProgramLink("F01", currentLocale),
+				link: "/programs/global-teamwork/F01",
 			},
 			{
 				id: "F08",
 				title: tLevels("globalProjects"),
 				image: "/img/globals/F08.jpg",
-				link: getProgramLink("F08", currentLocale),
+				link: "/programs/global-teamwork/F08",
 			},
 			{
 				id: "C09",
 				title: tLevels("businessGame"),
 				image: "/img/globals/C09.png",
-				link: getProgramLink("C09", currentLocale),
+				link: "/programs/global-teamwork/C09",
 			},
 		],
 	};
@@ -132,31 +130,31 @@ export default function HomePage() {
 				id: "L01",
 				title: tLevels("coaching"),
 				image: "/img/globals/L01.png",
-				link: getProgramLink("L01", currentLocale),
+				link: "/programs/global-leadership/L01",
 			},
 			{
 				id: "L08",
 				title: tLevels("strategy"),
 				image: "/img/globals/L08.jpg",
-				link: getProgramLink("L08", currentLocale),
+				link: "/programs/global-leadership/L08",
 			},
 			{
 				id: "I01",
 				title: tLevels("miniInternship"),
 				image: "/img/globals/C06.jpg",
-				link: getProgramLink("I01", currentLocale),
+				link: "/programs/global-leadership/I01",
 			},
 			{
 				id: "L02",
 				title: tLevels("practicalThinking"),
 				image: "/img/globals/L02.avif",
-				link: getProgramLink("L02-2", currentLocale),
+				link: "/programs/global-leadership/L02-2",
 			},
 			{
 				id: "L03",
 				title: tLevels("miniMBA"),
 				image: "/img/globals/C09.png",
-				link: getProgramLink("L03-2", currentLocale),
+				link: "/programs/global-leadership/L03-2",
 			},
 		],
 	};

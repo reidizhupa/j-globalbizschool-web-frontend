@@ -5,8 +5,6 @@ export async function GET() {
 
 	const auth = Buffer.from(`${process.env.FILEMAKER_USER}:${process.env.FILEMAKER_PASS}`).toString("base64");
 
-	console.log(auth);
-
 	const res = await fetch(url, {
 		method: "POST",
 		headers: {
