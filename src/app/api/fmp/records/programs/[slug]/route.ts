@@ -56,7 +56,7 @@ export async function GET(req: NextRequest) {
 			sort: [{ fieldName: "LearningProgramNameE", sortOrder: "ascend" }],
 		};
 
-		const apiUrl = `${FILEMAKER_URL}/fmi/data/${FILEMAKER_API_VERSION}/databases/${FILEMAKER_DB2}/layouts/LearningProgramApi/_find`;
+		const apiUrl = `${FILEMAKER_URL}/fmi/data/vLatest/databases/${FILEMAKER_DB2}/layouts/LearningProgramApi/_find`;
 
 		const res = await fetch(apiUrl, {
 			method: "POST",
