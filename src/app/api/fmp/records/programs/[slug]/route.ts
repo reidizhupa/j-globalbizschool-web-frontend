@@ -32,6 +32,7 @@ async function getToken() {
 
 	cachedToken = data.response.token;
 	tokenExpiresAt = Date.now() + 14 * 60 * 1000; // valid for 14 minutes
+	console.log("hello" + cachedToken);
 	return cachedToken;
 }
 
