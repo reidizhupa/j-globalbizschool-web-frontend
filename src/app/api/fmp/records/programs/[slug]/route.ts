@@ -16,7 +16,7 @@ async function getToken() {
 		throw new Error("Missing one or more FileMaker environment variables.");
 	}
 
-	const auth = Buffer.from(`${FILEMAKER_USER}:${FILEMAKER_PASS}`).toString("base64");
+	const auth = Buffer.from(`${FILEMAKER_USER}:${FILEMAKER_PASS?.replace(/\\n/g, "\n")}`).toString("base64");
 	const sessionUrl = `${FILEMAKER_URL}/fmi/data/${FILEMAKER_API_VERSION}/databases/${FILEMAKER_DB}/sessions`;
 
 	const res = await fetch(sessionUrl, {
