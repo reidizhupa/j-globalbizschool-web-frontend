@@ -3,7 +3,7 @@ import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDeta
 const fallbackWorkshop: Workshop = {
 	title: "",
 	subtitle: "",
-	image: "",
+	image: "/img/globals/presentation-C04.jpg",
 	purpose: [""],
 	participants: "",
 	objectives: [""],
@@ -50,7 +50,7 @@ type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]
 // --- Fetch function ---
 async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Workshop> {
 	try {
-		const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/fmp/records/programs/${slug}`;
+		const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/fmp/records/programs/${slug}/`;
 		const res = await fetch(url, { method: "GET", cache: "no-store" });
 
 		if (!res.ok) {

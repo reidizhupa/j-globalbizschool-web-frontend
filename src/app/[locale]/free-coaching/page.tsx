@@ -45,7 +45,7 @@ export default function FreeCoachingPage() {
 		const dayStr = format(selectedDate, "yyyy-MM-dd");
 
 		setLoading(true);
-		fetch("/api/free-coaching/available-slots", {
+		fetch("/api/free-coaching/available-slots/", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ date: dayStr }),
@@ -98,7 +98,7 @@ export default function FreeCoachingPage() {
 		try {
 			setLoading(true);
 
-			const res = await fetch("/api/free-coaching/book", {
+			const res = await fetch("/api/free-coaching/book/", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(bookingData),
