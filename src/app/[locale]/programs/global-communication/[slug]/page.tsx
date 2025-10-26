@@ -68,7 +68,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<{ work
 
 		const record = fmData?.response?.data?.[0]?.fieldData;
 		if (!record) {
-			let x = JSON.stringify(fmData, null, 2);
+			const x = JSON.stringify(fmData, null, 2);
 			return { workshop: fallbackWorkshop, error: `No record data returned from FileMaker API: wait ${x}` };
 		}
 
