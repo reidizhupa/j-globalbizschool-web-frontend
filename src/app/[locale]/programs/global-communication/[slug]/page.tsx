@@ -1,5 +1,4 @@
-import { Workshop } from "@/app/components/programs/WorkshopDetails";
-import { ProgramPageClient } from "../../ProgramPageClient";
+import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDetails";
 
 const fallbackWorkshop: Workshop = {
 	title: "",
@@ -49,37 +48,42 @@ type Session = {
 type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]>;
 
 // --- Fetch function ---
-async function fetchWorkshopBySlug(slug: string, locale: string): Promise<{ workshop: Workshop; error?: string }> {
+async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Workshop> {
 	try {
 		const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/fmp/records/programs/${slug}/`;
 		const res = await fetch(url, { method: "GET", cache: "no-store" });
 
 		if (!res.ok) {
 			const text = await res.text();
-			console.log("text");
-			return { workshop: fallbackWorkshop, error: `FileMaker API failed: ${text}` };
+			console.error("FileMaker API failed (non-OK response):", text); // ✅ print API response text
+			return fallbackWorkshop;
 		}
 
 		let fmData;
 		try {
 			fmData = await res.json();
 		} catch (parseErr) {
-			return { workshop: fallbackWorkshop, error: `Failed to parse FileMaker API response as JSON: ${parseErr}` };
+			console.error("Failed to parse FileMaker API response as JSON:", parseErr);
+			return fallbackWorkshop;
 		}
 
 		const record = fmData?.response?.data?.[0]?.fieldData;
+
 		if (!record) {
-			const x = JSON.stringify(fmData, null, 2);
-			return { workshop: fallbackWorkshop, error: `No record data returned from FileMaker API: wait ${x}` };
+			console.error("No record data returned from FileMaker API:", fmData);
+			return fallbackWorkshop;
 		}
 
 		const events = fmData?.response?.data?.[0]?.portalData as FileMakerPortalData | undefined;
+
 		const workshopsArray = (events ? (Object.values(events)[0] as FileMakerWorkshop[]) : []) ?? [];
 		const datesArray = (events ? (Object.values(events)[1] as FileMakerEvent[]) : []) ?? [];
 
 		const sessions: Session[] = workshopsArray.map((item: FileMakerWorkshop) => {
 			const title = item[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "") || "";
+
 			const purpose = item[locale === "jp" ? "Workshop::PurposeJ" : "Workshop::PurposeE"] || "";
+
 			const content = purpose
 				.split(/\r\r/)
 				.map((s) => s.trim())
@@ -92,10 +96,14 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<{ work
 				})
 				.map((event: FileMakerEvent) => `${event["WorkshopEvent::EventDate"]} ${event["WorkshopEvent::StartTime"]}`);
 
-			return { title, content, dates: matchingDates };
+			return {
+				title,
+				content,
+				dates: matchingDates,
+			};
 		});
 
-		const workshop: Workshop = {
+		return {
 			title: locale === "jp" ? record["ProgramType::ProgramTypeNameJ"] : record["ProgramType::ProgramTypeName"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
 			image: "/img/globals/L12.webp",
@@ -105,10 +113,9 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<{ work
 			language: locale === "jp" ? record.LanguageJ : record.LanguageE || fallbackWorkshop.language,
 			sessions,
 		};
-
-		return { workshop };
 	} catch (err) {
-		return { workshop: fallbackWorkshop, error: `Failed to fetch or map FileMaker data: ${err}` };
+		console.error("Failed to fetch or map FileMaker data:", err); // ✅ print any exception
+		return fallbackWorkshop;
 	}
 }
 
@@ -117,7 +124,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ locale
 	const slug = awaitedParams.slug;
 	const locale = awaitedParams.locale || "jp"; // default to Japanese
 
-	const { workshop, error } = await fetchWorkshopBySlug(slug, locale);
+	const workshop = await fetchWorkshopBySlug(slug, locale);
 
-	return <ProgramPageClient workshop={workshop} fetchError={error} />;
+	return <WorkshopDetail workshop={workshop} />;
 }

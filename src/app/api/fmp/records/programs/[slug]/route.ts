@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
 
 		const token = await getToken();
 
-		const { FILEMAKER_URL, FILEMAKER_DB, FILEMAKER_USER, FILEMAKER_PASS } = process.env;
+		const { FILEMAKER_URL, FILEMAKER_DB } = process.env;
 		if (!FILEMAKER_URL || !FILEMAKER_DB) throw new Error("Missing FILEMAKER_URL or FILEMAKER_DB environment variable.");
 
 		const body = {
