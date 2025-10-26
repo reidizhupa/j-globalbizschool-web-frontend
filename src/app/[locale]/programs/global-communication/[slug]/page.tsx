@@ -1,4 +1,3 @@
-import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDetails";
 import { ProgramPageClient } from "../../ProgramPageClient";
 
 const fallbackWorkshop: Workshop = {
