@@ -48,15 +48,15 @@ export async function GET(req: NextRequest) {
 
 		const token = await getToken();
 
-		const { FILEMAKER_URL, FILEMAKER_DB2, FILEMAKER_USER, FILEMAKER_PASS } = process.env;
-		if (!FILEMAKER_URL || !FILEMAKER_DB2) throw new Error("Missing FILEMAKER_URL or FILEMAKER_DB2 environment variable.");
+		const { FILEMAKER_URL, FILEMAKER_DB, FILEMAKER_USER, FILEMAKER_PASS } = process.env;
+		if (!FILEMAKER_URL || !FILEMAKER_DB) throw new Error("Missing FILEMAKER_URL or FILEMAKER_DB environment variable.");
 
 		const body = {
 			query: [{ LearningProgramCode: `=${slug.toUpperCase()}` }],
 			sort: [{ fieldName: "LearningProgramNameE", sortOrder: "ascend" }],
 		};
 
-		const apiUrl = `${FILEMAKER_URL}/fmi/data/vLatest/databases/${FILEMAKER_DB2}/layouts/LearningProgramApi/_find`;
+		const apiUrl = `${FILEMAKER_URL}/fmi/data/vLatest/databases/${FILEMAKER_DB}/layouts/LearningProgramApi/_find`;
 
 		const res = await fetch(apiUrl, {
 			method: "POST",
@@ -77,29 +77,16 @@ export async function GET(req: NextRequest) {
 				error: "FileMaker API error",
 				status: res.status,
 				details: data,
-				token, // ⚡ include the token for debugging
-				env: {
-					FILEMAKER_URL,
-					FILEMAKER_DB2,
-					FILEMAKER_USER,
-					FILEMAKER_PASS: FILEMAKER_PASS ? "*****" : undefined, // still mask password
-				},
 			});
 		}
 
 		return NextResponse.json(data);
 	} catch (error: unknown) {
 		const message = error instanceof Error ? error.message : "An unexpected error occurred";
-		const { FILEMAKER_URL, FILEMAKER_DB2, FILEMAKER_USER, FILEMAKER_PASS } = process.env;
 
 		return NextResponse.json({
 			error: message,
-			env: {
-				FILEMAKER_URL,
-				FILEMAKER_DB2,
-				FILEMAKER_USER,
-				FILEMAKER_PASS: FILEMAKER_PASS ? "*****" : undefined,
-			},
+
 			status: 500,
 		});
 	}
