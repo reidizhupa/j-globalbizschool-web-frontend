@@ -77,11 +77,12 @@ export async function GET(req: NextRequest) {
 				error: "FileMaker API error",
 				status: res.status,
 				details: data,
+				token, // ⚡ include the token for debugging
 				env: {
 					FILEMAKER_URL,
 					FILEMAKER_DB2,
 					FILEMAKER_USER,
-					FILEMAKER_PASS: FILEMAKER_PASS ? "*****" : undefined,
+					FILEMAKER_PASS: FILEMAKER_PASS ? "*****" : undefined, // still mask password
 				},
 			});
 		}
