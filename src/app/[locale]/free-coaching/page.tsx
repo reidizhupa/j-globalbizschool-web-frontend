@@ -39,7 +39,6 @@ export default function FreeCoachingPage() {
 	const next = () => setStep((prev) => prev + 1);
 	const prev = () => setStep((prev) => prev - 1);
 
-	// Fetch available slots
 	useEffect(() => {
 		if (!selectedDate) return;
 
@@ -53,10 +52,31 @@ export default function FreeCoachingPage() {
 		})
 			.then(async (res) => {
 				const text = await res.text();
-				return text ? JSON.parse(text) : { availableSlots: [] };
+				let data;
+				try {
+					data = text ? JSON.parse(text) : { availableSlots: [] };
+				} catch (err) {
+					console.error("Failed to parse JSON from API:", err, text);
+					data = { availableSlots: [] };
+				}
+
+				// If API returned an error
+				if ("error" in data) {
+					console.error("API error:", data.error, data.details ?? "");
+					setTimes([]);
+					return;
+				}
+
+				setTimes(data.availableSlots || []);
 			})
-			.then((data) => setTimes(data.availableSlots || []))
-			.catch(() => setTimes([]))
+			.catch((err: unknown) => {
+				if (err instanceof Error) {
+					console.error("Fetch error:", err.message);
+				} else {
+					console.error("Unknown fetch error:", err);
+				}
+				setTimes([]);
+			})
 			.finally(() => setLoading(false));
 	}, [selectedDate]);
 
