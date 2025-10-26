@@ -7,12 +7,12 @@ import { format } from "date-fns";
 // --- Types ---
 type CalendarEvent = calendar_v3.Schema$Event;
 
-const parseTimeJST = (dateStr: string, timeStr: string) => {
+const parseTimeJST = (dateStr: string, timeStr: string): Date => {
 	const [hourStr, minStr] = timeStr.split(":");
 	return new Date(`${dateStr}T${hourStr.padStart(2, "0")}:${minStr.padStart(2, "0")}:00+09:00`);
 };
 
-const isSlotAvailable = (slotStart: Date, slotEnd: Date, events: CalendarEvent[]) => {
+const isSlotAvailable = (slotStart: Date, slotEnd: Date, events: CalendarEvent[]): boolean => {
 	return !events.some((ev) => {
 		if (!ev.start?.dateTime || !ev.end?.dateTime) return false;
 		const evStart = new Date(ev.start.dateTime);
@@ -21,18 +21,16 @@ const isSlotAvailable = (slotStart: Date, slotEnd: Date, events: CalendarEvent[]
 	});
 };
 
-const getAvailableSlotsForDate = (dateStr: string, events: CalendarEvent[]) => {
+const getAvailableSlotsForDate = (dateStr: string, events: CalendarEvent[]): string[] => {
 	const dayOfWeek = new Date(`${dateStr}T00:00:00+09:00`).getDay();
 	const slots = weeklySlots[dayOfWeek] || [];
 
-	// current time in JST
 	const nowJST = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
 
 	return slots.filter((slot: string) => {
 		const slotStart = parseTimeJST(dateStr, slot);
-		const slotEnd = new Date(slotStart.getTime() + 30 * 60 * 1000); // 30 min slot
+		const slotEnd = new Date(slotStart.getTime() + 30 * 60 * 1000);
 
-		// skip past slots if the date is today
 		if (slotStart < nowJST && dateStr === format(nowJST, "yyyy-MM-dd")) {
 			return false;
 		}
@@ -40,7 +38,9 @@ const getAvailableSlotsForDate = (dateStr: string, events: CalendarEvent[]) => {
 		return isSlotAvailable(slotStart, slotEnd, events);
 	});
 };
-export async function POST(req: NextRequest) {
+
+// --- API Route ---
+export async function POST(req: NextRequest): Promise<Response> {
 	try {
 		const body = await req.json();
 		const dateStr: string = body.date;
@@ -62,7 +62,6 @@ export async function POST(req: NextRequest) {
 			);
 		}
 
-		// --- Authenticate with Google ---
 		const auth = new google.auth.JWT({
 			email: process.env.GOOGLE_SERVICE_CLIENT_EMAIL,
 			key: process.env.GOOGLE_SERVICE_PRIVATE_KEY.replace(/\\n/g, "\n"),
@@ -82,16 +81,21 @@ export async function POST(req: NextRequest) {
 			orderBy: "startTime",
 		});
 
-		const events = eventsRes.data.items || [];
+		const events: CalendarEvent[] = eventsRes.data.items || [];
 		const availableSlots = getAvailableSlotsForDate(dateStr, events);
 
-		return new Response(JSON.stringify({ date: dateStr, events, availableSlots }), {
-			status: 200,
-			headers: { "Content-Type": "application/json" },
-		});
-	} catch (err) {
-		// Detailed error for client
-		const errorMessage = (err as any)?.response?.data || (err as Error).message;
-		return new Response(JSON.stringify({ error: "Server error", details: errorMessage }), { status: 500, headers: { "Content-Type": "application/json" } });
+		return new Response(JSON.stringify({ date: dateStr, events, availableSlots }), { status: 200, headers: { "Content-Type": "application/json" } });
+	} catch (error) {
+		// Type-safe error handling
+		let message: string;
+		if (error instanceof Error) {
+			message = error.message;
+		} else if (typeof error === "object" && error !== null && "message" in error) {
+			message = String((error as { message: unknown }).message);
+		} else {
+			message = "Unknown error";
+		}
+
+		return new Response(JSON.stringify({ error: "Server error", details: message }), { status: 500, headers: { "Content-Type": "application/json" } });
 	}
 }
