@@ -54,22 +54,31 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 		const res = await fetch(url, { method: "GET", cache: "no-store" });
 
 		if (!res.ok) {
-			console.error("FileMaker API failed:", await res.text());
+			const text = await res.text();
+			console.error("FileMaker API failed (non-OK response):", text); // ✅ print API response text
 			return fallbackWorkshop;
 		}
 
-		const fmData = await res.json();
+		let fmData;
+		try {
+			fmData = await res.json();
+		} catch (parseErr) {
+			console.error("Failed to parse FileMaker API response as JSON:", parseErr);
+			return fallbackWorkshop;
+		}
+
 		const record = fmData?.response?.data?.[0]?.fieldData;
 
-		if (!record) return fallbackWorkshop;
+		if (!record) {
+			console.error("No record data returned from FileMaker API:", fmData);
+			return fallbackWorkshop;
+		}
 
 		const events = fmData?.response?.data?.[0]?.portalData as FileMakerPortalData | undefined;
 
-		// ✅ Extract portal arrays safely
 		const workshopsArray = (events ? (Object.values(events)[0] as FileMakerWorkshop[]) : []) ?? [];
 		const datesArray = (events ? (Object.values(events)[1] as FileMakerEvent[]) : []) ?? [];
 
-		// ✅ Map each workshop with its matching dates
 		const sessions: Session[] = workshopsArray.map((item: FileMakerWorkshop) => {
 			const title = item[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "") || "";
 
@@ -80,17 +89,12 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 				.map((s) => s.trim())
 				.filter((s) => s.length > 0);
 
-			// ✅ Match all events with the same workshop name
 			const matchingDates = datesArray
 				.filter((event: FileMakerEvent) => {
 					const eventTitle = event[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "");
 					return eventTitle === title;
 				})
-				.map((event: FileMakerEvent) => {
-					const date = event["WorkshopEvent::EventDate"];
-					const time = event["WorkshopEvent::StartTime"];
-					return `${date} ${time}`;
-				});
+				.map((event: FileMakerEvent) => `${event["WorkshopEvent::EventDate"]} ${event["WorkshopEvent::StartTime"]}`);
 
 			return {
 				title,
@@ -99,7 +103,6 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			};
 		});
 
-		// ✅ Build final Workshop object
 		return {
 			title: locale === "jp" ? record["ProgramType::ProgramTypeNameJ"] : record["ProgramType::ProgramTypeName"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
@@ -111,7 +114,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			sessions,
 		};
 	} catch (err) {
-		console.error("Failed to fetch or map FileMaker data:", err);
+		console.error("Failed to fetch or map FileMaker data:", err); // ✅ print any exception
 		return fallbackWorkshop;
 	}
 }
