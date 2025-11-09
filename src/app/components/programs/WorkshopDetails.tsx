@@ -5,14 +5,17 @@ import { useScroll } from "@/app/hoooks/useScroll";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import { FaBullseye, FaUsers, FaGlobe, FaLanguage, FaArrowRight, FaRegClock } from "react-icons/fa";
+import { FaBullseye, FaUsers, FaGlobe, FaLanguage, FaArrowRight, FaRegClock, FaChevronDown } from "react-icons/fa";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { getProgramLink } from "@/utils/helpers";
+import { getLocale } from "next-intl/server";
+import { useLocale, useTranslations } from "next-intl";
 
-export interface WorkshopSession {
+export type WorkshopSession = {
 	title: string;
 	content: string[];
-	dates: string[];
-}
+	dates: { id: string; date: string; startTime: string }[];
+};
 
 export interface Workshop {
 	title: string;
@@ -27,18 +30,27 @@ export interface Workshop {
 
 interface WorkshopDetailProps {
 	workshop: Workshop;
+	code: string;
 }
 
-export default function WorkshopDetail({ workshop }: WorkshopDetailProps) {
-	const [showAllSessions, setShowAllSessions] = useState<boolean[]>(workshop.sessions.map(() => false));
+export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) {
+	const locale = useLocale();
+	const tPrograms = useTranslations("programs");
+	const currentLocale = useLocale();
 
-	const toggleShowAll = (index: number) => {
-		setShowAllSessions((prev) => {
-			const newState = [...prev];
-			newState[index] = !newState[index];
-			return newState;
-		});
+	// Track which accordion is open (null = none open)
+	const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+	const toggleAccordion = (index: number) => {
+		setOpenIndex(openIndex === index ? null : index);
 	};
+
+	const colors = [
+		{ bg: "bg-blue-500", light: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
+		{ bg: "bg-purple-500", light: "bg-purple-50", border: "border-purple-200", text: "text-purple-700" },
+		{ bg: "bg-orange-500", light: "bg-orange-50", border: "border-orange-200", text: "text-orange-700" },
+	];
+
 	const scrolled = useScroll(10);
 
 	return (
@@ -71,9 +83,9 @@ export default function WorkshopDetail({ workshop }: WorkshopDetailProps) {
 					<div className="space-y-6">
 						<h1 className="text-5xl lg:text-6xl font-bold leading-tight">{workshop.title}</h1>
 						<p className="text-lg text-blue-100 leading-relaxed">{workshop.subtitle}</p>
-						<button className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow hover:bg-[#d74100] transition flex items-center justify-center gap-2">
-							Register Now <FaArrowRight />
-						</button>
+						<a href={getProgramLink(code, locale)} className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow hover:bg-[#d74100] transition flex items-center justify-center gap-2">
+							{tPrograms("registerNow")} <FaArrowRight />
+						</a>
 					</div>
 					<div className="relative">
 						<Image src={workshop.image} alt={workshop.title} width={600} height={400} className="relative rounded-2xl shadow-2xl object-cover w-full h-auto border-4 border-white/20" />
@@ -82,149 +94,390 @@ export default function WorkshopDetail({ workshop }: WorkshopDetailProps) {
 			</section>
 
 			{/* Two-column layout */}
-			<section className="max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-3 gap-12">
-				{/* Left Content */}
-				<div className="lg:col-span-2 space-y-12">
-					{/* Info Sections with icons */}
-					<div className="space-y-6">
-						{[
-							{ icon: <FaBullseye />, color: "bg-blue-100 text-blue-600", title: "Program Purpose", content: workshop.purpose },
-							{ icon: <FaGlobe />, color: "bg-green-100 text-green-600", title: "Learning Objectives", content: workshop.objectives },
-							{ icon: <FaUsers />, color: "bg-orange-100 text-orange-500", title: "Target Participants", content: workshop.participants },
-							{ icon: <FaLanguage />, color: "bg-purple-100 text-purple-600", title: "Language Requirement", content: workshop.language },
-						]
-							.filter((section) => {
-								let isNonEmpty = false;
+			<section className="max-w-7xl mx-auto px-6 py-20">
+				<div className="grid lg:grid-cols-3 gap-12">
+					{/* Left Content */}
+					<div className="lg:col-span-2 space-y-12">
+						<div className="flex justify-center font-medium text-4xl">{tPrograms("aboutThisProgram")}</div>
 
-								if (Array.isArray(section.content)) {
-									// Remove undefined, null, empty strings, and trim whitespace
-									const filteredArray = section.content
-										.filter((item) => item !== undefined && item !== null)
-										.map((item) => item.toString().trim())
-										.filter(Boolean);
+						{/* Info Sections with icons */}
+						<div className="max-w-6xl mx-auto">
+							<div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
+								{[
+									{ icon: <FaBullseye />, accent: "bg-blue-500/10", iconText: "text-blue-600", dot: "bg-blue-400", title: tPrograms("programPurpose"), content: workshop.purpose },
+									{ icon: <FaGlobe />, accent: "bg-teal-500/10", iconText: "text-teal-600", dot: "bg-teal-400", title: tPrograms("learningObjectives"), content: workshop.objectives },
+									{ icon: <FaUsers />, accent: "bg-purple-500/10", iconText: "text-purple-600", dot: "bg-purple-400", title: tPrograms("targetParticipants"), content: workshop.participants },
+									{ icon: <FaLanguage />, accent: "bg-rose-500/10", iconText: "text-rose-600", dot: "bg-rose-400", title: tPrograms("languageRequirements"), content: workshop.language },
+								]
+									.filter((section) => {
+										let isNonEmpty = false;
+										if (Array.isArray(section.content)) {
+											const filteredArray = section.content
+												.filter((item) => item !== undefined && item !== null)
+												.map((item) => item.toString().replace(/\r/g, "").trim())
+												.filter(Boolean);
+											section.content = filteredArray;
+											isNonEmpty = filteredArray.length > 0;
+										} else if (section.content !== undefined && section.content !== null) {
+											section.content = section.content.toString().replace(/\r/g, "");
+											isNonEmpty = section.content.trim() !== "";
+										}
+										return isNonEmpty;
+									})
+									.map((section, idx) => (
+										<div
+											key={idx}
+											className="
+						group relative bg-white rounded-3xl 
+						border border-gray-200/80
+						hover:border-gray-300 hover:shadow-lg
+						transition-all duration-300
+						overflow-hidden
+					"
+										>
+											<div className="p-8">
+												{/* Header */}
+												<div className="flex items-center gap-5 mb-7">
+													<div
+														className={`
+								flex-shrink-0 w-12 h-12 rounded-xl
+								${section.accent}
+								flex items-center justify-center
+								${section.iconText} text-lg
+								group-hover:scale-105
+								transition-all duration-300
+							`}
+													>
+														{section.icon}
+													</div>
+													<div className="flex-1 min-w-0">
+														<h3 className="text-lg font-semibold text-gray-900 mb-1.5">{section.title}</h3>
+														<div className="h-px w-12 bg-gray-200" />
+													</div>
+												</div>
 
-									section.content = filteredArray; // update content
-									isNonEmpty = filteredArray.length > 0;
-								} else if (section.content !== undefined && section.content !== null) {
-									isNonEmpty = section.content.toString().trim() !== "";
-								}
+												{/* Content */}
+												<div className="space-y-3.5">
+													{Array.isArray(section.content)
+														? section.content.map((item, i) => (
+																<div key={i} className="flex items-start gap-3 group/item">
+																	<div
+																		className={`
+												flex-shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
+												mt-2 opacity-60 group-hover/item:opacity-100
+												transition-opacity duration-200
+											`}
+																	/>
+																	<span className="text-gray-700 text-[15px] leading-relaxed font-light flex-1">{String(item).replace(/\r/g, "")}</span>
+																</div>
+														  ))
+														: section.content
+																?.split(/(?=●|・|●|\d+\.)/)
+																.filter(Boolean)
+																.map((line, i) => {
+																	const trimmed = line.trim().replace(/\r/g, "");
+																	const hasNumber = /^\d+\./.test(trimmed);
+																	const text = trimmed.replace(/^(●|●|\d+\.\s*)/, "").trim();
 
-								return isNonEmpty;
-							})
+																	return (
+																		<div key={i} className="flex items-start gap-3 group/item">
+																			{hasNumber ? (
+																				<span
+																					className={`
+															flex-shrink-0 text-xs font-medium ${section.iconText}
+															mt-0.5 min-w-[1.25rem] opacity-60 group-hover/item:opacity-100
+															transition-opacity duration-200
+														`}
+																				>
+																					{trimmed.match(/^\d+/)?.[0]}.
+																				</span>
+																			) : (
+																				<div
+																					className={`
+															flex-shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
+															mt-2 opacity-60 group-hover/item:opacity-100
+															transition-opacity duration-200
+														`}
+																				/>
+																			)}
+																			<span className="text-gray-700 text-[15px] leading-relaxed font-light flex-1">{text}</span>
+																		</div>
+																	);
+																})}
+												</div>
+											</div>
+										</div>
+									))}
+							</div>
+						</div>
 
-							.map((section, idx) => (
-								<div key={idx} className="flex items-start gap-4 pb-6 border-b border-gray-200 last:border-none rounded-lg p-2">
-									<div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${section.color}`}>{section.icon}</div>
-									<div className="flex-1">
-										<h3 className="text-2xl font-semibold text-gray-900 mb-6">{section.title}</h3>
-										<div className="flex flex-col gap-2">
-											{Array.isArray(section.content)
-												? section.content.map((item, i) => (
-														<span key={i} className="inline-flex items-center gap-1 px-3 text-gray-800 rounded-full">
-															<div className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></div>
-															{item}
-														</span>
-												  ))
-												: section.content
-														?.split("●")
-														.filter(Boolean)
-														.map((line, i) => (
-															<span key={i} className="inline-flex items-center gap-1 px-3 text-gray-800 rounded-full">
-																<div className="w-2 h-2 mr-2 bg-blue-500 rounded-full"></div>
-																{line.trim()}
+						{/* Mobile Sidebar - shown only on mobile between sections */}
+						<aside className="lg:hidden">
+							<div className="space-y-6 bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-md">
+								<h2 className="text-2xl font-medium text-gray-900 mb-5">{tPrograms("registerToWorkshops")}</h2>
+								<a href={getProgramLink(code, locale)} className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow flex items-center justify-center gap-2">
+									{tPrograms("registerNow")} <FaArrowRight />
+								</a>
+
+								<hr className="border-t border-gray-200 my-4" />
+								<div className="mt-10 font-semibold text-gray-700">{tPrograms("availableWorkshops")}</div>
+
+								<div className="space-y-4 mt-4">
+									{workshop.sessions.map((session, i) => {
+										return (
+											<a key={i} href={`#workshop-accordion-${i}`} className="group flex items-center justify-between py-2 border-b border-gray-100 hover:bg-gray-50/70 transition-colors duration-150">
+												<p className="text-sm text-gray-700 font-medium group-hover:text-blue-600 transition-colors">{session.title}</p>
+												<span className="text-gray-400 text-xs group-hover:text-blue-500 transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+											</a>
+										);
+									})}
+								</div>
+							</div>
+						</aside>
+
+						<div className="flex justify-center font-medium mt-20 text-4xl">{tPrograms("availableWorkshops")}</div>
+
+						{/* Sessions */}
+						{workshop.sessions.map((session, i) => {
+							const accentColors = ["from-slate-600 to-slate-700", "from-stone-600 to-stone-700", "from-neutral-600 to-neutral-700", "from-gray-600 to-gray-700"];
+
+							const color = colors[i % colors.length];
+							const isOpen = openIndex === i;
+
+							return (
+								<div
+									id={`workshop-accordion-${i}`}
+									key={i}
+									className={`
+				group rounded-3xl overflow-hidden 
+				bg-gradient-to-br from-white to-gray-50/30
+				border transition-all duration-300 ease-out
+				${isOpen ? "shadow-2xl border-gray-300 ring-1 ring-gray-900/5" : "shadow-md border-gray-200/60 hover:shadow-xl hover:border-gray-300/80"}
+			`}
+								>
+									{/* Accordion Header - Elegant Workshop Card */}
+									<button onClick={() => toggleAccordion(i)} aria-expanded={isOpen} aria-controls={`workshop-content-${i}`} className="w-full text-left">
+										<div className="p-8 sm:p-10">
+											<div className="flex items-start justify-between gap-6">
+												<div className="flex-1 min-w-0">
+													{/* Elegant header with accent line */}
+													<div className="flex items-center gap-4 mb-4">
+														<div
+															className={`
+									h-12 w-1 rounded-full bg-gradient-to-b ${accentColors[i % 4]}
+									transition-all duration-300
+									${isOpen ? "h-16" : "group-hover:h-14"}
+								`}
+														/>
+														<div>
+															<span className="block text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] mb-1">
+																{tPrograms("workshop")} {String(i + 1).padStart(2, "0")}
 															</span>
-														))}
+															<div className="h-px w-12 bg-gradient-to-r from-gray-300 to-transparent" />
+														</div>
+													</div>
+
+													{/* Title */}
+													<h3
+														className={`
+								 text-3xl font-light text-gray-900 mb-5 
+								leading-tight tracking-tight
+								transition-colors duration-300
+								${isOpen ? "text-gray-900" : "group-hover:text-gray-700"}
+							`}
+													>
+														{session.title}
+													</h3>
+												</div>
+
+												{/* Minimalist expand indicator */}
+												<div className="flex flex-col items-center gap-2 pt-2">
+													<div
+														className={`
+								w-12 h-12 rounded-full 
+								border-2 transition-all duration-300 ease-out
+								flex items-center justify-center
+								${isOpen ? "border-gray-900 bg-gray-900 scale-110" : "border-gray-300 bg-white group-hover:border-gray-400 group-hover:scale-105"}
+							`}
+													>
+														<FaChevronDown
+															className={`
+										w-3.5 h-3.5 transition-all duration-300
+										${isOpen ? "rotate-180 text-white" : "text-gray-500 group-hover:text-gray-700"}
+									`}
+															aria-hidden="true"
+														/>
+													</div>
+													{isOpen && <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider">{tPrograms("close")}</span>}
+												</div>
+											</div>
+										</div>
+									</button>
+									{/* Accordion Content */}
+									<div
+										id={`workshop-content-${i}`}
+										className={`
+		transition-all duration-500 ease-in-out 
+		${isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"} 
+		overflow-hidden
+	`}
+									>
+										<div className="px-8 sm:px-10 pb-10 bg-gradient-to-b from-gray-50/50 to-white">
+											{/* Divider */}
+											<div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" />
+
+											{/* What You'll Learn */}
+											<div className="mb-8">
+												<h4 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">{tPrograms("whatYouWillLearn")}</h4>
+												<div className="space-y-3">
+													{session.content
+														?.flatMap((item) =>
+															item
+																// Split at bullets or numbers with one or more digits followed by dot+space
+																.split(/(?=●|・|\b\d+\.\s)/)
+																.map((line) => line.trim())
+																.filter(Boolean)
+														)
+														.map((line, j) => {
+															const isBullet = /^(●|・)/.test(line);
+															const isNumbered = /^\d+\./.test(line);
+
+															// Remove bullet only; keep numbers intact
+															const text = isBullet ? line.replace(/^(●|・)/, "").trim() : line;
+
+															return (
+																<div key={j} className="flex items-start gap-3">
+																	{/* Show custom dot only for bullets */}
+																	<div className={`flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 ${isBullet ? "bg-gray-400" : "bg-transparent"}`} />
+																	<span className="text-base text-gray-700 leading-relaxed">{text}</span>
+																</div>
+															);
+														})}
+												</div>
+											</div>
+
+											{/* Available Times */}
+											<div className="mb-10">
+												<div className="flex items-center gap-3 mb-6">
+													<div className="h-8 w-1 rounded-full bg-gradient-to-b from-gray-600 to-gray-700" />
+													<h4 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">{tPrograms("availableDates")}</h4>
+													<span className="text-xs font-light text-gray-400 ml-1">
+														({session.dates.length} {session.dates.length === 1 ? tPrograms("date") : tPrograms("dates")})
+													</span>
+												</div>
+												<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+													{session.dates.map((date, j) => {
+														const parsedDate = new Date(`${date.date} ${date.startTime}`);
+														const monthNames = [tPrograms("jan"), tPrograms("feb"), tPrograms("mar"), tPrograms("apr"), tPrograms("may"), tPrograms("jun"), tPrograms("jul"), tPrograms("aug"), tPrograms("sep"), tPrograms("oct"), tPrograms("nov"), tPrograms("dec")];
+														const month = monthNames[parsedDate.getMonth()];
+														const day = currentLocale === "jp" ? `${parsedDate.getDate()}日` : parsedDate.getDate();
+														let hours = parsedDate.getHours();
+														const minutes = parsedDate.getMinutes().toString().padStart(2, "0");
+														const ampm = currentLocale === "en" ? (hours >= 12 ? "PM" : "AM") : "";
+														hours = hours % 12 || 12;
+
+														const handleClick = async () => {
+															try {
+																const res = await fetch(`/api/fmp/records/events/${date.id}`, { method: "GET" });
+																const data = await res.json();
+																if (!res.ok) {
+																	alert(`Error: ${data.error || "Failed to fetch workshop"}`);
+																	return;
+																}
+																console.log("Workshop data:", data);
+															} catch (err) {
+																console.error("Failed to fetch:", err);
+																alert("Failed to load workshop data");
+															}
+														};
+
+														return (
+															<button
+																key={j}
+																onClick={handleClick}
+																className="
+								group relative px-4 py-3.5 rounded-xl
+								bg-white border border-gray-200
+								hover:border-gray-300 hover:shadow-md
+								active:scale-[0.98]
+								transition-all duration-200
+								text-left
+							"
+															>
+																<div className="flex items-center gap-3">
+																	<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:border-gray-200 transition-colors">
+																		<FaRegClock className="w-4 h-4 text-gray-400" />
+																	</div>
+																	<div className="flex-1 min-w-0">
+																		<div className="text-sm font-medium text-gray-900">
+																			{month} {day}
+																		</div>
+																		<div className="text-xs font-light text-gray-500">
+																			{hours}:{minutes} {ampm}
+																		</div>
+																	</div>
+																</div>
+															</button>
+														);
+													})}
+												</div>
+											</div>
+
+											{/* Divider */}
+											<div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" />
+
+											{/* Join Button */}
+											<button
+												className="
+			group relative w-full 
+			bg-gradient-to-r from-gray-800 to-gray-900 
+			text-white font-medium py-4 rounded-xl 
+			hover:from-gray-900 hover:to-black
+			active:scale-[0.99]
+			transition-all duration-200 
+			shadow-lg hover:shadow-xl
+			overflow-hidden
+		"
+											>
+												<span className="relative z-10 flex items-center justify-center gap-2">
+													<span>{tPrograms("registerToWorkshop")}</span>
+													<svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+													</svg>
+												</span>
+												<div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+											</button>
 										</div>
 									</div>
 								</div>
-							))}
+							);
+						})}
 					</div>
 
-					<div className="flex justify-center font-bold text-3xl">Available Workshops</div>
+					{/* Desktop Sidebar - hidden on mobile */}
+					<aside className="hidden lg:block lg:col-span-1 sticky top-30 self-start">
+						<div className="space-y-6 bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-md overflow-y-auto max-h-[calc(100vh-8rem)]">
+							<h2 className="text-2xl font-medium text-gray-900 mb-5">{tPrograms("registerToWorkshops")}</h2>
+							<a href={getProgramLink(code, locale)} className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow flex items-center justify-center gap-2">
+								{tPrograms("registerNow")} <FaArrowRight />
+							</a>
 
-					{/* Sessions */}
-					<div className="space-y-16">
-						{workshop.sessions.map((session, i) => (
-							<div key={i} className="relative bg-white/90 backdrop-blur-sm rounded-3xl shadow-md p-6">
-								<div className="flex items-center gap-4 mb-4">
-									<div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-md">{i + 1}</div>
-									<h3 className="text-2xl font-bold text-gray-900">{session.title}</h3>
-								</div>
+							<hr className="border-t border-gray-200 my-4" />
+							<div className="mt-10 font-semibold text-gray-700">{tPrograms("availableWorkshops")}</div>
 
-								<div className="relative pl-6">
-									{/* Vertical gradient line */}
-									<div className="absolute left-1 top-0 bottom-0 w-px bg-gradient-to-b from-blue-300 via-blue-200 to-transparent"></div>
-
-									<ul className="space-y-5">
-										{session.content.map((item, j) => (
-											<li key={j} className="relative flex items-center gap-3">
-												{/* Dot */}
-												<span className="absolute -left-[6px] mt-1 w-2 h-2 bg-blue-500 rounded-full ring-4 ring-white group-hover:ring-blue-200 transition-all"></span>
-
-												{/* Content box */}
-												<div className="rounded-2xl px-4 py-1 bg-white text-gray-800 transition ">{item}</div>
-											</li>
-										))}
-									</ul>
-								</div>
-
-								<hr className="my-6 border-t border-gray-200" />
-
-								<div className="rounded-xl p-4">
-									<div className="flex items-center gap-2 mb-2">
-										<h4 className="text-lg font-semibold text-green-800">Available Sessions</h4>
-									</div>
-									<div className="flex flex-wrap gap-2">
-										{session.dates.map((date, j) => (
-											<span key={j} className="inline-flex items-center gap-1 px-3 py-1 bg-green-50 text-green-800 text-xs font-medium rounded-full border border-green-200">
-												<FaRegClock className="w-3 h-3" />
-												{date}
-											</span>
-										))}
-									</div>
-								</div>
+							<div className="space-y-4 mt-4">
+								{workshop.sessions.map((session, i) => {
+									return (
+										<a key={i} href={`#workshop-accordion-${i}`} className="group flex items-center justify-between py-2 border-b border-gray-100 hover:bg-gray-50/70 transition-colors duration-150">
+											<p className="text-sm text-gray-700 font-medium group-hover:text-blue-600 transition-colors">{session.title}</p>
+											<span className="text-gray-400 text-xs group-hover:text-blue-500 transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+										</a>
+									);
+								})}
 							</div>
-						))}
-					</div>
-				</div>
-
-				{/* Sidebar */}
-				<aside className="lg:col-span-1 sticky top-30 self-start flex flex-col justify-between h-[calc(100vh-5rem)]">
-					<div className="space-y-6 bg-white/90 backdrop-blur-sm rounded-3xl p-6 shadow-md overflow-y-auto max-h-[80vh]">
-						<h2 className="text-2xl font-bold text-gray-900 mb-2">Register to workshops</h2>
-						<button className="w-full bg-[#d74100] text-white py-4 rounded-full font-semibold shadow flex items-center justify-center gap-2">
-							Register Now <FaArrowRight />
-						</button>
-
-						<hr className="border-t border-gray-200 my-4" />
-						<div className="mt-10 font-semibold text-gray-700">Available workshops</div>
-
-						<div className="space-y-4 mt-4">
-							{workshop.sessions.map((session, i) => {
-								const showDates = showAllSessions[i];
-								return (
-									<div key={i} className="border-b border-gray-200 last:border-none pb-3">
-										<p className="text-gray-500">{session.title}</p>
-										<button onClick={() => toggleShowAll(i)} className="mb-2 text-blue-600 text-sm font-medium hover:underline">
-											{showDates ? "Hide Dates" : `Show Dates (${session.dates.length})`}
-										</button>
-
-										{showDates && (
-											<div className="flex flex-wrap gap-2">
-												{session.dates.map((date, j) => (
-													<span key={j} className="inline-flex items-center gap-1 px-3 py-1 bg-green-50 text-green-700 text-xs font-medium rounded-full border border-green-200">
-														<FaRegClock className="w-3 h-3" />
-														{date}
-													</span>
-												))}
-											</div>
-										)}
-									</div>
-								);
-							})}
 						</div>
-					</div>
-				</aside>
+					</aside>
+				</div>
 			</section>
 
 			<Footer />

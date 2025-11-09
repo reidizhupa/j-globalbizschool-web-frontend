@@ -3,7 +3,7 @@ import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDeta
 const fallbackWorkshop: Workshop = {
 	title: "",
 	subtitle: "",
-	image: "",
+	image: "/img/globals/presentation-C04.jpg",
 	purpose: [""],
 	participants: "",
 	objectives: [""],
@@ -12,7 +12,7 @@ const fallbackWorkshop: Workshop = {
 		{
 			title: "",
 			content: [""],
-			dates: [""],
+			dates: [],
 		},
 	],
 };
@@ -36,13 +36,15 @@ type FileMakerEvent = {
 	"WorkshopEvent::StartTime": string;
 	"WorkshopEvent::Duration": number;
 	"WorkshopEvent::ZoomLink": string;
+	"WorkshopEvent::ID": string;
+
 	modId: string;
 };
 
 type Session = {
 	title: string;
 	content: string[];
-	dates: string[];
+	dates: { id: string; date: string; startTime: string }[];
 };
 
 type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]>;
@@ -50,26 +52,35 @@ type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]
 // --- Fetch function ---
 async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Workshop> {
 	try {
-		const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/fmp/records/programs/${slug}`;
+		const url = `${process.env.NEXT_PUBLIC_APP_URL}/api/fmp/records/programs/${slug}/`;
 		const res = await fetch(url, { method: "GET", cache: "no-store" });
 
 		if (!res.ok) {
-			console.error("FileMaker API failed:", await res.text());
+			const text = await res.text();
+			console.error("FileMaker API failed (non-OK response):", text); // ✅ print API response text
 			return fallbackWorkshop;
 		}
 
-		const fmData = await res.json();
+		let fmData;
+		try {
+			fmData = await res.json();
+		} catch (parseErr) {
+			console.error("Failed to parse FileMaker API response as JSON:", parseErr);
+			return fallbackWorkshop;
+		}
+
 		const record = fmData?.response?.data?.[0]?.fieldData;
 
-		if (!record) return fallbackWorkshop;
+		if (!record) {
+			console.error("No record data returned from FileMaker API:", fmData);
+			return fallbackWorkshop;
+		}
 
 		const events = fmData?.response?.data?.[0]?.portalData as FileMakerPortalData | undefined;
 
-		// ✅ Extract portal arrays safely
 		const workshopsArray = (events ? (Object.values(events)[0] as FileMakerWorkshop[]) : []) ?? [];
 		const datesArray = (events ? (Object.values(events)[1] as FileMakerEvent[]) : []) ?? [];
 
-		// ✅ Map each workshop with its matching dates
 		const sessions: Session[] = workshopsArray.map((item: FileMakerWorkshop) => {
 			const title = item[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "") || "";
 
@@ -80,17 +91,16 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 				.map((s) => s.trim())
 				.filter((s) => s.length > 0);
 
-			// ✅ Match all events with the same workshop name
 			const matchingDates = datesArray
 				.filter((event: FileMakerEvent) => {
 					const eventTitle = event[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "");
 					return eventTitle === title;
 				})
-				.map((event: FileMakerEvent) => {
-					const date = event["WorkshopEvent::EventDate"];
-					const time = event["WorkshopEvent::StartTime"];
-					return `${date} ${time}`;
-				});
+				.map((event: FileMakerEvent) => ({
+					id: event["WorkshopEvent::ID"],
+					date: event["WorkshopEvent::EventDate"],
+					startTime: event["WorkshopEvent::StartTime"],
+				}));
 
 			return {
 				title,
@@ -99,9 +109,8 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			};
 		});
 
-		// ✅ Build final Workshop object
 		return {
-			title: locale === "jp" ? record["ProgramType::ProgramTypeNameJ"] : record["ProgramType::ProgramTypeName"] || fallbackWorkshop.title,
+			title: locale === "jp" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
 			image: "/img/globals/L12.webp",
 			purpose: locale === "jp" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
@@ -111,7 +120,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			sessions,
 		};
 	} catch (err) {
-		console.error("Failed to fetch or map FileMaker data:", err);
+		console.error("Failed to fetch or map FileMaker data:", err); // ✅ print any exception
 		return fallbackWorkshop;
 	}
 }
@@ -122,6 +131,5 @@ export default async function ProgramPage({ params }: { params: Promise<{ locale
 	const locale = awaitedParams.locale || "jp"; // default to Japanese
 
 	const workshop = await fetchWorkshopBySlug(slug, locale);
-
-	return <WorkshopDetail workshop={workshop} />;
+	return <WorkshopDetail workshop={workshop} code={slug} />;
 }

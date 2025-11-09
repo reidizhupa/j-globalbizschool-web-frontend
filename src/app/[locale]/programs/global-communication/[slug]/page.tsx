@@ -12,7 +12,7 @@ const fallbackWorkshop: Workshop = {
 		{
 			title: "",
 			content: [""],
-			dates: [""],
+			dates: [],
 		},
 	],
 };
@@ -36,13 +36,15 @@ type FileMakerEvent = {
 	"WorkshopEvent::StartTime": string;
 	"WorkshopEvent::Duration": number;
 	"WorkshopEvent::ZoomLink": string;
+	"WorkshopEvent::ID": string;
+
 	modId: string;
 };
 
 type Session = {
 	title: string;
 	content: string[];
-	dates: string[];
+	dates: { id: string; date: string; startTime: string }[];
 };
 
 type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]>;
@@ -94,7 +96,11 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 					const eventTitle = event[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "");
 					return eventTitle === title;
 				})
-				.map((event: FileMakerEvent) => `${event["WorkshopEvent::EventDate"]} ${event["WorkshopEvent::StartTime"]}`);
+				.map((event: FileMakerEvent) => ({
+					id: event["WorkshopEvent::ID"],
+					date: event["WorkshopEvent::EventDate"],
+					startTime: event["WorkshopEvent::StartTime"],
+				}));
 
 			return {
 				title,
@@ -104,7 +110,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 		});
 
 		return {
-			title: locale === "jp" ? record["ProgramType::ProgramTypeNameJ"] : record["ProgramType::ProgramTypeName"] || fallbackWorkshop.title,
+			title: locale === "jp" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
 			image: "/img/globals/L12.webp",
 			purpose: locale === "jp" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
@@ -125,6 +131,5 @@ export default async function ProgramPage({ params }: { params: Promise<{ locale
 	const locale = awaitedParams.locale || "jp"; // default to Japanese
 
 	const workshop = await fetchWorkshopBySlug(slug, locale);
-
-	return <WorkshopDetail workshop={workshop} />;
+	return <WorkshopDetail workshop={workshop} code={slug} />;
 }

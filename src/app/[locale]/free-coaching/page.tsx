@@ -138,11 +138,41 @@ export default function FreeCoachingPage() {
 							<div className="grid lg:grid-cols-7 gap-8 lg:gap-12">
 								{/* Left: Hero & Info */}
 								<div className="lg:col-span-4 space-y-8">
+									{/* Hero Image */}
 									<div className="relative h-72 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
 										<Image src="/img/free-coaching.avif" alt="Online coaching session" fill className="object-cover" priority />
 										<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 									</div>
 
+									{/* Booking CTA (under image on mobile) */}
+									<div className="block lg:hidden">
+										<div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8 mt-6">
+											<div className="space-y-4 text-center">
+												<h1 className="text-3xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
+												<p className="text-gray-600 text-lg leading-relaxed">Book your complimentary 30-minute online counselling session to start your intercultural development journey.</p>
+											</div>
+
+											<div className="space-y-4">
+												<button onClick={next} className="w-full bg-gradient-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
+													<FaCalendarAlt className="w-5 h-5" />
+													Book Free Coaching
+												</button>
+											</div>
+
+											<div className="pt-6 border-t border-gray-200 space-y-3 text-sm text-gray-600">
+												<div className="flex items-center justify-center gap-3">
+													<FaEnvelope className="w-4 h-4 text-gray-400" />
+													<span>support@j-global.com</span>
+												</div>
+												<div className="flex items-center justify-center gap-3">
+													<FaMapMarkerAlt className="w-4 h-4 text-gray-400" />
+													<span>Based in Tokyo, Japan</span>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									{/* Info Sections */}
 									<div className="space-y-6">
 										{/* Important Notice */}
 										<div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 lg:p-8">
@@ -164,7 +194,7 @@ export default function FreeCoachingPage() {
 											<div className="space-y-4">
 												<h3 className="font-semibold text-gray-900 text-lg">Meet Your Coach</h3>
 												<p className="text-gray-700 leading-relaxed">
-													Our bilingual coach, <strong className="text-blue-600">Jon</strong>, specializes in helping professionals develop intercultural business skills. This is a no-pressure session, we&apos;re here to help, not to sell.
+													Our bilingual coach, <strong className="text-blue-600">Jon</strong>, specializes in helping professionals develop intercultural business skills. This is a no-pressure session — we&apos;re here to help, not to sell.
 												</p>
 											</div>
 										</div>
@@ -188,8 +218,8 @@ export default function FreeCoachingPage() {
 									</div>
 								</div>
 
-								{/* Right: Booking CTA */}
-								<div className="lg:col-span-3">
+								{/* Right: Booking CTA (desktop only) */}
+								<div className="lg:col-span-3 hidden lg:block">
 									<div className="sticky top-28 bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8">
 										<div className="space-y-4 text-center">
 											<h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
@@ -221,17 +251,19 @@ export default function FreeCoachingPage() {
 
 					{/* Step 2: Date & Time */}
 					{step === 2 && (
-						<motion.div key="step2" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -40 }} transition={{ duration: 0.5, ease: "easeOut" }} className="relative p-10 bg-gradient-to-br from-white/90 to-blue-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-blue-100">
-							<div className="text-center mb-8">
-								<h2 className="text-3xl font-bold text-gray-800">
+						<motion.div key="step2" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -40 }} transition={{ duration: 0.5, ease: "easeOut" }} className="relative p-6 sm:p-8 md:p-10 bg-gradient-to-br from-white/90 to-blue-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-blue-100">
+							{/* Header */}
+							<div className="text-center mb-6 sm:mb-8">
+								<h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
 									Step 2: <span className="text-blue-600">Select Date & Time</span>
 								</h2>
 								<p className="text-gray-500 mt-2 text-sm sm:text-base">Pick your preferred date and time for your free coaching session.</p>
 							</div>
 
-							<div className="flex flex-col lg:flex-row gap-10 items-start">
+							{/* Layout */}
+							<div className="flex flex-col lg:flex-row gap-6 sm:gap-10 items-start">
 								{/* Calendar */}
-								<div className="lg:w-1/3 bg-white/70 rounded-2xl p-6 shadow-inner border border-gray-100 backdrop-blur-sm">
+								<div className="w-full max-w-full md:max-w-md  bg-white/80 rounded-2xl p-6 shadow-lg border border-gray-100 backdrop-blur-md flex flex-col items-center text-center">
 									<DayPicker
 										mode="single"
 										selected={selectedDate}
@@ -245,22 +277,22 @@ export default function FreeCoachingPage() {
 									/>
 								</div>
 
-								{/* Time slots */}
-								<div className="lg:w-2/3 relative bg-white/70 rounded-2xl p-8 shadow-inner border border-gray-100 backdrop-blur-sm min-h-[280px] flex items-center justify-center">
+								{/* Time Slots */}
+								<div className="w-full lg:w-2/3 relative bg-white/70 rounded-2xl p-6 sm:p-8 shadow-inner border border-gray-100 backdrop-blur-sm min-h-[240px] sm:min-h-[280px] flex items-center justify-center">
 									{loading && (
 										<div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-md rounded-2xl z-10">
-											<div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+											<div className="w-10 h-10 sm:w-12 sm:h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
 										</div>
 									)}
 
 									{!loading && selectedDate ? (
-										<div className="w-full space-y-6">
+										<div className="w-full space-y-4 sm:space-y-6">
 											{!times || times.length === 0 ? (
-												<p className="text-gray-500 text-center text-lg">No available slots for this day</p>
+												<p className="text-gray-500 text-center text-base sm:text-lg">No available slots for this day</p>
 											) : (
-												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
 													{times.map((time, index) => (
-														<motion.button key={index} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSelectedTime(time)} className={`px-4 py-3 rounded-xl border font-medium transition-all duration-300 text-sm sm:text-base ${selectedTime === time ? "bg-blue-600 text-white shadow-lg" : "bg-white/80 border-gray-300 hover:border-blue-400 hover:bg-blue-50"}`}>
+														<motion.button key={index} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSelectedTime(time)} className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl border font-medium transition-all duration-300 text-xs sm:text-sm md:text-base ${selectedTime === time ? "bg-blue-600 text-white shadow-lg" : "bg-white/80 border-gray-300 hover:border-blue-400 hover:bg-blue-50"}`}>
 															{time}
 														</motion.button>
 													))}
@@ -268,17 +300,18 @@ export default function FreeCoachingPage() {
 											)}
 										</div>
 									) : (
-										!loading && <p className="text-gray-500 text-center text-lg">Select a date to see available time slots</p>
+										!loading && <p className="text-gray-500 text-center text-base sm:text-lg">Select a date to see available time slots</p>
 									)}
 								</div>
 							</div>
 
-							<div className="flex justify-between items-center mt-10">
-								<motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={prev} className="px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow-sm transition-all">
+							{/* Footer Buttons */}
+							<div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 sm:mt-10">
+								<motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={prev} className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow-sm transition-all text-sm sm:text-base">
 									← Back
 								</motion.button>
 
-								<motion.button whileHover={selectedDate && selectedTime ? { scale: 1.05 } : {}} whileTap={selectedDate && selectedTime ? { scale: 0.95 } : {}} onClick={next} disabled={!selectedDate || !selectedTime} className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 ${selectedDate && selectedTime ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
+								<motion.button whileHover={selectedDate && selectedTime ? { scale: 1.05 } : {}} whileTap={selectedDate && selectedTime ? { scale: 0.95 } : {}} onClick={next} disabled={!selectedDate || !selectedTime} className={`w-full sm:w-auto px-8 py-3 rounded-xl font-semibold transition-all duration-200 text-sm sm:text-base ${selectedDate && selectedTime ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
 									Next →
 								</motion.button>
 							</div>

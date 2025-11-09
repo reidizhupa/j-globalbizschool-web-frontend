@@ -30,4 +30,10 @@ export const LINKS: Record<string, LinkEntry> = {
 			en: "https://fms.j-globalbizschool.com/fmi/webd/IBSApplication?script=homepageEn",
 		},
 	},
+	registerToProgram: {
+		url: "https://fms.j-globalbizschool.com/fmi/webd/IBSApplication?script=JbsProgramsJpn&param=",
+		langUrls: {
+			en: "https://fms.j-globalbizschool.com/fmi/webd/IBSApplication?script=JbsProgramsEn&param=",
+		},
+	},
 };

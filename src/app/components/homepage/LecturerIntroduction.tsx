@@ -5,7 +5,6 @@ import Link from "next/link";
 
 export default function LecturerIntroduction() {
 	const tHome = useTranslations("homepage.LecturerIntroduction");
-	const currentLocale = useLocale();
 
 	return (
 		<div className="relative bg-blue-50/40 overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
@@ -36,7 +35,7 @@ export default function LecturerIntroduction() {
 						<div className="bg-blue-50 border-l-4 border-[#1f497c] p-4 rounded-xl shadow-sm mt-2">
 							<h3 className="text-sm font-semibold text-blue-800 mb-2">{tHome("coachingSupport")}</h3>
 							<p className="text-blue-800 text-sm mb-6">{tHome("description2")}</p>
-							<Link href={getLink("freeCoaching", currentLocale)} className="bg-[#1f497c] hover:bg-[#2a5a8e] text-white text-sm font-medium mt-2 px-4 py-2 rounded-xl transition">
+							<Link href="free-coaching/" className="bg-[#1f497c] hover:bg-[#2a5a8e] text-white text-sm font-medium mt-2 px-4 py-2 rounded-xl transition">
 								{tHome("bookCoaching")}
 							</Link>
 						</div>
