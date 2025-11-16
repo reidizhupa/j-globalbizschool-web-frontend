@@ -171,7 +171,7 @@ export default function HomePage() {
 			<FreeTrial />
 			<div className="bg-[#dbe9ff] pt-20">
 				<div className="bg-[url('/img/bg_continuation.png')] bg-cover bg-center bg-no-repeat">
-					<h1 className="text-4xl md:text-5xl text-center flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
+					<h1 className="text-2xl md:text-5xl text-center flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
 						<span className="bg-clip-text  relative z-10"> {tHome("programsSectionSubtitle")}</span>
 					</h1>
 					{/* Content */}

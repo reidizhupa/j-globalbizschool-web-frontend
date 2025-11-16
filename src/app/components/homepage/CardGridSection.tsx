@@ -44,7 +44,7 @@ export default function CardGridSection({ level, title, description, stats, alig
 					})}
 				>
 					<span className="inline-block px-3 max-w-max py-1 mb-3 text-sm font-bold text-white rounded-full bg-[#215ca5]">{level}</span>
-					<h2 className="text-4xl  font-extrabold text-[#215ca5] mb-4 flex  gap-2">{title}</h2>
+					<h2 className="text-3xl md:text-4xl  font-extrabold text-[#215ca5] mb-4 flex  gap-2">{title}</h2>
 					<p
 						className={clsx("text-gray-500 text-left text-lg max-w-4xl leading-relaxed", {
 							"md:text-left": align === "right" || align === "left",
