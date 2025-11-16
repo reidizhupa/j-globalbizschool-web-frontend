@@ -10,10 +10,22 @@ import { FaCheckCircle, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaExclamation
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import { Link } from "@/i18n/navigation";
 import "react-phone-input-2/lib/style.css";
-
 import PhoneInput from "react-phone-input-2";
 
+// Import useMessages from next-intl (or your custom wrapper)
+import { useMessages, useTranslations } from "next-intl";
+// NOTE: Make sure the import path above is correct for your project's next-intl setup.
+
 export default function FreeCoachingPage() {
+	const t = useTranslations("coaching");
+
+	// 1. Fetch the raw translation messages object
+	const messages = useMessages();
+
+	// 2. Access the array using dot notation on the raw object.
+	// NOTE: This assumes 'step1' is directly available on the messages object.
+	const expectedItems = (messages.step1?.expect_list || []) as string[];
+
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -83,7 +95,8 @@ export default function FreeCoachingPage() {
 	// Step 3: Submit and open Google Calendar
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (!selectedDate || !selectedTime) return alert("Please select date and time first.");
+		// Uses translated alert key
+		if (!selectedDate || !selectedTime) return alert(t("alerts.select_date_time"));
 
 		const bookingData = {
 			firstName: formData.firstName,
@@ -110,9 +123,11 @@ export default function FreeCoachingPage() {
 			next();
 		} catch (err: unknown) {
 			if (err instanceof Error) {
-				alert("Booking failed: " + err.message);
+				// Uses translated alert key
+				alert(t("alerts.booking_failed") + err.message);
 			} else {
-				alert("Booking failed");
+				// Uses translated alert key
+				alert(t("alerts.booking_failed_generic"));
 			}
 		}
 	};
@@ -122,7 +137,7 @@ export default function FreeCoachingPage() {
 			<header className="fixed top-0 left-0 right-0 z-50 mx-auto flex w-full items-center justify-between px-6 py-2 transition-colors duration-300 bg-white shadow-md">
 				<div className="max-w-7xl flex w-full items-center justify-between mx-auto">
 					<Link href="/" className="flex items-center">
-						<Image src="/logo.avif" alt="Prebuilt UI Logo" width={120} height={40} className="h-auto w-24 sm:w-32 md:w-32 object-contain" priority />
+						<Image src="/logo.avif" alt={t("header.alt_logo")} width={120} height={40} className="h-auto w-24 sm:w-32 md:w-32 object-contain" priority />
 					</Link>
 					<div className="flex items-center space-x-4">
 						<LanguageSwitcher />
@@ -148,25 +163,25 @@ export default function FreeCoachingPage() {
 									<div className="block lg:hidden">
 										<div className="bg-linear-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8 mt-6">
 											<div className="space-y-4 text-center">
-												<h1 className="text-3xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
-												<p className="text-gray-600 text-lg leading-relaxed">Book your complimentary 30-minute online counselling session to start your intercultural development journey.</p>
+												<h1 className="text-3xl font-bold text-gray-900 leading-tight">{t("step1.title")}</h1>
+												<p className="text-gray-600 text-lg leading-relaxed">{t("step1.intro_p")}</p>
 											</div>
 
 											<div className="space-y-4">
 												<button onClick={next} className="w-full bg-linear-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
 													<FaCalendarAlt className="w-5 h-5" />
-													Book Free Coaching
+													{t("step1.button_text")}
 												</button>
 											</div>
 
 											<div className="pt-6 border-t border-gray-200 space-y-3 text-sm text-gray-600">
 												<div className="flex items-center justify-center gap-3">
 													<FaEnvelope className="w-4 h-4 text-gray-400" />
-													<span>support@j-global.com</span>
+													<span>{t("step1.contact_email")}</span>
 												</div>
 												<div className="flex items-center justify-center gap-3">
 													<FaMapMarkerAlt className="w-4 h-4 text-gray-400" />
-													<span>Based in Tokyo, Japan</span>
+													<span>{t("step1.contact_location")}</span>
 												</div>
 											</div>
 										</div>
@@ -181,9 +196,11 @@ export default function FreeCoachingPage() {
 													<FaExclamationTriangle className="w-full h-full" />
 												</div>
 												<div className="space-y-3">
-													<h3 className="font-semibold text-orange-900 text-lg">Important Notice</h3>
+													<h3 className="font-semibold text-orange-900 text-lg">{t("step1.notice_title")}</h3>
 													<p className="text-orange-800 leading-relaxed">
-														Please schedule appointments at least <strong>3 hours in the future</strong> to ensure proper preparation time.
+														{t("step1.notice_p_1")}
+														<strong>{t("step1.notice_p_2_bold")}</strong>
+														{t("step1.notice_p_3")}
 													</p>
 												</div>
 											</div>
@@ -192,9 +209,11 @@ export default function FreeCoachingPage() {
 										{/* Coach Intro */}
 										<div className="bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 shadow-sm">
 											<div className="space-y-4">
-												<h3 className="font-semibold text-gray-900 text-lg">Meet Your Coach</h3>
+												<h3 className="font-semibold text-gray-900 text-lg">{t("step1.coach_title")}</h3>
 												<p className="text-gray-700 leading-relaxed">
-													Our bilingual coach, <strong className="text-blue-600">Jon</strong>, specializes in helping professionals develop intercultural business skills. This is a no-pressure session — we&apos;re here to help, not to sell.
+													{t("step1.coach_p_1")}
+													<strong className="text-blue-600">{t("step1.coach_p_2_bold")}</strong>
+													{t("step1.coach_p_3")}
 												</p>
 											</div>
 										</div>
@@ -202,9 +221,10 @@ export default function FreeCoachingPage() {
 										{/* Session Details */}
 										<div className="bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 shadow-sm">
 											<div className="space-y-4">
-												<h3 className="font-semibold text-gray-900 text-lg">What to Expect</h3>
+												<h3 className="font-semibold text-gray-900 text-lg">{t("step1.expect_title")}</h3>
 												<ul className="space-y-3 text-gray-700">
-													{["Discussion of your current work situation, goals, and challenges", "Identification of skills needed for global business success in Japanese companies", "Interactive mind mapping session to organize your ideas", "Personalized Individual Learning Journey guide with recommendations"].map((text, i) => (
+													{/* FIX: Use the 'expectedItems' array fetched via useMessages */}
+													{expectedItems.map((text, i) => (
 														<li key={i} className="flex items-start gap-3">
 															<div className="shrink-0 w-5 h-5 text-green-500 mt-0.5">
 																<FaCheckCircle className="w-full h-full" />
@@ -222,25 +242,25 @@ export default function FreeCoachingPage() {
 								<div className="lg:col-span-3 hidden lg:block">
 									<div className="sticky top-28 bg-linear-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8">
 										<div className="space-y-4 text-center">
-											<h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
-											<p className="text-gray-600 text-lg leading-relaxed">Book your complimentary 30-minute online counselling session to start your intercultural development journey.</p>
+											<h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">{t("step1.title")}</h1>
+											<p className="text-gray-600 text-lg leading-relaxed">{t("step1.intro_p")}</p>
 										</div>
 
 										<div className="space-y-4">
 											<button onClick={next} className="w-full bg-linear-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
 												<FaCalendarAlt className="w-5 h-5" />
-												Book Free Coaching
+												{t("step1.button_text")}
 											</button>
 										</div>
 
 										<div className="pt-6 border-t border-gray-200 space-y-3 text-sm text-gray-600">
 											<div className="flex items-center justify-center gap-3">
 												<FaEnvelope className="w-4 h-4 text-gray-400" />
-												<span>support@j-global.com</span>
+												<span>{t("step1.contact_email")}</span>
 											</div>
 											<div className="flex items-center justify-center gap-3">
 												<FaMapMarkerAlt className="w-4 h-4 text-gray-400" />
-												<span>Based in Tokyo, Japan</span>
+												<span>{t("step1.contact_location")}</span>
 											</div>
 										</div>
 									</div>
@@ -255,9 +275,9 @@ export default function FreeCoachingPage() {
 							{/* Header */}
 							<div className="text-center mb-6 sm:mb-8">
 								<h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
-									Step 2: <span className="text-blue-600">Select Date & Time</span>
+									{t("step2.title_1")} <span className="text-blue-600">{t("step2.title_2_span")}</span>
 								</h2>
-								<p className="text-gray-500 mt-2 text-sm sm:text-base">Pick your preferred date and time for your free coaching session.</p>
+								<p className="text-gray-500 mt-2 text-sm sm:text-base">{t("step2.sub_p")}</p>
 							</div>
 
 							{/* Layout */}
@@ -274,6 +294,9 @@ export default function FreeCoachingPage() {
 											selected: "bg-blue-600 text-white rounded-lg shadow-md",
 											today: "font-semibold border border-blue-300 rounded-lg",
 										}}
+										// Accessibility translation
+										captionLayout="dropdown"
+										aria-label={t("step2.day_picker_aria_label")}
 									/>
 								</div>
 
@@ -288,7 +311,7 @@ export default function FreeCoachingPage() {
 									{!loading && selectedDate ? (
 										<div className="w-full space-y-4 sm:space-y-6">
 											{!times || times.length === 0 ? (
-												<p className="text-gray-500 text-center text-base sm:text-lg">No available slots for this day</p>
+												<p className="text-gray-500 text-center text-base sm:text-lg">{t("step2.no_slots")}</p>
 											) : (
 												<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
 													{times.map((time, index) => (
@@ -300,7 +323,7 @@ export default function FreeCoachingPage() {
 											)}
 										</div>
 									) : (
-										!loading && <p className="text-gray-500 text-center text-base sm:text-lg">Select a date to see available time slots</p>
+										!loading && <p className="text-gray-500 text-center text-base sm:text-lg">{t("step2.select_date_prompt")}</p>
 									)}
 								</div>
 							</div>
@@ -308,11 +331,11 @@ export default function FreeCoachingPage() {
 							{/* Footer Buttons */}
 							<div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8 sm:mt-10">
 								<motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={prev} className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow-sm transition-all text-sm sm:text-base">
-									← Back
+									{t("step2.button_back")}
 								</motion.button>
 
 								<motion.button whileHover={selectedDate && selectedTime ? { scale: 1.05 } : {}} whileTap={selectedDate && selectedTime ? { scale: 0.95 } : {}} onClick={next} disabled={!selectedDate || !selectedTime} className={`w-full sm:w-auto px-8 py-3 rounded-xl font-semibold transition-all duration-200 text-sm sm:text-base ${selectedDate && selectedTime ? "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
-									Next →
+									{t("step2.button_next")}
 								</motion.button>
 							</div>
 						</motion.div>
@@ -323,17 +346,17 @@ export default function FreeCoachingPage() {
 						<motion.div key="step3" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -40 }} transition={{ duration: 0.5, ease: "easeOut" }} className="relative p-10 bg-white/90 rounded-3xl shadow-xl border border-gray-200 max-w-2xl mx-auto">
 							<div className="text-center mb-8">
 								<h2 className="text-3xl font-bold text-gray-800">
-									Step 3: <span className="text-blue-600">Your Information</span>
+									{t("step3.title_1")} <span className="text-blue-600">{t("step3.title_2_span")}</span>
 								</h2>
-								<p className="text-gray-500 mt-2 text-sm sm:text-base">Fill in your details so we can contact you and prepare for your session.</p>
+								<p className="text-gray-500 mt-2 text-sm sm:text-base">{t("step3.sub_p")}</p>
 							</div>
 
 							<form onSubmit={handleSubmit} className="space-y-6">
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-									<input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-									<input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+									<input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={t("step3.placeholder_first_name")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+									<input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={t("step3.placeholder_last_name")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 								</div>
-								<input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+								<input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t("step3.placeholder_email")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 								<PhoneInput
 									country={"jp"} // default country
 									value={formData.phone}
@@ -347,14 +370,14 @@ export default function FreeCoachingPage() {
 										className: "w-full px-4 pl-13 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none",
 									}}
 								/>
-								<textarea name="message" value={formData.message} onChange={handleChange} placeholder="Additional message (optional)" rows={4} className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+								<textarea name="message" value={formData.message} onChange={handleChange} placeholder={t("step3.placeholder_message")} rows={4} className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
 								<div className="flex justify-between items-center mt-6">
 									<motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={prev} type="button" className="px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow-sm transition-all">
-										← Back
+										{t("step3.button_back")}
 									</motion.button>
 
 									<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={loading} className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 ${loading ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg"}`}>
-										{loading ? "Booking..." : "Confirm Booking →"}
+										{loading ? t("step3.button_submitting") : t("step3.button_submit")}
 									</motion.button>
 								</div>
 							</form>
@@ -367,17 +390,19 @@ export default function FreeCoachingPage() {
 							<div className="flex justify-center">
 								<FaCheckCircle className="w-16 h-16 text-green-500" />
 							</div>
-							<h2 className="text-3xl font-bold text-gray-800">Booking Confirmed!</h2>
+							<h2 className="text-3xl font-bold text-gray-800">{t("step4.title")}</h2>
 							<p className="text-gray-600 text-lg">
-								Thank you, {formData.firstName}! Your free coaching session is scheduled for{" "}
+								{t("step4.p_thank_you_1")}
+								{formData.firstName}
+								{t("step4.p_thank_you_2")}
 								<strong>
 									{format(selectedDate!, "MMMM dd, yyyy")} at {selectedTime}
 								</strong>
 								.
 							</p>
-							<p className="text-gray-500 text-sm">A confirmation email has been sent. You can also add this session to your Google Calendar by clicking below.</p>
-							<a href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=Free+Coaching+Session&dates=${format(selectedDate!, "yyyyMMdd")}T${selectedTime?.replace(":", "")}00Z/${format(selectedDate!, "yyyyMMdd")}T${selectedTime?.replace(":", "")}00Z&details=Your+free+coaching+session+with+our+expert&location=Online`} target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all duration-200">
-								Add to Google Calendar
+							<p className="text-gray-500 text-sm">{t("step4.p_confirmation_email")}</p>
+							<a href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(t("step4.calendar_event_name"))}&dates=${format(selectedDate!, "yyyyMMdd")}T${selectedTime?.replace(":", "")}00Z/${format(selectedDate!, "yyyyMMdd")}T${selectedTime?.replace(":", "")}00Z&details=${encodeURIComponent(t("step4.calendar_event_details"))}&location=${encodeURIComponent(t("step4.calendar_event_location"))}`} target="_blank" rel="noopener noreferrer" className="inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-lg hover:bg-blue-700 transition-all duration-200">
+								{t("step4.button_google_calendar")}
 							</a>
 						</motion.div>
 					)}

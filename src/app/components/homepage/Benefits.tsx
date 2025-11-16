@@ -1,115 +1,122 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Calendar, RefreshCw, DollarSign, Award, Target } from "lucide-react";
+import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 export default function JBSWorkshopsBenefits() {
+	const t = useTranslations("homepage.benefits");
+
+	const [isOpen, setIsOpen] = useState(false);
+
+	// Note: The 'label' is now 'labelKey' to fetch the translated string
 	const benefits = [
-		{ icon: Calendar, label: "Flexible", color: "from-amber-200 to-amber-300" },
-		{ icon: RefreshCw, label: "Convenient", color: "from-amber-200 to-amber-300" },
-		{ icon: DollarSign, label: "Affordable", color: "from-amber-200 to-amber-300" },
-		{ icon: Award, label: "Certified", color: "from-amber-200 to-amber-300" },
-		{ icon: Target, label: "Goal Oriented", color: "from-amber-200 to-amber-300" },
+		{ icon: Calendar, labelKey: "benefits_list.flexible", color: "from-blue-400 to-blue-500" },
+		{ icon: RefreshCw, labelKey: "benefits_list.convenient", color: "from-blue-300 to-blue-400" },
+		{ icon: DollarSign, labelKey: "benefits_list.affordable", color: "from-blue-200 to-blue-300" },
+		{ icon: Award, labelKey: "benefits_list.certified", color: "from-blue-400 to-blue-500" },
+		{ icon: Target, labelKey: "benefits_list.goal_oriented", color: "from-blue-300 to-blue-400" },
+	];
+
+	// List items for the left column, using translation keys
+	const leftColumnItems = ["content.list_item_1", "content.list_item_2", "content.list_item_3", "content.list_item_4"];
+
+	// Schedule data structure
+	const scheduleRows = [
+		{ periodKey: "schedule.period_morning", timeKey: "schedule.time_morning", monThu: 3, sat: 2 },
+		{ periodKey: "schedule.period_afternoon", timeKey: "schedule.time_afternoon", monThu: 6, sat: 0 },
+		{ periodKey: "schedule.period_evening", timeKey: "schedule.time_evening", monThu: 9, sat: 0 },
 	];
 
 	return (
-		<section className="relative py-20 bg-gradient-to-br from-blue-50 via-white to-indigo-50 overflow-hidden">
+		<section className={clsx("relative overflow-hidden", isOpen ? "py-10" : "py-10")}>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				{/* Header */}
-				<div className="text-center mb-16">
-					<h2 className="text-3xl md:text-4xl font-extrabold text-[#215ca5] mb-4">Benefits ofJBS Online Workshops</h2>
+				{/* Collapsible Header */}
+				<div className="flex justify-center items-center cursor-pointer px-4 py-3 rounded-lg hover:bg-blue-100 transition-colors" onClick={() => setIsOpen(!isOpen)}>
+					{/* Translated Header Title */}
+					<h2 className="text-xl text-center md:text-4xl mr-4 font-extrabold text-[#215ca5]">{t("header.title")}</h2>
+					{/* Translated Plus/Minus Sign */}
+					<span className={`text-3xl text-[#215ca5] transform transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>{t("header.plus_sign")}</span>
 				</div>
 
-				{/* Benefits */}
-				<div className="flex flex-wrap justify-center gap-6 mb-14">
-					{benefits.map((benefit, i) => {
-						const Icon = benefit.icon;
-						const colors = [
-							{ bg: "bg-blue-400", ring: "ring-sky-50" },
-							{ bg: "bg-blue-300", ring: "ring-sky-50" },
-							{ bg: "bg-blue-300", ring: "ring-sky-50" },
-							{ bg: "bg-blue-200", ring: "ring-sky-50" },
-							{ bg: "bg-blue-200", ring: "ring-sky-50" },
-						];
-						return (
-							<div key={i} className="group flex flex-col items-center text-center transition-all hover:-translate-y-1">
-								<div className={`md:w-20 md:h-20 h-10 w-10 mb-3 rounded-3xl flex items-center justify-center ${colors[i].bg} ${colors[i].ring} ring-4 shadow-lg group-hover:shadow-xl transition-all group-hover:scale-110`}>
-									<Icon className="md:w-7 md:h-7 h-5 w-5 text-white" strokeWidth={2.5} />
+				{/* Collapsible Content */}
+				{isOpen && (
+					<div className="space-y-16">
+						{/* Intro */}
+						<p className="text-gray-600 max-w-2xl mx-auto text-center mb-16">{t("intro.text")}</p>
+
+						{/* Benefits Icons */}
+						<div className="flex flex-wrap justify-center gap-8 mb-20">
+							{benefits.map((benefit, i) => {
+								const Icon = benefit.icon;
+								return (
+									<div key={i} className="group flex flex-col items-center text-center transition-transform hover:-translate-y-2">
+										<div className={`md:w-24 md:h-24 h-12 w-12 mb-3 rounded-3xl flex items-center justify-center bg-gradient-to-br ${benefit.color} ring-4 ring-blue-50 shadow-lg transition-all group-hover:scale-110 group-hover:shadow-2xl`}>
+											<Icon className="md:w-8 md:h-8 h-5 w-5 text-white" strokeWidth={2.5} />
+										</div>
+										{/* Translated Benefit Label */}
+										<p className="font-semibold text-gray-900 text-sm md:text-base">{t(benefit.labelKey)}</p>
+									</div>
+								);
+							})}
+						</div>
+
+						{/* Two Column Layout */}
+						<div className="grid lg:grid-cols-2 gap-16 items-start">
+							{/* Left Column */}
+							<div className="space-y-8 px-6">
+								{/* Translated Left Column Title */}
+								<h3 className="text-2xl font-bold text-gray-800">{t("content.left_column_title")}</h3>
+								<div className="space-y-4">
+									{leftColumnItems.map((key, idx) => (
+										<div key={idx} className="flex gap-4 items-start">
+											<div className="shrink-0 w-3 h-3 mt-2 rounded-full bg-blue-400 mt-1"></div>
+											{/* Translated List Item */}
+											<p className="text-gray-600 text-lg leading-relaxed">{t(key)}</p>
+										</div>
+									))}
 								</div>
-								<p className="font-semibold text-gray-900 text-sm">{benefit.label}</p>
-							</div>
-						);
-					})}
-				</div>
-
-				{/* Two Column Layout */}
-				<div className="grid lg:grid-cols-2 gap-16 items-center">
-					<div className="space-y-8 px-6">
-						<h3 className="text-2xl font-bold text-gray-800">Flexible, Interactive & Global</h3>
-
-						<div className="space-y-3">
-							<div className="flex gap-4 items-start group">
-								<div className="flex-shrink-0 w-2 h-2 rounded-full bg-indigo-400 mt-2 "></div>
-								<p className="text-lg text-gray-500 leading-relaxed">
-									Join <span className="font-medium text-gray-700">20+ bilingual one-hour workshops weekly</span>, offered <span className="font-medium text-gray-700">morning, afternoon, and evening (Japan time)</span>.
-								</p>
 							</div>
 
-							<div className="flex gap-4 items-start group">
-								<div className="flex-shrink-0 w-2 h-2 rounded-full bg-indigo-400 mt-2 "></div>
-								<p className="text-lg text-gray-500 leading-relaxed">
-									Programs cover practical global business topics in <span className="font-medium text-gray-700">2–4 workshops</span> you can attend in any order.
-								</p>
-							</div>
+							{/* Right Column - Calendar */}
+							<div className="p-6 bg-gradient-to-br from-white to-blue-50 rounded-4xl shadow-lg">
+								{/* Translated Class Schedule Title */}
+								<h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{t("schedule.class_schedule")}</h3>
 
-							<div className="flex gap-4 items-start group">
-								<div className="flex-shrink-0 w-2 h-2 rounded-full bg-indigo-400 mt-2"></div>
-								<p className="text-lg text-gray-500 leading-relaxed">
-									Major courses like the <span className="font-medium text-gray-700">Mini MBA</span> include <span className="font-medium text-gray-700">6 programs and 24 workshops over six months</span>.
-								</p>
-							</div>
+								<div className="grid grid-cols-3 bg-blue-100 rounded-full text-center mb-4">
+									<div className="py-4 font-bold text-gray-700"></div>
+									{/* Translated Weekday headers */}
+									<div className="py-4 font-bold text-gray-700">{t("schedule.mon_thu")}</div>
+									<div className="py-4 font-bold text-gray-700">{t("schedule.saturday")}</div>
+								</div>
 
-							<div className="flex gap-4 items-start group">
-								<div className="flex-shrink-0 w-2 h-2 rounded-full bg-indigo-400 mt-2 "></div>
-								<p className="text-lg text-gray-500 leading-relaxed">
-									Every session is <span className="font-medium text-gray-700">interactive, live, and bilingual</span>, with <span className="font-medium text-gray-700">attendance tracking, digital badges, and certificates</span> to boost your global career credentials.
-								</p>
+								<div className="space-y-3">
+									{scheduleRows.map((row, idx) => (
+										<div key={idx} className="grid grid-cols-3 items-center bg-white rounded-2xl shadow-sm hover:shadow-md transition-all">
+											<div className="p-4 font-semibold text-gray-900">
+												{/* Translated Period (Morning/Afternoon/Evening) */}
+												<div>{t(row.periodKey)}</div>
+												{/* Translated Time */}
+												<span className="text-xs text-gray-500">{t(row.timeKey)}</span>
+											</div>
+											<div className="p-4 flex flex-col items-center justify-center">
+												{row.monThu > 0 ? <div className="w-12 h-12 bg-blue-400 rounded-xl flex items-center justify-center mb-1 text-white font-bold">{row.monThu}</div> : <span className="text-gray-400 text-xl">—</span>}
+												{/* Translated "classes" or "No classes" */}
+												<span className="text-xs text-gray-700">{row.monThu > 0 ? t("schedule.classes") : t("schedule.no_classes")}</span>
+											</div>
+											<div className="p-4 flex flex-col items-center justify-center">
+												{row.sat > 0 ? <div className="w-12 h-12 bg-blue-400 rounded-xl flex items-center justify-center mb-1 text-white font-bold">{row.sat}</div> : <span className="text-gray-400 text-xl">—</span>}
+												{/* Translated "classes" or "No classes" */}
+												<span className="text-xs text-gray-700">{row.sat > 0 ? t("schedule.classes") : t("schedule.no_classes")}</span>
+											</div>
+										</div>
+									))}
+								</div>
 							</div>
 						</div>
 					</div>
-
-					{/* Right Column - Calendar */}
-					<div className="p-6 bg-white rounded-4xl shadow-md">
-						<h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Class Schedule</h3>
-						<div className="grid grid-cols-3  bg-indigo-50 mb-4 rounded-full text-center">
-							<div className="py-4 font-bold text-gray-700"></div>
-							<div className="py-4 font-bold text-gray-700 ">Mon-Thu</div>
-							<div className="py-4 font-bold text-gray-700 ">Saturday</div>
-						</div>
-
-						<div className="">
-							{[
-								{ period: "Morning", time: "7-10am", monThu: 3, sat: 2 },
-								{ period: "Afternoon", time: "1-5pm", monThu: 6, sat: 0 },
-								{ period: "Evening", time: "7-10pm", monThu: 9, sat: 0 },
-							].map((row, idx) => (
-								<div key={idx} className="grid items-center rounded-full bg-white shadow-xs my-1 grid-cols-3 text-center ">
-									<div className="p-4  font-semibold text-gray-900">
-										<div> {row.period}</div>
-
-										<span className="text-xs font-normal text-gray-600">{row.time}</span>
-									</div>
-									<div className="p-4 flex flex-col items-center justify-center">
-										{row.monThu > 0 ? <div className="w-12 h-12 bg-blue-300 rounded-2xl flex items-center justify-center mb-1 text-white font-bold">{row.monThu}</div> : <span className="text-gray-400 text-xl">—</span>}
-										{row.monThu > 0 ? <span className="text-xs text-gray-700">classes</span> : <span className="text-xs text-gray-700">No classes</span>}
-									</div>
-									<div className="p-4 flex flex-col items-center justify-center ">
-										{row.sat > 0 ? <div className="w-12 h-12 bg-blue-300 rounded-2xl flex items-center justify-center mb-1 text-white font-bold">{row.monThu}</div> : <span className="text-gray-400 text-xl">—</span>}
-										{row.sat > 0 ? <span className="text-xs text-gray-700">classes</span> : <span className="text-xs text-gray-700">No classes</span>}
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
+				)}
 			</div>
 		</section>
 	);

@@ -1,46 +1,65 @@
 {
     "header": {
-        "location": "日本・東京",
-        "email": "support@j-global.com"
+        "alt_logo": "プリビルトUIのロゴ"
     },
     "step1": {
         "title": "無料コーチング",
-        "subtitle": "異文化コミュニケーションスキルを高めるための30分間の無料オンラインカウンセリングをご予約ください。",
-        "book": "無料コーチングを予約する",
-        "noticeTitle": "重要なお知らせ",
-        "noticeText": "準備時間確保のため、ご予約は<strong>3時間以上前</strong>にお願いいたします。",
-        "coachTitle": "コーチ紹介",
-        "coachText": "バイリンガルコーチの<strong>Jon</strong>が、グローバルビジネスで必要なスキル開発をサポートします。売り込み目的ではありませんので、安心してご相談ください。",
-        "expectTitle": "セッション内容",
-        "expectItems": {
-            "1": "現在の業務状況、目標、課題についてのヒアリング",
-            "2": "日本企業で活躍するために必要なスキルの整理",
-            "3": "アイデアをまとめるインタラクティブなマインドマップセッション",
-            "4": "おすすめの学習計画（Individual Learning Journey）のご提案"
-        }
+        "intro_p": "異文化開発の旅を始めるために、無料の30分オンラインカウンセリングセッションをご予約ください。",
+        "button_text": "無料コーチングを予約する",
+        "contact_email": "support@j-global.com",
+        "contact_location": "拠点：日本、東京",
+        "notice_title": "重要なお知らせ",
+        "notice_p_1": "適切な準備時間を確保するため、予約は",
+        "notice_p_2_bold": "3時間以上先の日時",
+        "notice_p_3": "をご指定ください。",
+        "coach_title": "コーチの紹介",
+        "coach_p_1": "バイリンガルコーチの",
+        "coach_p_2_bold": "ジョン",
+        "coach_p_3": "は、プロフェッショナルが異文化ビジネススキルを習得するのを専門としています。これは営業を目的としたセッションではなく、あくまでお手伝いをさせていただくものです。",
+        "expect_title": "セッション内容",
+        "expect_list": [
+            "現在の業務状況、目標、課題に関する議論",
+            "日本企業でのグローバルビジネス成功に必要なスキルの特定",
+            "アイデアを整理するためのインタラクティブなマインドマッピングセッション",
+            "推奨事項を含む個別学習ジャーニーガイドの提供"
+        ]
     },
     "step2": {
-        "title": "ステップ2：日付と時間の選択",
-        "subtitle": "無料コーチングのご希望日時をお選びください。",
-        "noSlots": "この日の空き枠はありません",
-        "selectDate": "日付を選択すると時間枠が表示されます",
-        "next": "次へ →",
-        "back": "← 戻る"
+        "title_1": "ステップ 2:",
+        "title_2_span": "日時を選択",
+        "sub_p": "無料コーチングセッションのご希望の日時を選択してください。",
+        "loading_slots": "読み込み中...",
+        "no_slots": "この日に利用可能なスロットはありません",
+        "select_date_prompt": "利用可能なタイムスロットを見るには日付を選択してください",
+        "button_back": "← 戻る",
+        "button_next": "次へ →",
+        "day_picker_aria_label": "予約日を選択するためのカレンダー"
     },
     "step3": {
-        "title": "ステップ3：お客様情報",
-        "subtitle": "ご連絡・事前準備のため、必要事項をご入力ください。",
-        "firstName": "名（First Name）",
-        "lastName": "姓（Last Name）",
-        "email": "メールアドレス",
-        "message": "追加メッセージ（任意）",
-        "booking": "予約中...",
-        "confirm": "予約を確定する →"
+        "title_1": "ステップ 3:",
+        "title_2_span": "お客様の情報",
+        "sub_p": "セッションの準備とご連絡のために、詳細をご記入ください。",
+        "placeholder_first_name": "名",
+        "placeholder_last_name": "姓",
+        "placeholder_email": "メールアドレス",
+        "placeholder_message": "追加のメッセージ（任意）",
+        "button_back": "← 戻る",
+        "button_submit": "予約を確定 →",
+        "button_submitting": "予約中..."
     },
     "step4": {
-        "confirmed": "予約が確定しました！",
-        "text": "{name} 様、無料コーチングは <strong>{date} {time}〜</strong> にて予定されています。",
-        "emailSent": "確認メールを送信しました。下のボタンから Google カレンダーに追加できます。",
-        "addToCalendar": "Google カレンダーに追加"
+        "title": "予約が確定しました！",
+        "p_thank_you_1": "ありがとうございます、",
+        "p_thank_you_2": "様！無料コーチングセッションは、",
+        "p_confirmation_email": "確認メールを送信しました。以下のボタンをクリックして、セッションをGoogleカレンダーに追加することもできます。",
+        "button_google_calendar": "Googleカレンダーに追加",
+        "calendar_event_name": "無料コーチングセッション",
+        "calendar_event_details": "専門家による無料コーチングセッション",
+        "calendar_event_location": "オンライン"
+    },
+    "alerts": {
+        "select_date_time": "先に日時を選択してください。",
+        "booking_failed": "予約に失敗しました: ",
+        "booking_failed_generic": "予約に失敗しました"
     }
 }

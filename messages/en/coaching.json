@@ -1,41 +1,65 @@
 {
     "header": {
-        "location": "Based in Tokyo, Japan",
-        "email": "support@j-global.com"
+        "alt_logo": "Prebuilt UI Logo"
     },
     "step1": {
         "title": "Free Coaching",
-        "subtitle": "Book your complimentary 30-minute online counselling session to start your intercultural development journey.",
-        "book": "Book Free Coaching",
-        "noticeTitle": "Important Notice",
-        "noticeText": "Please schedule appointments at least <strong>3 hours in the future</strong> to ensure proper preparation time.",
-        "coachTitle": "Meet Your Coach",
-        "coachText": "Our bilingual coach, <strong>Jon</strong>, specializes in helping professionals develop intercultural business skills. This is a no-pressure session — we're here to help, not to sell.",
-        "expectTitle": "What to Expect",
-        "expectItems": "Discussion of your current work situation, goals, and challenges\nIdentification of skills needed for global business success in Japanese companies\nInteractive mind mapping session to organize your ideas\nPersonalized Individual Learning Journey guide with recommendations"
+        "intro_p": "Book your complimentary 30-minute online counselling session to start your intercultural development journey.",
+        "button_text": "Book Free Coaching",
+        "contact_email": "support@j-global.com",
+        "contact_location": "Based in Tokyo, Japan",
+        "notice_title": "Important Notice",
+        "notice_p_1": "Please schedule appointments at least ",
+        "notice_p_2_bold": "3 hours in the future",
+        "notice_p_3": " to ensure proper preparation time.",
+        "coach_title": "Meet Your Coach",
+        "coach_p_1": "Our bilingual coach, ",
+        "coach_p_2_bold": "Jon",
+        "coach_p_3": ", specializes in helping professionals develop intercultural business skills. This is a no-pressure session — we're here to help, not to sell.",
+        "expect_title": "What to Expect",
+        "expect_list": [
+            "Discussion of your current work situation, goals, and challenges",
+            "Identification of skills needed for global business success in Japanese companies",
+            "Interactive mind mapping session to organize your ideas",
+            "Personalized Individual Learning Journey guide with recommendations"
+        ]
     },
     "step2": {
-        "title": "Step 2: Select Date & Time",
-        "subtitle": "Pick your preferred date and time for your free coaching session.",
-        "noSlots": "No available slots for this day",
-        "selectDate": "Select a date to see available time slots",
-        "next": "Next →",
-        "back": "← Back"
+        "title_1": "Step 2:",
+        "title_2_span": "Select Date & Time",
+        "sub_p": "Pick your preferred date and time for your free coaching session.",
+        "loading_slots": "Loading...",
+        "no_slots": "No available slots for this day",
+        "select_date_prompt": "Select a date to see available time slots",
+        "button_back": "← Back",
+        "button_next": "Next →",
+        "day_picker_aria_label": "Calendar for selecting a booking date"
     },
     "step3": {
-        "title": "Step 3: Your Information",
-        "subtitle": "Fill in your details so we can contact you and prepare for your session.",
-        "firstName": "First Name",
-        "lastName": "Last Name",
-        "email": "Email",
-        "message": "Additional message (optional)",
-        "booking": "Booking...",
-        "confirm": "Confirm Booking →"
+        "title_1": "Step 3:",
+        "title_2_span": "Your Information",
+        "sub_p": "Fill in your details so we can contact you and prepare for your session.",
+        "placeholder_first_name": "First Name",
+        "placeholder_last_name": "Last Name",
+        "placeholder_email": "Email",
+        "placeholder_message": "Additional message (optional)",
+        "button_back": "← Back",
+        "button_submit": "Confirm Booking →",
+        "button_submitting": "Booking..."
     },
     "step4": {
-        "confirmed": "Booking Confirmed!",
-        "text": "Thank you, {name}! Your free coaching session is scheduled for <strong>{date} at {time}</strong>.",
-        "emailSent": "A confirmation email has been sent. You can also add this session to your Google Calendar by clicking below.",
-        "addToCalendar": "Add to Google Calendar"
+        "title": "Booking Confirmed!",
+        "p_thank_you_1": "Thank you, ",
+        "p_thank_you_2": "! Your free coaching session is scheduled for ",
+        "p_confirmation_email": "A confirmation email has been sent. You can also add this session to your Google Calendar by clicking below.",
+        "button_google_calendar": "Add to Google Calendar",
+        "calendar_event_name": "Free Coaching Session",
+        "calendar_event_details": "Your free coaching session with our expert",
+        "calendar_event_location": "Online"
+    },
+    "alerts": {
+        "select_date_time": "Please select date and time first.",
+        "booking_failed": "Booking failed: ",
+        "booking_failed_generic": "Booking failed"
     }
 }

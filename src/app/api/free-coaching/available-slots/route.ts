@@ -2,11 +2,11 @@
 import { weeklySlots } from "@/app/utils/slots";
 import { google, calendar_v3 } from "googleapis";
 import type { NextRequest } from "next/server";
-import { format } from "date-fns";
 
 // --- Types ---
 type CalendarEvent = calendar_v3.Schema$Event;
 
+// --- Helpers ---
 const parseTimeJST = (dateStr: string, timeStr: string): Date => {
 	const [hourStr, minStr] = timeStr.split(":");
 	return new Date(`${dateStr}T${hourStr.padStart(2, "0")}:${minStr.padStart(2, "0")}:00+09:00`);
@@ -26,15 +26,18 @@ const getAvailableSlotsForDate = (dateStr: string, events: CalendarEvent[]): str
 	const slots = weeklySlots[dayOfWeek] || [];
 
 	const nowJST = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+	const FOUR_HOURS = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
 
 	return slots.filter((slot: string) => {
 		const slotStart = parseTimeJST(dateStr, slot);
 		const slotEnd = new Date(slotStart.getTime() + 30 * 60 * 1000);
 
-		if (slotStart < nowJST && dateStr === format(nowJST, "yyyy-MM-dd")) {
+		// Skip slots in the past or less than 4 hours away
+		if (slotStart.getTime() - nowJST.getTime() < FOUR_HOURS) {
 			return false;
 		}
 
+		// Skip slots that overlap with existing events
 		return isSlotAvailable(slotStart, slotEnd, events);
 	});
 };
@@ -86,7 +89,6 @@ export async function POST(req: NextRequest): Promise<Response> {
 
 		return new Response(JSON.stringify({ date: dateStr, events, availableSlots }), { status: 200, headers: { "Content-Type": "application/json" } });
 	} catch (error) {
-		// Type-safe error handling
 		let message: string;
 		if (error instanceof Error) {
 			message = error.message;

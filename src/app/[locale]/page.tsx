@@ -14,6 +14,7 @@ import { useTranslations } from "next-intl";
 import FeturedIn from "../components/homepage/FeaturedIn";
 import Footer from "../components/Footer";
 import JBSWorkshopsBenefits from "../components/homepage/Benefits";
+import JBSWorkshopsStructure from "../components/homepage/WorkshopStructure";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
 	/*
@@ -187,6 +188,7 @@ export default function HomePage() {
 				</div>
 			</div>
 			<JBSWorkshopsBenefits />
+			<JBSWorkshopsStructure />
 
 			<LecturerIntroduction />
 			<Instructors />

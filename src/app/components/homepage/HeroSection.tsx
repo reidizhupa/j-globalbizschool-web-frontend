@@ -83,9 +83,9 @@ export default function Page() {
 
 					{/* Big image */}
 					<div
-						className="
-      relative w-[300px] sm:w-[400px] md:w-[400px] 
-      h-[300px] sm:h-[400px] md:h-[300px]
+						className=" mb-5
+      relative w-[200px] sm:w-[300px] md:w-[400px] 
+      h-[200px] sm:h-[300px] md:h-[300px]
       rounded-4xl overflow-hidden shadow-2xl border border-white
     "
 						style={{

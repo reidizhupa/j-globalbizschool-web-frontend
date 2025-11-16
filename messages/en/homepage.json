@@ -59,6 +59,99 @@
         "tipsSuccessfulAssignment": "What are the tips for a successful overseas assignment?",
         "digitalEducationGrowth": "Additional strategies for digital education growth."
     },
+    "benefits": {
+        "header": {
+            "title": "Benefits of JBS Online Workshops",
+            "plus_sign": "+"
+        },
+        "benefits_list": {
+            "flexible": "Flexible",
+            "convenient": "Convenient",
+            "affordable": "Affordable",
+            "certified": "Certified",
+            "goal_oriented": "Goal Oriented"
+        },
+        "intro": {
+            "text": "Unlock your global business potential with flexible, interactive, and certified workshops."
+        },
+        "content": {
+            "left_column_title": "Flexible, Interactive & Global",
+            "list_item_1": "Join 20+ bilingual one-hour workshops weekly, offered morning, afternoon, and evening (Japan time).",
+            "list_item_2": "Programs cover practical global business topics in 2–4 workshops you can attend in any order.",
+            "list_item_3": "Major courses like the Mini MBA include 6 programs and 24 workshops over six months.",
+            "list_item_4": "Every session is interactive, live, and bilingual, with attendance tracking, digital badges, and certificates."
+        },
+        "schedule": {
+            "class_schedule": "Class Schedule",
+            "mon_thu": "Mon-Thu",
+            "saturday": "Saturday",
+            "period_morning": "Morning",
+            "period_afternoon": "Afternoon",
+            "period_evening": "Evening",
+            "time_morning": "7-10am",
+            "time_afternoon": "1-5pm",
+            "time_evening": "7-10pm",
+            "classes": "classes",
+            "no_classes": "No classes"
+        }
+    },
+    "structure": {
+        "header": {
+            "title": "Workshop Style",
+            "plus_sign": "+"
+        },
+        "intro": {
+            "title_1": "Relaxed, Interactive",
+            "title_2_span": " & Practical",
+            "p1_part1": "Our ",
+            "p1_part2_bold": "bilingual workshops",
+            "p1_part3": " are designed to be fun, interactive, and impactful, with friendly facilitators and a \"no wrong answers\" approach. Participants can speak freely in ",
+            "p1_part4_bold": "Japanese or English",
+            "p1_part5": ".",
+            "p2_part1": "Before joining, learners can watch short videos or readings and complete a needs and goals survey to personalize their experience. After class, participants record their progress and apply what they learned through a ",
+            "p2_part2_bold": "workplace task or mini-internship",
+            "p2_part3": "."
+        },
+        "online_workshop": {
+            "title": "Online Workshop",
+            "flow_header": "WORKSHOP FLOW"
+        },
+        "features": [
+            {
+                "title": "Flexible schedule",
+                "sub": "Morning, afternoon, evening"
+            },
+            {
+                "title": "20+ weekly classes",
+                "sub": "1 hour, Mon–Thu & Sat"
+            },
+            {
+                "title": "Join any order",
+                "sub": "Various useful topics"
+            },
+            {
+                "title": "Track progress",
+                "sub": "Badges & certificates"
+            }
+        ],
+        "steps": [
+            {
+                "text": "Fun icebreaker"
+            },
+            {
+                "text": "Customized learning"
+            },
+            {
+                "text": "Structured practice"
+            },
+            {
+                "text": "Debate or roleplay"
+            },
+            {
+                "text": "Reflect & apply"
+            }
+        ]
+    },
     "programsSectionSubtitle": "Three levels of global skill learning",
     "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
     "clickFreeTrial": "Click for free trial",
