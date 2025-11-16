@@ -26,3 +26,32 @@ body {
 .selected-flag {
 	@apply rounded-tl-full; /* Tailwind width, height, rounded */
 }
+
+@keyframes floatStair {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-3px);
+	}
+}
+
+/* Big image: very subtle float */
+@keyframes floatBig {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-4px);
+	}
+}
+
+[data-aos] {
+	overflow-x: clip;
+}
+html,
+body {
+	overflow-x: hidden;
+}

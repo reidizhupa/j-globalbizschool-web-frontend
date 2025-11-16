@@ -43,6 +43,23 @@
         "companyProfile": "Company Profile",
         "copyright": "All Rights Reserved"
     },
+    "featuredIn": {
+        "featuredTitle": "Featured In",
+        "featuredSubtitle": "Discover what top publications have said about us.",
+        "englishJournalOnline": "English Journal Online",
+        "englishJournalOnlineDescription": "We were featured in ALC Inc.'s online media, English Journal Online.",
+        "readFirstArticle": "Click here to read first article",
+        "readSecondArticle": "Click here to read second article",
+        "keysession": "KeySession",
+        "keysessionDescription": "Our CEO, John, supervised an article on intercultural communication training on Keysession, a comprehensive employee training website.",
+        "introInterculturalCommunication": "Introduction to Intercultural Communication",
+        "modernClassroomsTech": "How new tech is transforming modern classrooms.",
+        "overseasAssignmentTraining": "Overseas assignment training",
+        "digitalLearningInsights": "Further insights on digital learning innovation.",
+        "tipsSuccessfulAssignment": "What are the tips for a successful overseas assignment?",
+        "digitalEducationGrowth": "Additional strategies for digital education growth."
+    },
+    "programsSectionSubtitle": "Three levels of global skill learning",
     "heroDescription": "Welcome to\nJ-Global\nBusiness School!",
     "clickFreeTrial": "Click for free trial",
     "whyChooseUs": "Why Choose J-Global",

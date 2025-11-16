@@ -8,7 +8,6 @@ import { useState } from "react";
 import { FaBullseye, FaUsers, FaGlobe, FaLanguage, FaArrowRight, FaRegClock, FaChevronDown } from "react-icons/fa";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { getProgramLink } from "@/utils/helpers";
-import { getLocale } from "next-intl/server";
 import { useLocale, useTranslations } from "next-intl";
 
 export type WorkshopSession = {
@@ -45,16 +44,10 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 		setOpenIndex(openIndex === index ? null : index);
 	};
 
-	const colors = [
-		{ bg: "bg-blue-500", light: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
-		{ bg: "bg-purple-500", light: "bg-purple-50", border: "border-purple-200", text: "text-purple-700" },
-		{ bg: "bg-orange-500", light: "bg-orange-50", border: "border-orange-200", text: "text-orange-700" },
-	];
-
 	const scrolled = useScroll(10);
 
 	return (
-		<main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
+		<main className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50/30">
 			{/* Navbar */}
 			<header className={`fixed top-0 left-0 right-0 z-50 mx-auto flex w-full items-center justify-between px-6 py-2 transition-colors duration-300 ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}>
 				<div className="max-w-7xl flex w-full items-center justify-between mx-auto">
@@ -140,7 +133,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 												<div className="flex items-center gap-5 mb-7">
 													<div
 														className={`
-								flex-shrink-0 w-12 h-12 rounded-xl
+								shrink-0 w-12 h-12 rounded-xl
 								${section.accent}
 								flex items-center justify-center
 								${section.iconText} text-lg
@@ -163,7 +156,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 																<div key={i} className="flex items-start gap-3 group/item">
 																	<div
 																		className={`
-												flex-shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
+												shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
 												mt-2 opacity-60 group-hover/item:opacity-100
 												transition-opacity duration-200
 											`}
@@ -184,8 +177,8 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 																			{hasNumber ? (
 																				<span
 																					className={`
-															flex-shrink-0 text-xs font-medium ${section.iconText}
-															mt-0.5 min-w-[1.25rem] opacity-60 group-hover/item:opacity-100
+															shrink-0 text-xs font-medium ${section.iconText}
+															mt-0.5 min-w-5 opacity-60 group-hover/item:opacity-100
 															transition-opacity duration-200
 														`}
 																				>
@@ -194,7 +187,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 																			) : (
 																				<div
 																					className={`
-															flex-shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
+															shrink-0 w-1.5 h-1.5 rounded-full ${section.dot}
 															mt-2 opacity-60 group-hover/item:opacity-100
 															transition-opacity duration-200
 														`}
@@ -241,7 +234,6 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 						{workshop.sessions.map((session, i) => {
 							const accentColors = ["from-slate-600 to-slate-700", "from-stone-600 to-stone-700", "from-neutral-600 to-neutral-700", "from-gray-600 to-gray-700"];
 
-							const color = colors[i % colors.length];
 							const isOpen = openIndex === i;
 
 							return (
@@ -250,7 +242,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 									key={i}
 									className={`
 				group rounded-3xl overflow-hidden 
-				bg-gradient-to-br from-white to-gray-50/30
+				bg-linear-to-brrom-white to-gray-50/30
 				border transition-all duration-300 ease-out
 				${isOpen ? "shadow-2xl border-gray-300 ring-1 ring-gray-900/5" : "shadow-md border-gray-200/60 hover:shadow-xl hover:border-gray-300/80"}
 			`}
@@ -264,7 +256,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 													<div className="flex items-center gap-4 mb-4">
 														<div
 															className={`
-									h-12 w-1 rounded-full bg-gradient-to-b ${accentColors[i % 4]}
+									h-12 w-1 rounded-full bg-linear-to-b ${accentColors[i % 4]}
 									transition-all duration-300
 									${isOpen ? "h-16" : "group-hover:h-14"}
 								`}
@@ -273,7 +265,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 															<span className="block text-xs font-semibold text-gray-400 uppercase tracking-[0.2em] mb-1">
 																{tPrograms("workshop")} {String(i + 1).padStart(2, "0")}
 															</span>
-															<div className="h-px w-12 bg-gradient-to-r from-gray-300 to-transparent" />
+															<div className="h-px w-12 bg-linear-to-r from-gray-300 to-transparent" />
 														</div>
 													</div>
 
@@ -322,9 +314,9 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 		overflow-hidden
 	`}
 									>
-										<div className="px-8 sm:px-10 pb-10 bg-gradient-to-b from-gray-50/50 to-white">
+										<div className="px-8 sm:px-10 pb-10 bg-linear-to-b from-gray-50/50 to-white">
 											{/* Divider */}
-											<div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" />
+											<div className="h-px bg-linear-to-r from-transparent via-gray-200 to-transparent mb-8" />
 
 											{/* What You'll Learn */}
 											<div className="mb-8">
@@ -340,7 +332,6 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 														)
 														.map((line, j) => {
 															const isBullet = /^(●|・)/.test(line);
-															const isNumbered = /^\d+\./.test(line);
 
 															// Remove bullet only; keep numbers intact
 															const text = isBullet ? line.replace(/^(●|・)/, "").trim() : line;
@@ -348,7 +339,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 															return (
 																<div key={j} className="flex items-start gap-3">
 																	{/* Show custom dot only for bullets */}
-																	<div className={`flex-shrink-0 w-1.5 h-1.5 rounded-full mt-2 ${isBullet ? "bg-gray-400" : "bg-transparent"}`} />
+																	<div className={`shrink-0 w-1.5 h-1.5 rounded-full mt-2 ${isBullet ? "bg-gray-400" : "bg-transparent"}`} />
 																	<span className="text-base text-gray-700 leading-relaxed">{text}</span>
 																</div>
 															);
@@ -359,7 +350,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 											{/* Available Times */}
 											<div className="mb-10">
 												<div className="flex items-center gap-3 mb-6">
-													<div className="h-8 w-1 rounded-full bg-gradient-to-b from-gray-600 to-gray-700" />
+													<div className="h-8 w-1 rounded-full bg-linear-to-b from-gray-600 to-gray-700" />
 													<h4 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">{tPrograms("availableDates")}</h4>
 													<span className="text-xs font-light text-gray-400 ml-1">
 														({session.dates.length} {session.dates.length === 1 ? tPrograms("date") : tPrograms("dates")})
@@ -405,7 +396,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 							"
 															>
 																<div className="flex items-center gap-3">
-																	<div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:border-gray-200 transition-colors">
+																	<div className="shrink-0 h-10 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-100 group-hover:border-gray-200 transition-colors">
 																		<FaRegClock className="w-4 h-4 text-gray-400" />
 																	</div>
 																	<div className="flex-1 min-w-0">
@@ -424,13 +415,13 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 											</div>
 
 											{/* Divider */}
-											<div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8" />
+											<div className="h-px bg-linear-to-r from-transparent via-gray-200 to-transparent mb-8" />
 
 											{/* Join Button */}
 											<button
 												className="
 			group relative w-full 
-			bg-gradient-to-r from-gray-800 to-gray-900 
+			bg-linear-to-r from-gray-800 to-gray-900 
 			text-white font-medium py-4 rounded-xl 
 			hover:from-gray-900 hover:to-black
 			active:scale-[0.99]
@@ -445,7 +436,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 														<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
 													</svg>
 												</span>
-												<div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+												<div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
 											</button>
 										</div>
 									</div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
@@ -78,14 +78,11 @@ export default function Footer() {
 						<a href="https://www.instagram.com/jglobal_bizschool/" target="_blank" className="hover:text-pink-600 transition">
 							<FaInstagram />
 						</a>
-						<a href="https://www.youtube.com/" target="_blank" className="hover:text-red-600 transition">
-							<FaYoutube />
-						</a>
 					</div>
 
 					{/* Copyright */}
 					<p className="text-center md:text-right text-gray-500">
-						© {new Date().getFullYear()} j-globalbizschool. {t("copyright")}.
+						© {new Date().getFullYear()} j-globalbizschool.com {t("copyright")}.
 					</p>
 				</div>
 			</div>

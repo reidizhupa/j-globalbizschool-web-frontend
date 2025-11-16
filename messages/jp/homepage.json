@@ -1,6 +1,6 @@
 {
     "HeroSection": {
-        "heading": "伝わらない・進まない・噛み合わない」 異文化チームの停滞を、<br></br><blue>J-Globalビジネススクール</blue>で解決",
+        "heading": "伝わらない・進まない・噛み合わない」 異文化チームの停滞を、<blue>J-Globalビジネススクール</blue>で解決",
         "subheading": "スキルと挑戦で、世界をつなぐ新世代リーダーに。",
         "heroCTA": "まずは無料体験へ",
         "heroSecondaryCTA": "詳しく見る"
@@ -43,6 +43,23 @@
         "companyProfile": "会社概要",
         "copyright": "全著作権所有"
     },
+    "featuredIn": {
+        "featuredTitle": "掲載実績",
+        "featuredSubtitle": "主要メディアで紹介されました。",
+        "englishJournalOnline": "イングリッシュ・ジャーナル・オンライン",
+        "englishJournalOnlineDescription": "当社は、アルク株式会社のオンラインメディア「イングリッシュ・ジャーナル・オンライン」で紹介されました。",
+        "readFirstArticle": "最初の記事はこちら",
+        "readSecondArticle": "2本目の記事はこちら",
+        "keysession": "KeySession（キーセッション）",
+        "keysessionDescription": "当社CEOのジョンが、総合社員研修サイト「KeySession」にて異文化コミュニケーション研修の記事を監修しました。",
+        "introInterculturalCommunication": "異文化コミュニケーション入門",
+        "modernClassroomsTech": "最新テクノロジーが現代教育をどのように変えているか。",
+        "overseasAssignmentTraining": "海外赴任研修",
+        "digitalLearningInsights": "デジタル学習革新に関するさらなる洞察。",
+        "tipsSuccessfulAssignment": "海外赴任を成功させるためのポイントとは？",
+        "digitalEducationGrowth": "デジタル教育成長のための追加戦略。"
+    },
+    "programsSectionSubtitle": "グローバルスキル習得の3段階",
     "heroDescription": "J-Global\nビジネススクールへ\nようこそ!",
     "clickFreeTrial": "無料トライアルはこちら",
     "whyChooseUs": "J-Globalビジネススクールとは?",

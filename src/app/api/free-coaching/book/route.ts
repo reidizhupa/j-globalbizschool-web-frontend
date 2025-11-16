@@ -17,10 +17,41 @@ export async function POST(req: NextRequest) {
 		});
 		const calendar = google.calendar({ version: "v3", auth });
 
-		// Convert to full ISO date in JST
+		// Create start/end time in JST
 		const start = new Date(`${date}T${time}:00+09:00`);
 		const end = new Date(start.getTime() + 30 * 60 * 1000);
 
+		// -----------------------------
+		// 🔒 STEP 1: SERVER-SIDE CONFLICT CHECK
+		// -----------------------------
+		const existing = await calendar.events.list({
+			calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
+			timeMin: start.toISOString(),
+			timeMax: end.toISOString(),
+			singleEvents: true,
+			orderBy: "startTime",
+		});
+
+		const hasConflict = existing.data.items?.some((ev) => {
+			if (!ev.start?.dateTime || !ev.end?.dateTime) return false;
+
+			const evStart = new Date(ev.start.dateTime);
+			const evEnd = new Date(ev.end.dateTime);
+
+			// Overlap check
+			return start < evEnd && end > evStart;
+		});
+
+		if (hasConflict) {
+			return new Response(JSON.stringify({ error: "This time slot is already booked." }), {
+				status: 409, // conflict
+				headers: { "Content-Type": "application/json" },
+			});
+		}
+
+		// -----------------------------
+		// 🔒 NO CONFLICT → INSERT EVENT
+		// -----------------------------
 		const event = {
 			summary: "Free Coaching Session",
 			description: `
@@ -31,7 +62,6 @@ export async function POST(req: NextRequest) {
       `,
 			start: { dateTime: start.toISOString(), timeZone: "Asia/Tokyo" },
 			end: { dateTime: end.toISOString(), timeZone: "Asia/Tokyo" },
-			// extendedProperties can also store structured info if needed
 			extendedProperties: {
 				private: {
 					firstName,
@@ -48,9 +78,20 @@ export async function POST(req: NextRequest) {
 			requestBody: event,
 		});
 
-		return new Response(JSON.stringify({ success: true, eventLink: response.data.htmlLink }), { status: 200, headers: { "Content-Type": "application/json" } });
+		return new Response(
+			JSON.stringify({
+				success: true,
+				eventLink: response.data.htmlLink,
+			}),
+			{
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			}
+		);
 	} catch (err) {
 		console.error(err);
-		return new Response(JSON.stringify({ error: (err as Error).message }), { status: 500 });
+		return new Response(JSON.stringify({ error: (err as Error).message }), {
+			status: 500,
+		});
 	}
 }

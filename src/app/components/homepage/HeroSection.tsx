@@ -62,9 +62,37 @@ export default function Page() {
 				</div>
 
 				{/* Right Side */}
-				<div className="flex-1 flex justify-center sm:justify-end px-6 sm:px-0">
-					<div className="relative w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[450px] overflow-hidden rounded-[50%_50%_0_0] md:rounded-[50%_20%_50%_20%] shadow-2xl">
-						<Image src="/img/gril.jpg" alt="Students collaborating" fill className="object-cover" priority />
+				<div className="flex-1 flex flex-col items-center sm:items-center px-6 sm:px-0">
+					{/* Top row: 3 small images */}
+					<div className="flex w-[300px] sm:w-[400px] md:w-[400px] gap-3 mb-4">
+						{["/img/jon_hero2.png", "/img/nana_hero2.png", "/img/usa_hero2.png"].map((src, i) => (
+							<div
+								key={i}
+								className="
+            relative flex-1 aspect-square rounded-3xl overflow-hidden border border-white
+          "
+								style={{
+									animation: `floatStair 6s ease-in-out infinite`,
+									animationDelay: `${i * 0.5}s`, // stair effect
+								}}
+							>
+								<Image src={src} alt={`Small ${i + 1}`} fill className="object-cover" />
+							</div>
+						))}
+					</div>
+
+					{/* Big image */}
+					<div
+						className="
+      relative w-[300px] sm:w-[400px] md:w-[400px] 
+      h-[300px] sm:h-[400px] md:h-[300px]
+      rounded-4xl overflow-hidden shadow-2xl border border-white
+    "
+						style={{
+							animation: `floatBig 7s ease-in-out infinite`,
+						}}
+					>
+						<Image src="/img/girl_hero.png" alt="Students collaborating" fill className="object-cover" priority />
 					</div>
 				</div>
 			</section>

@@ -13,6 +13,7 @@ import LogoSection from "../components/homepage/LogoSection";
 import { useTranslations } from "next-intl";
 import FeturedIn from "../components/homepage/FeaturedIn";
 import Footer from "../components/Footer";
+import JBSWorkshopsBenefits from "../components/homepage/Benefits";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
 	/*
@@ -32,6 +33,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 
 export default function HomePage() {
 	const tLevels = useTranslations("levels");
+	const tHome = useTranslations("homepage");
 
 	const globalPrograms: CardGridData = {
 		level: tLevels("level1"),
@@ -168,8 +170,8 @@ export default function HomePage() {
 			<FreeTrial />
 			<div className="bg-[#dbe9ff] pt-20">
 				<div className="bg-[url('/img/bg_continuation.png')] bg-cover bg-center bg-no-repeat">
-					<h1 className="text-4xl md:text-5xl flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
-						<span className="bg-clip-text  relative z-10"> Unlimited opportunites</span>
+					<h1 className="text-4xl md:text-5xl text-center flex justify-center lg:text-5xl font-extrabold tracking-tight text-gray-600 mb-10">
+						<span className="bg-clip-text  relative z-10"> {tHome("programsSectionSubtitle")}</span>
 					</h1>
 					{/* Content */}
 					<div data-aos="fade-right" data-aos-duration="600">
@@ -184,6 +186,8 @@ export default function HomePage() {
 					</div>
 				</div>
 			</div>
+			<JBSWorkshopsBenefits />
+
 			<LecturerIntroduction />
 			<Instructors />
 			<FeturedIn />

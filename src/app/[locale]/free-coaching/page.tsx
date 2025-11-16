@@ -141,19 +141,19 @@ export default function FreeCoachingPage() {
 									{/* Hero Image */}
 									<div className="relative h-72 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg">
 										<Image src="/img/free-coaching.avif" alt="Online coaching session" fill className="object-cover" priority />
-										<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+										<div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent" />
 									</div>
 
 									{/* Booking CTA (under image on mobile) */}
 									<div className="block lg:hidden">
-										<div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8 mt-6">
+										<div className="bg-linear-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8 mt-6">
 											<div className="space-y-4 text-center">
 												<h1 className="text-3xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
 												<p className="text-gray-600 text-lg leading-relaxed">Book your complimentary 30-minute online counselling session to start your intercultural development journey.</p>
 											</div>
 
 											<div className="space-y-4">
-												<button onClick={next} className="w-full bg-gradient-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
+												<button onClick={next} className="w-full bg-linear-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
 													<FaCalendarAlt className="w-5 h-5" />
 													Book Free Coaching
 												</button>
@@ -177,7 +177,7 @@ export default function FreeCoachingPage() {
 										{/* Important Notice */}
 										<div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 lg:p-8">
 											<div className="flex items-start gap-3">
-												<div className="flex-shrink-0 w-6 h-6 text-orange-600 mt-0.5">
+												<div className="shrink-0 w-6 h-6 text-orange-600 mt-0.5">
 													<FaExclamationTriangle className="w-full h-full" />
 												</div>
 												<div className="space-y-3">
@@ -206,7 +206,7 @@ export default function FreeCoachingPage() {
 												<ul className="space-y-3 text-gray-700">
 													{["Discussion of your current work situation, goals, and challenges", "Identification of skills needed for global business success in Japanese companies", "Interactive mind mapping session to organize your ideas", "Personalized Individual Learning Journey guide with recommendations"].map((text, i) => (
 														<li key={i} className="flex items-start gap-3">
-															<div className="flex-shrink-0 w-5 h-5 text-green-500 mt-0.5">
+															<div className="shrink-0 w-5 h-5 text-green-500 mt-0.5">
 																<FaCheckCircle className="w-full h-full" />
 															</div>
 															<span>{text}</span>
@@ -220,14 +220,14 @@ export default function FreeCoachingPage() {
 
 								{/* Right: Booking CTA (desktop only) */}
 								<div className="lg:col-span-3 hidden lg:block">
-									<div className="sticky top-28 bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8">
+									<div className="sticky top-28 bg-linear-to-br from-white to-gray-50 border border-gray-200 rounded-3xl shadow-xl p-8 space-y-8">
 										<div className="space-y-4 text-center">
 											<h1 className="text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">Free Coaching</h1>
 											<p className="text-gray-600 text-lg leading-relaxed">Book your complimentary 30-minute online counselling session to start your intercultural development journey.</p>
 										</div>
 
 										<div className="space-y-4">
-											<button onClick={next} className="w-full bg-gradient-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
+											<button onClick={next} className="w-full bg-linear-to-r from-[#d74100] to-[#ff5a1f] hover:from-[#bf3a00] hover:to-[#e04e00] text-white font-semibold py-4 px-8 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-3">
 												<FaCalendarAlt className="w-5 h-5" />
 												Book Free Coaching
 											</button>
@@ -251,7 +251,7 @@ export default function FreeCoachingPage() {
 
 					{/* Step 2: Date & Time */}
 					{step === 2 && (
-						<motion.div key="step2" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -40 }} transition={{ duration: 0.5, ease: "easeOut" }} className="relative p-6 sm:p-8 md:p-10 bg-gradient-to-br from-white/90 to-blue-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-blue-100">
+						<motion.div key="step2" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -40 }} transition={{ duration: 0.5, ease: "easeOut" }} className="relative p-6 sm:p-8 md:p-10 bg-linear-to-br from-white/90 to-blue-50/80 backdrop-blur-md rounded-3xl shadow-xl border border-blue-100">
 							{/* Header */}
 							<div className="text-center mb-6 sm:mb-8">
 								<h2 className="text-2xl sm:text-3xl font-bold text-gray-800">
@@ -278,7 +278,7 @@ export default function FreeCoachingPage() {
 								</div>
 
 								{/* Time Slots */}
-								<div className="w-full lg:w-2/3 relative bg-white/70 rounded-2xl p-6 sm:p-8 shadow-inner border border-gray-100 backdrop-blur-sm min-h-[240px] sm:min-h-[280px] flex items-center justify-center">
+								<div className="w-full lg:w-2/3 relative bg-white/70 rounded-2xl p-6 sm:p-8 shadow-inner border border-gray-100 backdrop-blur-sm min-h-60 sm:min-h-[280px] flex items-center justify-center">
 									{loading && (
 										<div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-md rounded-2xl z-10">
 											<div className="w-10 h-10 sm:w-12 sm:h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
@@ -311,7 +311,7 @@ export default function FreeCoachingPage() {
 									← Back
 								</motion.button>
 
-								<motion.button whileHover={selectedDate && selectedTime ? { scale: 1.05 } : {}} whileTap={selectedDate && selectedTime ? { scale: 0.95 } : {}} onClick={next} disabled={!selectedDate || !selectedTime} className={`w-full sm:w-auto px-8 py-3 rounded-xl font-semibold transition-all duration-200 text-sm sm:text-base ${selectedDate && selectedTime ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
+								<motion.button whileHover={selectedDate && selectedTime ? { scale: 1.05 } : {}} whileTap={selectedDate && selectedTime ? { scale: 0.95 } : {}} onClick={next} disabled={!selectedDate || !selectedTime} className={`w-full sm:w-auto px-8 py-3 rounded-xl font-semibold transition-all duration-200 text-sm sm:text-base ${selectedDate && selectedTime ? "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg" : "bg-gray-300 text-gray-500 cursor-not-allowed"}`}>
 									Next →
 								</motion.button>
 							</div>
@@ -353,7 +353,7 @@ export default function FreeCoachingPage() {
 										← Back
 									</motion.button>
 
-									<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={loading} className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 ${loading ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg"}`}>
+									<motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} type="submit" disabled={loading} className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 ${loading ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-md hover:shadow-lg"}`}>
 										{loading ? "Booking..." : "Confirm Booking →"}
 									</motion.button>
 								</div>

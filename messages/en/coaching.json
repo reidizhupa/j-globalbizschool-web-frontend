@@ -1,0 +1,41 @@
+{
+    "header": {
+        "location": "Based in Tokyo, Japan",
+        "email": "support@j-global.com"
+    },
+    "step1": {
+        "title": "Free Coaching",
+        "subtitle": "Book your complimentary 30-minute online counselling session to start your intercultural development journey.",
+        "book": "Book Free Coaching",
+        "noticeTitle": "Important Notice",
+        "noticeText": "Please schedule appointments at least <strong>3 hours in the future</strong> to ensure proper preparation time.",
+        "coachTitle": "Meet Your Coach",
+        "coachText": "Our bilingual coach, <strong>Jon</strong>, specializes in helping professionals develop intercultural business skills. This is a no-pressure session — we're here to help, not to sell.",
+        "expectTitle": "What to Expect",
+        "expectItems": "Discussion of your current work situation, goals, and challenges\nIdentification of skills needed for global business success in Japanese companies\nInteractive mind mapping session to organize your ideas\nPersonalized Individual Learning Journey guide with recommendations"
+    },
+    "step2": {
+        "title": "Step 2: Select Date & Time",
+        "subtitle": "Pick your preferred date and time for your free coaching session.",
+        "noSlots": "No available slots for this day",
+        "selectDate": "Select a date to see available time slots",
+        "next": "Next →",
+        "back": "← Back"
+    },
+    "step3": {
+        "title": "Step 3: Your Information",
+        "subtitle": "Fill in your details so we can contact you and prepare for your session.",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "message": "Additional message (optional)",
+        "booking": "Booking...",
+        "confirm": "Confirm Booking →"
+    },
+    "step4": {
+        "confirmed": "Booking Confirmed!",
+        "text": "Thank you, {name}! Your free coaching session is scheduled for <strong>{date} at {time}</strong>.",
+        "emailSent": "A confirmation email has been sent. You can also add this session to your Google Calendar by clicking below.",
+        "addToCalendar": "Add to Google Calendar"
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "header": {
+        "location": "日本・東京",
+        "email": "support@j-global.com"
+    },
+    "step1": {
+        "title": "無料コーチング",
+        "subtitle": "異文化コミュニケーションスキルを高めるための30分間の無料オンラインカウンセリングをご予約ください。",
+        "book": "無料コーチングを予約する",
+        "noticeTitle": "重要なお知らせ",
+        "noticeText": "準備時間確保のため、ご予約は<strong>3時間以上前</strong>にお願いいたします。",
+        "coachTitle": "コーチ紹介",
+        "coachText": "バイリンガルコーチの<strong>Jon</strong>が、グローバルビジネスで必要なスキル開発をサポートします。売り込み目的ではありませんので、安心してご相談ください。",
+        "expectTitle": "セッション内容",
+        "expectItems": {
+            "1": "現在の業務状況、目標、課題についてのヒアリング",
+            "2": "日本企業で活躍するために必要なスキルの整理",
+            "3": "アイデアをまとめるインタラクティブなマインドマップセッション",
+            "4": "おすすめの学習計画（Individual Learning Journey）のご提案"
+        }
+    },
+    "step2": {
+        "title": "ステップ2：日付と時間の選択",
+        "subtitle": "無料コーチングのご希望日時をお選びください。",
+        "noSlots": "この日の空き枠はありません",
+        "selectDate": "日付を選択すると時間枠が表示されます",
+        "next": "次へ →",
+        "back": "← 戻る"
+    },
+    "step3": {
+        "title": "ステップ3：お客様情報",
+        "subtitle": "ご連絡・事前準備のため、必要事項をご入力ください。",
+        "firstName": "名（First Name）",
+        "lastName": "姓（Last Name）",
+        "email": "メールアドレス",
+        "message": "追加メッセージ（任意）",
+        "booking": "予約中...",
+        "confirm": "予約を確定する →"
+    },
+    "step4": {
+        "confirmed": "予約が確定しました！",
+        "text": "{name} 様、無料コーチングは <strong>{date} {time}〜</strong> にて予定されています。",
+        "emailSent": "確認メールを送信しました。下のボタンから Google カレンダーに追加できます。",
+        "addToCalendar": "Google カレンダーに追加"
+    }
+}
