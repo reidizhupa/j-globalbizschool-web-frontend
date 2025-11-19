@@ -1,0 +1,12 @@
+{
+    "email": {
+        "subject": "Your Coaching Session is Booked",
+        "hi": "Hi {name},",
+        "confirmed": "Your coaching session is confirmed!",
+        "date": "Date",
+        "time": "Time",
+        "lookingForward": "We look forward to meeting you.",
+        "addToCalendar": "Add to Google Calendar",
+        "teamName": "JBS Coaching Team"
+    }
+}

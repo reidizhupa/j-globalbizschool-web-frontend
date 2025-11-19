@@ -13,10 +13,11 @@ import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
 // Import useMessages from next-intl (or your custom wrapper)
-import { useMessages, useTranslations } from "next-intl";
+import { useLocale, useMessages, useTranslations } from "next-intl";
 // NOTE: Make sure the import path above is correct for your project's next-intl setup.
 
 export default function FreeCoachingPage() {
+	const locale = useLocale();
 	const t = useTranslations("coaching");
 
 	// 1. Fetch the raw translation messages object
@@ -111,9 +112,12 @@ export default function FreeCoachingPage() {
 		try {
 			setLoading(true);
 
-			const res = await fetch("/api/free-coaching/book/", {
+			const res = await fetch("/api/free-coaching/book", {
 				method: "POST",
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					"x-locale": locale,
+				},
 				body: JSON.stringify(bookingData),
 			});
 

@@ -112,7 +112,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 		return {
 			title: locale === "jp" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
-			image: `/img/globals/${slug}.png`,
+			image: `/img/globals/${slug}.webp`,
 			purpose: locale === "jp" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
 			participants: locale === "jp" ? record.PartecipantsJ : record.PartecipantsE || fallbackWorkshop.participants,
 			objectives: locale === "jp" ? record.ObjectivesJ : record.ObjectivesE || fallbackWorkshop.objectives,

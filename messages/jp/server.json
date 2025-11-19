@@ -1,0 +1,12 @@
+{
+    "email": {
+        "subject": "コーチングセッションが予約されました",
+        "hi": "{name}さん、こんにちは。",
+        "confirmed": "コーチングセッションのご予約が確認されました！",
+        "date": "日付",
+        "time": "時間",
+        "lookingForward": "お会いできるのを楽しみにしています。",
+        "addToCalendar": "Googleカレンダーに追加",
+        "teamName": "JBSコーチングチーム"
+    }
+}

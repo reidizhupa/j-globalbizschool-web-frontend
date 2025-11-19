@@ -81,9 +81,6 @@ export default function LanguageSwitcher() {
 					<Link href={getLink("login", currentLocale)} className="px-5 py-2.5 rounded-full border border-[#d74100] bg-white text-[#d74100] text-sm font-bold hover:bg-[#285677]/10 transition">
 						{t("login")}
 					</Link>
-					<button onClick={() => setIsModalOpen(true)} className="px-5 py-2.5 rounded-full bg-[#d74100] text-white text-sm font-bold hover:bg-[#d74100]/90 transition shadow-sm hover:shadow-md">
-						{t("joinPrograms")}
-					</button>
 
 					{/* Modal */}
 					<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={t("joinPrograms")}>
@@ -133,9 +130,6 @@ export default function LanguageSwitcher() {
 							<div className="flex flex-col items-center gap-4">
 								<Link href="https://fms.j-globalbizschool.com/fmi/webd/IBSApplication?script=login" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 border border-[#f7a520] rounded-full text-[#f7a520] text-sm hover:bg-[#285677]/10">
 									{t("login")}
-								</Link>
-								<Link href="https://fms.j-globalbizschool.com/fmi/webd/IBSApplication" onClick={() => setMenuOpen(false)} className="w-3/4 text-center px-4 py-2 bg-[#f7a520] text-white rounded-full text-sm hover:bg-[#f7a520]">
-									{t("joinPrograms")}
 								</Link>
 							</div>
 						</div>
