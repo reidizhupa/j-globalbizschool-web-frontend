@@ -51,10 +51,14 @@
  * - User data stored in calendar's private extended properties
  */
 
+import { loadServerMessages } from "../../../../../messages/server";
 import { google } from "googleapis";
-import { getTranslations } from "next-intl/server";
 import type { NextRequest } from "next/server";
 import { Resend } from "resend";
+
+export function interpolate(template: string, values: Record<string, any>) {
+	return template.replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
+}
 
 /**
  * POST handler for booking coaching sessions
@@ -98,7 +102,7 @@ export async function POST(req: NextRequest) {
 	 * - Used for email subject and body translations
 	 */
 	const locale = req.headers.get("x-locale") || "jp";
-	const t = await getTranslations({ locale, namespace: "server" });
+	const messages = await loadServerMessages(locale);
 
 	try {
 		// =====================================================================
@@ -332,18 +336,18 @@ Message: ${message || "N/A"}
 		await resend.emails.send({
 			from: "onboarding@resend.dev", // Sender address
 			to: email, // Recipient (user who booked)
-			subject: t("email.subject"),
+			subject: messages.server.email.subject,
 			html: `
-		<p>${t("email.hi", { name: firstName })}</p>
+		<p>${interpolate(messages.server.email.hi, { name: firstName })}</p>
 
-		<p>${t("email.confirmed")}</p>
+		<p>${messages.server.email.confirmed}</p>
 
 		<p>
-			<strong>${t("email.date")}:</strong> ${date}<br/>
-			<strong>${t("email.time")}:</strong> ${time} (JST)
+			<strong>${messages.server.email.date}:</strong> ${date}<br/>
+			<strong>${messages.server.email.time}:</strong> ${time} (JST)
 		</p>
 
-		<p>${t("email.lookingForward")}</p>
+		<p>${messages.server.email.lookingForward}</p>
 
 		<p>
 			<a href="${calendarUrl}" target="_blank" rel="noopener noreferrer" style="
@@ -356,11 +360,11 @@ Message: ${message || "N/A"}
 				text-decoration:none;
 				margin-top:10px;
 			">
-				${t("email.addToCalendar")}
+				${messages.server.email.addToCalendar}
 			</a>
 		</p>
 
-		<p>— ${t("email.teamName")}</p>
+		<p>— ${messages.server.email.teamName}</p>
 	`,
 		});
 
