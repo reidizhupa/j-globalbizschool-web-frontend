@@ -56,7 +56,7 @@ import { google } from "googleapis";
 import type { NextRequest } from "next/server";
 import { Resend } from "resend";
 
-export function interpolate(template: string, values: Record<string, unknown>) {
+function interpolate(template: string, values: Record<string, unknown>) {
 	return template.replace(/\{(\w+)\}/g, (_, key) => String(values[key] ?? ""));
 }
 
