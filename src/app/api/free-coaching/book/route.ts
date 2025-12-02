@@ -334,38 +334,96 @@ Message: ${message || "N/A"}
 		 * - email.teamName: Signature
 		 */
 		await resend.emails.send({
-			from: "onboarding@resend.dev", // Sender address
-			to: email, // Recipient (user who booked)
+			from: "onboarding@resend.dev",
+			to: email,
 			subject: messages.server.email.subject,
 			html: `
-		<p>${interpolate(messages.server.email.hi, { name: firstName })}</p>
+  <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6; padding: 20px;">
 
-		<p>${messages.server.email.confirmed}</p>
+    <!-- Logo -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="https://j-globalbizschool.vercel.app/logo.png" alt="Company Logo" style="max-width: 150px;" />
+    </div>
 
-		<p>
-			<strong>${messages.server.email.date}:</strong> ${date}<br/>
-			<strong>${messages.server.email.time}:</strong> ${time} (JST)
-		</p>
+    <!-- Header -->
+    <h2 style="text-align: center; color: #2563eb; margin-bottom: 30px;">
+      ${messages.server.email.header}
+    </h2>
 
-		<p>${messages.server.email.lookingForward}</p>
+    <!-- Greeting -->
+    <p>${interpolate(messages.server.email.hi, { name: firstName })}</p>
 
-		<p>
-			<a href="${calendarUrl}" target="_blank" rel="noopener noreferrer" style="
-				display:inline-block;
-				padding: 12px 24px;
-				background-color:#2563eb;
-				color:white;
-				font-weight:600;
-				border-radius:12px;
-				text-decoration:none;
-				margin-top:10px;
-			">
-				${messages.server.email.addToCalendar}
-			</a>
-		</p>
+    <!-- Intro -->
+    <p>
+      ${messages.server.email.thanks}<br/>
+      ${interpolate(messages.server.email.seeYou, { date, time })}
+    </p>
 
-		<p>— ${messages.server.email.teamName}</p>
-	`,
+    <!-- Booking details -->
+    <p>
+      <strong>${messages.server.email.serviceBooked}:</strong> ${messages.server.email.serviceName}<br/>
+      <strong>${messages.server.email.zoomLink}:</strong>
+      <a href="" style="color:#2563eb;">zoomLink</a><br/>
+      <strong>${messages.server.email.staff}:</strong> ${messages.server.email.staffName}
+    </p>
+
+    <!-- Contact -->
+    <p>
+      ${messages.server.email.contact}<br/>
+      <a href="mailto:${messages.server.email.supportEmail}" style="color:#2563eb;">
+        ${messages.server.email.supportEmail}
+      </a>
+    </p>
+
+    <!-- Add to Calendar -->
+    <p style="text-align: center; margin-top: 30px;">
+      <a href="${calendarUrl}" target="_blank" rel="noopener noreferrer" style="
+        display:inline-block;
+        padding: 12px 24px;
+        background-color:#2563eb;
+        color:white;
+        font-weight:600;
+        border-radius:12px;
+        text-decoration:none;
+      ">
+        ${messages.server.email.addToCalendar}
+      </a>
+    </p>
+
+    <p style="margin-top: 40px;">— ${messages.server.email.teamName}</p>
+  </div>
+  `,
+		});
+
+		await resend.emails.send({
+			from: "onboarding@resend.dev",
+			to: "reidizhupa56@gmail.com", // ← your email here
+			subject: "New Free Coaching Booking Received",
+			html: `
+    <div style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
+      <h2>New Coaching Session Booking</h2>
+
+      <p>A new user has booked a free coaching session.</p>
+
+      <p>
+        <strong>Name:</strong> ${firstName} ${lastName || ""}<br/>
+        <strong>Email:</strong> ${email}<br/>
+		<strong>Phone Number:</strong>  ${phone || "N/A"} <br/>
+		<strong>Phone Message:</strong>  ${message || "N/A"} <br/>
+        <strong>Date:</strong> ${date}<br/>
+        <strong>Time:</strong> ${time} (JST)<br/>
+      </p>
+
+      <p>
+        <strong>Google Calendar Event URL:</strong><br/>
+        <a href="${calendarUrl}">${calendarUrl}</a>
+      </p>
+
+      <p>
+        — Booking Notification System
+      </p>
+    </div>
+  `,
 		});
 
 		// =====================================================================

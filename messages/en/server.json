@@ -1,12 +1,18 @@
 {
     "email": {
-        "subject": "Your Coaching Session is Booked",
+        "subject": "Your Free Coaching Session is Confirmed",
+        "header": "Thanks for Booking Free Coaching",
         "hi": "Hi {name},",
-        "confirmed": "Your coaching session is confirmed!",
-        "date": "Date",
-        "time": "Time",
-        "lookingForward": "We look forward to meeting you.",
+        "thanks": "Thanks for booking! You're all set now.",
+        "seeYou": "See you on {date} at {time} (JST).",
+        "serviceBooked": "Service booked",
+        "serviceName": "Free Coaching",
+        "zoomLink": "Zoom link",
+        "staff": "Staff",
+        "staffName": "Jonathan Lynch",
+        "contact": "Feel free to get in touch. If you need to make any changes to your booking, please email us at",
+        "supportEmail": "support@j-global.com",
         "addToCalendar": "Add to Google Calendar",
-        "teamName": "JBS Coaching Team"
+        "teamName": "J-Global Team"
     }
 }
