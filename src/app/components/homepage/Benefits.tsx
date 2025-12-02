@@ -56,7 +56,7 @@ export default function JBSWorkshopsBenefits() {
 											<Icon className="md:w-8 md:h-8 h-5 w-5 text-white" strokeWidth={2.5} />
 										</div>
 										{/* Translated Benefit Label */}
-										<p className="font-semibold text-gray-900 text-sm md:text-base">{t(benefit.labelKey)}</p>
+										<p className="md:w-35 md:h-35 h-20 w-20 font-semibold text-gray-900 text-sm md:text-base">{t(benefit.labelKey)}</p>
 									</div>
 								);
 							})}

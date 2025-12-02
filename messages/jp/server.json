@@ -1,16 +1,16 @@
 {
     "email": {
-        "subject": "無料コーチングセッションの予約が完了しました",
+        "subject": "『J-Global Business School』コーチングセッション予約完了のお知らせ",
         "header": "無料コーチングのご予約ありがとうございます",
         "hi": "{name}様",
-        "thanks": "この度はご予約いただき、誠にありがとうございます。予約が正常に完了いたしました。",
+        "thanks": "この度はご予約いただき、誠にありがとうございます。コーチングセッションのご予約を以下の通り受付けました。",
         "seeYou": "{date} の {time}（JST）にお会いできるのを楽しみにしております。",
         "serviceBooked": "ご予約内容",
         "serviceName": "無料コーチング",
         "zoomLink": "Zoomリンク",
         "staff": "担当スタッフ",
         "staffName": "ジョナサン・リンチ",
-        "contact": "ご不明点や予約内容の変更をご希望の場合は、下記メールアドレスまでお気軽にご連絡ください。",
+        "contact": "Googleカレンダーに事前に追加いただくか、開始時間になりましたらZoomリンクよりご参加ください\nご不明点や予約内容の変更をご希望の場合は、下記メールアドレスまでお気軽にご連絡ください。",
         "supportEmail": "support@j-global.com",
         "addToCalendar": "Googleカレンダーに追加",
         "teamName": "J-Globalチーム"

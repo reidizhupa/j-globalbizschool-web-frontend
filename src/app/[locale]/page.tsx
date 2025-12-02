@@ -47,25 +47,25 @@ export default function HomePage() {
 		cards: [
 			{
 				id: "CO1",
-				title: tLevels("interculturalSkills"),
+				title: tLevels("C01"),
 				image: "/img/globals/C01.webp",
 				link: "/programs/global-communication/C01",
 			},
 			{
 				id: "CO2",
-				title: tLevels("globalMindset"),
+				title: tLevels("C02"),
 				image: "/img/globals/C02.webp",
 				link: "/programs/global-communication/C02",
 			},
 			{
 				id: "CO3",
-				title: tLevels("growthMindset"),
+				title: tLevels("C03"),
 				image: "/img/globals/C03.webp",
 				link: "/programs/global-communication/C03",
 			},
 			{
 				id: "CO4",
-				title: tLevels("presentation"),
+				title: tLevels("C04"),
 				image: "/img/globals/C04.webp",
 				link: "/programs/global-communication/C04",
 			},
@@ -89,31 +89,31 @@ export default function HomePage() {
 		cards: [
 			{
 				id: "L12",
-				title: tLevels("teamBuilding"),
+				title: tLevels("L12"),
 				image: "/img/globals/L12.webp",
 				link: "/programs/global-teamwork/L12",
 			},
 			{
 				id: "CO6",
-				title: tLevels("negotiation"),
+				title: tLevels("C06"),
 				image: "/img/globals/C06.webp",
 				link: "/programs/global-teamwork/C06",
 			},
 			{
 				id: "F01",
-				title: tLevels("globalSales"),
+				title: tLevels("F01"),
 				image: "/img/globals/F01.webp",
 				link: "/programs/global-teamwork/F01",
 			},
 			{
 				id: "F08",
-				title: tLevels("globalProjects"),
+				title: tLevels("F08"),
 				image: "/img/globals/F08.webp",
 				link: "/programs/global-teamwork/F08",
 			},
 			{
 				id: "C09",
-				title: tLevels("businessGame"),
+				title: tLevels("C09"),
 				image: "/img/globals/C09.webp",
 				link: "/programs/global-teamwork/C09",
 			},
@@ -131,31 +131,31 @@ export default function HomePage() {
 		cards: [
 			{
 				id: "L01",
-				title: tLevels("coaching"),
+				title: tLevels("L01"),
 				image: "/img/globals/L01.webp",
 				link: "/programs/global-leadership/L01",
 			},
 			{
 				id: "L08",
-				title: tLevels("strategy"),
+				title: tLevels("L08"),
 				image: "/img/globals/L08.webp",
 				link: "/programs/global-leadership/L08",
 			},
 			{
 				id: "I01",
-				title: tLevels("miniInternship"),
+				title: tLevels("I01"),
 				image: "/img/globals/C06.webp",
 				link: "/programs/global-leadership/I01",
 			},
 			{
 				id: "L02",
-				title: tLevels("practicalThinking"),
+				title: tLevels("L02"),
 				image: "/img/globals/L02.webp",
 				link: "/programs/global-leadership/L02-2",
 			},
 			{
 				id: "L03",
-				title: tLevels("miniMBA"),
+				title: tLevels("L03"),
 				image: "/img/globals/C09.webp",
 				link: "/programs/global-leadership/L03-2",
 			},
@@ -189,7 +189,6 @@ export default function HomePage() {
 			</div>
 			<JBSWorkshopsBenefits />
 			<JBSWorkshopsStructure />
-
 			<LecturerIntroduction />
 			<Instructors />
 			<FeturedIn />

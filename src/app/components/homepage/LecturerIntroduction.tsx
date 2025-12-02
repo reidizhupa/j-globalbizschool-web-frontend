@@ -31,10 +31,8 @@ export default function LecturerIntroduction() {
 						<p className="text-gray-500">{tHome("description")}</p>
 
 						{/* Coaching Callout (still compact) */}
-						<div className="bg-blue-50 border-l-4 border-[#1f497c] p-4 rounded-xl shadow-sm mt-2">
-							<h3 className="text-sm font-semibold text-blue-800 mb-2">{tHome("coachingSupport")}</h3>
-							<p className="text-blue-800 text-sm mb-6">{tHome("description2")}</p>
-							<Link href="free-coaching/" className="bg-[#1f497c] hover:bg-[#2a5a8e] text-white text-sm font-medium mt-2 px-4 py-2 rounded-xl transition">
+						<div className="  mt-2">
+							<Link href="free-coaching/" className="bg-[#1f497c] hover:bg-[#2a5a8e] text-white text-lg font-medium mt-2 px-4 py-2 rounded-xl transition">
 								{tHome("bookCoaching")}
 							</Link>
 						</div>

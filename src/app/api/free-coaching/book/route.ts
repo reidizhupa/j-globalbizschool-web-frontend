@@ -351,7 +351,7 @@ Message: ${message || "N/A"}
     </h2>
 
     <!-- Greeting -->
-    <p>${interpolate(messages.server.email.hi, { name: firstName })}</p>
+    <p>${interpolate(messages.server.email.hi, { name: locale == "jp" ? lastName : firstName })}</p>
 
     <!-- Intro -->
     <p>
@@ -409,7 +409,7 @@ Message: ${message || "N/A"}
         <strong>Name:</strong> ${firstName} ${lastName || ""}<br/>
         <strong>Email:</strong> ${email}<br/>
 		<strong>Phone Number:</strong>  ${phone || "N/A"} <br/>
-		<strong>Phone Message:</strong>  ${message || "N/A"} <br/>
+		<strong>Message:</strong>  ${message || "N/A"} <br/>
         <strong>Date:</strong> ${date}<br/>
         <strong>Time:</strong> ${time} (JST)<br/>
       </p>

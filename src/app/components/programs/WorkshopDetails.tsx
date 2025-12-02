@@ -35,6 +35,7 @@ interface WorkshopDetailProps {
 export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) {
 	const locale = useLocale();
 	const tPrograms = useTranslations("programs");
+	const tLevels = useTranslations("levels");
 	const currentLocale = useLocale();
 
 	// Track which accordion is open (null = none open)
@@ -72,7 +73,7 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 				/>
 				<div className="absolute inset-0 bg-black/20"></div>
 
-				<div className="relative max-w-6xl mx-auto px-6 py-20 mt-10 grid lg:grid-cols-2 gap-12 items-center">
+				<div className="relative max-w-6xl mx-auto px-6 py-20 mt-10 grid lg:grid-cols-2 gap-30 items-center space-between">
 					<div className="space-y-6">
 						<h1 className="text-5xl lg:text-6xl font-bold leading-tight">{workshop.title}</h1>
 						<p className="text-lg text-blue-100 leading-relaxed">{workshop.subtitle}</p>
@@ -80,8 +81,9 @@ export default function WorkshopDetail({ workshop, code }: WorkshopDetailProps) 
 							{tPrograms("registerNow")} <FaArrowRight />
 						</a>
 					</div>
-					<div className="relative">
-						<Image src={workshop.image} alt={workshop.title} width={600} height={400} className="relative rounded-2xl shadow-2xl object-cover w-full h-auto border-4 border-white/20" />
+					<div className="relative  w-100 h-80">
+						<Image src={workshop.image} alt={workshop.title} width={600} height={300} className="relative rounded-4xl shadow-2xl object-cover w-100 h-80 border-4 border-white/20" />
+						<h3 className="absolute bottom-0 left-0 right-0 text-center text-xl font-semibold text-white bg-gradient-to-t from-blue-900/80 to-transparent px-3 py-1 rounded-2xl shadow-sm">{tLevels(code)}</h3>
 					</div>
 				</div>
 			</section>

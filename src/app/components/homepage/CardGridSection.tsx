@@ -63,8 +63,8 @@ export default function CardGridSection({ level, title, description, stats, alig
 							})}
 						>
 							{stats.map((item, index) => (
-								<div key={index} className="flex items-center gap-2 px-4 py-2 bg-[#215ca5]/10 text-[#215ca5] rounded-full text-sm font-medium hover:bg-[#215ca5]/20 transition">
-									{item.icon && <span className="text-[#215ca5]">{item.icon}</span>}
+								<div key={index} className="flex items-center gap-2 px-4 py-2 bg-[#1d6ed0]/10 text-[#1862bc] rounded-full text-sm font-medium hover:bg-[#215ca5]/20 transition">
+									{item.icon && <span className="text-[#1862bc]">{item.icon}</span>}
 									<span>{item.label}</span>
 								</div>
 							))}
@@ -78,7 +78,7 @@ export default function CardGridSection({ level, title, description, stats, alig
 						<Link key={card.id} href={card.link} className="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col" style={{ boxShadow: "0 0 10px rgba(31, 73, 124, 0.1)" }}>
 							<div className="relative aspect-[4/3] w-full h-full shadow-2xl">
 								<Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300" />
-								<h3 className="absolute bottom-0 left-0 right-0 text-center text-md font-semibold text-white bg-gradient-to-t from-gray-900/80 to-transparent px-3 py-1 rounded-md shadow-sm">{card.title}</h3>
+								<h3 className="absolute bottom-0 left-0 right-0 text-center text-md font-semibold text-white bg-gradient-to-t from-blue-900/80 to-transparent px-3 py-1 rounded-md shadow-sm">{card.title}</h3>
 							</div>
 						</Link>
 					))}

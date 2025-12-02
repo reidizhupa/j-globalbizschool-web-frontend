@@ -40,7 +40,7 @@ export default function Page() {
 			</header>
 
 			{/* Hero Section */}
-			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-25 text-center sm:flex-row sm:pt-44 sm:text-left">
+			<section className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-12 px-6 pt-25 text-center sm:flex-row sm:pt-40 sm:text-left">
 				{/* Left Side */}
 				<div className="flex flex-1 flex-col items-center sm:items-start">
 					<h1 className="text-[2.7rem] font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
@@ -52,10 +52,10 @@ export default function Page() {
 					</h1>
 
 					<div className="mt-8 flex flex-wrap justify-center gap-4 sm:justify-start">
-						<Link href={getLink("freeTrial", currentLocale)} className="rounded-full bg-[#d74100] px-6 py-3  font-semibold text-white shadow-lg transition hover:bg-indigo-700">
+						<Link href={getLink("freeTrial", currentLocale)} className="rounded-full bg-[#d74100] px-6 py-3 text-xl font-semibold text-white shadow-lg transition hover:bg-indigo-700">
 							{tHome("HeroSection.heroCTA")}
 						</Link>
-						<a href="#why-us" className="rounded-full border  border-gray-300 px-6 py-3 font-medium text-white transition hover:border-indigo-500 hover:text-indigo-600">
+						<a href="#why-us" className="rounded-full border border-gray-300 px-6 py-3 font-medium text-white transition text-xl hover:border-indigo-500 hover:text-indigo-600">
 							{tHome("HeroSection.heroSecondaryCTA")}
 						</a>
 					</div>
