@@ -1,5 +1,6 @@
 import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDetails";
-
+import { generatePageMetadata } from "@/lib/seo";
+import type { Metadata, ResolvingMetadata } from "next";
 const fallbackWorkshop: Workshop = {
 	title: "",
 	subtitle: "",
@@ -37,7 +38,6 @@ type FileMakerEvent = {
 	"WorkshopEvent::Duration": number;
 	"WorkshopEvent::ZoomLink": string;
 	"WorkshopEvent::ID": string;
-
 	modId: string;
 };
 
@@ -48,6 +48,12 @@ type Session = {
 };
 
 type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]>;
+export async function generateMetadata(props: { params: Promise<{ locale: string; slug: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
+	const params = await props.params;
+
+	// FIX: wrap params back into a Promise for generatePageMetadata
+	return generatePageMetadata({ params: Promise.resolve(params) }, parent, "seo");
+}
 
 // --- Fetch function ---
 async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Workshop> {
@@ -57,7 +63,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 
 		if (!res.ok) {
 			const text = await res.text();
-			console.error("FileMaker API failed (non-OK response):", text); // ✅ print API response text
+			console.error("FileMaker API failed (non-OK response):", text);
 			return fallbackWorkshop;
 		}
 
@@ -120,16 +126,26 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			sessions,
 		};
 	} catch (err) {
-		console.error("Failed to fetch or map FileMaker data:", err); // ✅ print any exception
+		console.error("Failed to fetch or map FileMaker data:", err);
 		return fallbackWorkshop;
 	}
 }
 
-export default async function ProgramPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
-	const awaitedParams = await params;
-	const slug = awaitedParams.slug;
-	const locale = awaitedParams.locale || "jp"; // default to Japanese
+// --- Page component with case-sensitive slug redirect ---
+import { redirect } from "next/navigation";
 
-	const workshop = await fetchWorkshopBySlug(slug, locale);
-	return <WorkshopDetail workshop={workshop} code={slug} />;
+export default async function ProgramPage(props: { params: Promise<{ locale: string; slug: string }> }) {
+	const { locale, slug } = await props.params;
+	const finalLocale = locale || "jp";
+
+	// Force proper casing (or map from DB)
+	const properSlug = slug.toUpperCase(); // replace with DB lookup if needed
+
+	// Redirect if slug is not correctly cased
+	if (slug !== properSlug) {
+		redirect(`/${finalLocale}/programs/global-leadership/${properSlug}`);
+	}
+
+	const workshop = await fetchWorkshopBySlug(properSlug, finalLocale);
+	return <WorkshopDetail workshop={workshop} code={properSlug} />;
 }

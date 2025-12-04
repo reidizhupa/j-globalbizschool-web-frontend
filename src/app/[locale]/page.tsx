@@ -15,6 +15,7 @@ import FeturedIn from "../components/homepage/FeaturedIn";
 import Footer from "../components/Footer";
 import JBSWorkshopsBenefits from "../components/homepage/Benefits";
 import JBSWorkshopsStructure from "../components/homepage/WorkshopStructure";
+import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
 	/*
@@ -33,6 +34,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
 }
 
 export default function HomePage() {
+	console.log(typeof window);
 	const tLevels = useTranslations("levels");
 	const tHome = useTranslations("homepage");
 
@@ -193,6 +195,28 @@ export default function HomePage() {
 			<Instructors />
 			<FeturedIn />
 			<Footer />
+			<Link
+				href="/free-coaching"
+				className="
+    fixed bottom-6 right-0
+    bg-gradient-to-r from-[#f58766]/80 to-[#fd634b]/80
+    backdrop-blur-md
+  
+    shadow-lg shadow-blue-500/30
+    pl-5 pr-7 py-3
+    text-white font-semibold tracking-tight
+    rounded-l-2xl
+    flex items-center gap-2
+    transition-all duration-300
+    hover:shadow-xl hover:shadow-blue-400/50
+    hover:from-[#ffa78c] hover:to-[#ff885c]
+    z-50
+  "
+			>
+				<span className="text-sm drop-shadow-md">FREE COACHING</span>
+
+				{/* Curved blue edge */}
+			</Link>
 		</>
 	);
 }

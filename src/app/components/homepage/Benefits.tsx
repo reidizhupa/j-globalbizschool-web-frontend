@@ -12,10 +12,10 @@ export default function JBSWorkshopsBenefits() {
 
 	// Note: The 'label' is now 'labelKey' to fetch the translated string
 	const benefits = [
-		{ icon: Calendar, labelKey: "benefits_list.flexible", color: "from-blue-400 to-blue-500" },
+		{ icon: Calendar, labelKey: "benefits_list.flexible", color: "from-blue-300 to-blue-400" },
 		{ icon: RefreshCw, labelKey: "benefits_list.convenient", color: "from-blue-300 to-blue-400" },
-		{ icon: DollarSign, labelKey: "benefits_list.affordable", color: "from-blue-200 to-blue-300" },
-		{ icon: Award, labelKey: "benefits_list.certified", color: "from-blue-400 to-blue-500" },
+		{ icon: DollarSign, labelKey: "benefits_list.affordable", color: "from-blue-300 to-blue-400" },
+		{ icon: Award, labelKey: "benefits_list.certified", color: "from-blue-300 to-blue-400" },
 		{ icon: Target, labelKey: "benefits_list.goal_oriented", color: "from-blue-300 to-blue-400" },
 	];
 
@@ -47,7 +47,7 @@ export default function JBSWorkshopsBenefits() {
 						<p className="text-gray-600 max-w-2xl mx-auto text-center mb-16">{t("intro.text")}</p>
 
 						{/* Benefits Icons */}
-						<div className="flex flex-wrap justify-center gap-8 mb-20">
+						<div className="flex flex-wrap justify-center gap-8 mb-0">
 							{benefits.map((benefit, i) => {
 								const Icon = benefit.icon;
 								return (

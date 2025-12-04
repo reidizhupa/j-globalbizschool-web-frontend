@@ -25,5 +25,7 @@
     "dec": "Dec",
     "dates": "Dates",
     "date": "Date",
-    "close": "Close"
+    "close": "Close",
+    "readMore": "Read More",
+    "readLess": "Read Less"
 }

@@ -51,6 +51,7 @@
  * - User data stored in calendar's private extended properties
  */
 
+import { query } from "@/utils/neon";
 import { loadServerMessages } from "../../../../../messages/server";
 import { google } from "googleapis";
 import type { NextRequest } from "next/server";
@@ -269,15 +270,34 @@ Message: ${message || "N/A"}
 			},
 		};
 
+		await query(
+			`
+  INSERT INTO "jbs-coaching".learner
+    (first_name, last_name, email, phone_number, message, )
+  VALUES ($1, $2, $3, $4, $5)
+  `,
+			[firstName, lastName, email, phone || "", message || ""]
+		);
+		const response = await calendar.events.insert({
+			calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
+			requestBody: event,
+		});
+		return new Response(
+			JSON.stringify({
+				success: true,
+				eventLink: response.data.htmlLink, // Google Calendar event URL
+			}),
+			{
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			}
+		);
+
 		/**
 		 * Insert event into Google Calendar
 		 * - Returns event object with generated ID and links
 		 * - Event is immediately visible in calendar
 		 */
-		const response = await calendar.events.insert({
-			calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
-			requestBody: event,
-		});
 
 		// =====================================================================
 		// 7. SEND CONFIRMATION EMAIL
