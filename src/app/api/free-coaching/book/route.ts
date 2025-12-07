@@ -270,28 +270,50 @@ Message: ${message || "N/A"}
 			},
 		};
 
+		// -----------------------------
+		// 1. GET EXISTING SESSION COOKIE
+		// -----------------------------
+		const cookieHeader = req.headers.get("cookie") || "";
+		const cookies = Object.fromEntries(
+			cookieHeader.split(";").map((c) => {
+				const [key, ...v] = c.trim().split("=");
+				return [key, decodeURIComponent(v.join("="))];
+			})
+		);
+		let sessionId = cookies["sessionId"];
+
+		// -----------------------------
+		// 2. CREATE NEW SESSION IF NEEDED
+		// -----------------------------
+		if (!sessionId) {
+			const ip = req.headers.get("x-forwarded-for") || req.headers.get("remote_addr") || "unknown";
+			const userAgent = req.headers.get("user-agent") || "";
+			const fingerprint = `${ip}:${userAgent}`;
+
+			const sessionResult = await query(
+				`INSERT INTO jbs.client_sessions (ip_address, user_agent, fingerprint)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (fingerprint) DO UPDATE SET ip_address = EXCLUDED.ip_address
+         RETURNING id`,
+				[ip, userAgent, fingerprint]
+			);
+			sessionId = sessionResult.rows[0].id.toString();
+		}
+
+		// -----------------------------
+		// 3. SAVE BOOKING
+		// -----------------------------
+		const eventDateTimeJST = new Date(`${date}T${time}:00+09:00`);
 		await query(
-			`
-  INSERT INTO "jbs-coaching".learner
-    (first_name, last_name, email, phone_number, message, )
-  VALUES ($1, $2, $3, $4, $5)
-  `,
-			[firstName, lastName, email, phone || "", message || ""]
+			`INSERT INTO jbs.bookings
+        (session_id, first_name, last_name, email, phone_number, message, event_date, created_at)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
+			[sessionId, firstName, lastName, email, phone || "", message || "", eventDateTimeJST.toISOString(), new Date().toISOString()]
 		);
-		const response = await calendar.events.insert({
-			calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
-			requestBody: event,
-		});
-		return new Response(
-			JSON.stringify({
-				success: true,
-				eventLink: response.data.htmlLink, // Google Calendar event URL
-			}),
-			{
-				status: 200,
-				headers: { "Content-Type": "application/json" },
-			}
-		);
+
+		// -----------------------------
+		// 4. SEND CONFIRMATION EMAIL
+		// -----------------------------
 
 		/**
 		 * Insert event into Google Calendar
@@ -354,7 +376,7 @@ Message: ${message || "N/A"}
 		 * - email.teamName: Signature
 		 */
 		await resend.emails.send({
-			from: "onboarding@resend.dev",
+			from: process.env.FROM_EMAIL || "",
 			to: email,
 			subject: messages.server.email.subject,
 			html: `
@@ -417,7 +439,7 @@ Message: ${message || "N/A"}
 
 		await resend.emails.send({
 			from: "onboarding@resend.dev",
-			to: "reidizhupa56@gmail.com", // ← your email here
+			to: process.env.LECTURER_EMAIL || "", // ← your email here
 			subject: "New Free Coaching Booking Received",
 			html: `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
@@ -462,14 +484,28 @@ Message: ${message || "N/A"}
 		 * - Display confirmation with calendar preview
 		 * - Store for future reference
 		 */
+		// -----------------------------
+		// 5. RETURN RESPONSE WITH COOKIE
+		// -----------------------------
+
+		const response = await calendar.events.insert({
+			calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
+			requestBody: event,
+		});
+
+		// Return both the event info and the sessionId cookie
 		return new Response(
 			JSON.stringify({
 				success: true,
-				eventLink: response.data.htmlLink, // Google Calendar event URL
+				event: response, // <-- this contains the Google Calendar event info
+				sessionId: sessionId, // <-- optional, already in cookie
 			}),
 			{
 				status: 200,
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					"Set-Cookie": `sessionId=${sessionId}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${60 * 60 * 24 * 30}`, // 30 days
+				},
 			}
 		);
 	} catch (err) {
