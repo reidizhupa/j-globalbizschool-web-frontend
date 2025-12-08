@@ -23,23 +23,23 @@ export async function generatePageMetadata(props: PageProps, parent: ResolvingMe
 
 	return {
 		title: t("title"),
-		description: t("title"),
+		description: t("description"),
 
 		// Open Graph metadata
 		openGraph: {
 			title: t("title") || t("title"),
-			description: t("title") || t("title"),
+			description: t("description") || t("description"),
 			type: "website",
 			url: t("title"), // optional, can fallback to current page URL
-			images: t("title") ? [{ url: t("title") }] : undefined,
+			images: t("image") ? [{ url: t("image") }] : undefined,
 		},
 
 		// Twitter card metadata
 		twitter: {
 			card: "summary_large_image",
 			title: t("title") || t("title"),
-			description: t("title") || t("title"),
-			images: t("title") ? [t("title")] : undefined,
+			description: t("description") || t("description"),
+			images: t("image") ? [t("image")] : undefined,
 		},
 
 		icons: {

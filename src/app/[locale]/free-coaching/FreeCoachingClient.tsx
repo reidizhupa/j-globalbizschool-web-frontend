@@ -8,14 +8,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import Image from "next/image";
-import { FaCheckCircle, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaExclamationTriangle } from "react-icons/fa";
+import { FaCheckCircle, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import { Link } from "@/i18n/navigation";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
 // Import useMessages from next-intl (or your custom wrapper)
-import { useLocale, useMessages, useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 // NOTE: Make sure the import path above is correct for your project's next-intl setup.
 
 export default function FreeCoachingClient() {
@@ -28,12 +28,8 @@ export default function FreeCoachingClient() {
 
 	const dateFnsLocale = localeMap[locale] || enUS;
 
-	// 1. Fetch the raw translation messages object
-	const messages = useMessages();
-
 	// 2. Access the array using dot notation on the raw object.
 	// NOTE: This assumes 'step1' is directly available on the messages object.
-	const expectedItems = (messages.step1?.expect_list || []) as string[];
 
 	const [formData, setFormData] = useState({
 		firstName: "",
