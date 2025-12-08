@@ -42,10 +42,12 @@
         "placeholder_first_name": "名",
         "placeholder_last_name": "姓",
         "placeholder_email": "メールアドレス",
-        "placeholder_message": "追加のメッセージ（任意）",
+        "placeholder_message": "追加のメッセージ",
         "button_back": "← 戻る",
         "button_submit": "予約を確定 →",
-        "button_submitting": "予約中..."
+        "button_submitting": "予約中...",
+        "placeholder_phone": "電話番号",
+        "optional": "(任意)"
     },
     "step4": {
         "title": "予約が確定しました！",

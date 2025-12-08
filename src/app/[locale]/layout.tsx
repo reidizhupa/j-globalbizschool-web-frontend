@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import "@/app/globals.css";
 import Aoscompo from "../utils/aos";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -24,6 +25,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
 				<NextIntlClientProvider>
 					<Aoscompo>{children}</Aoscompo>
 				</NextIntlClientProvider>
+				<Toaster richColors closeButton />
 			</body>
 		</html>
 	);

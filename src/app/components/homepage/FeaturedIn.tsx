@@ -14,12 +14,12 @@ export default function PressSection() {
 			articles: [
 				{
 					title: t("readFirstArticle"),
-					url: "https://ejournal.jp/article1",
+					url: "https://ej.alc.co.jp/previewPublic/U2FsdGVkX18Qvp1L2u3SWS1vus1L2a3S4hc0v0jL7VptZc7g3HwJZvutl9jhcB0lNSbzs1L2a3S4hnz5fYDNGe?ejo=ygkXqBbnYeUgijEoTrX3LcQQRqaPjfNpYuqyjeIqGjeifqFYevjW5e5U5Xoe4HKj",
 					description: "",
 				},
 				{
 					title: t("readSecondArticle"),
-					url: "https://ejournal.jp/article2",
+					url: "https://ej.alc.co.jp/tag/BUSINESS/20230206-jonlynch-interview-02",
 					description: "",
 				},
 			],
@@ -31,17 +31,17 @@ export default function PressSection() {
 			articles: [
 				{
 					title: t("introInterculturalCommunication"),
-					url: "https://techcrunch.com/your-article",
+					url: "https://keysession.jp/media/recommended-companies-for-intercultural-communication-training/",
 					description: t("modernClassroomsTech"),
 				},
 				{
 					title: t("overseasAssignmentTraining"),
-					url: "https://techcrunch.com/your-article",
+					url: "https://keysession.jp/media/recommended-companies-for-before-global-assignment-training/",
 					description: t("digitalLearningInsights"),
 				},
 				{
 					title: t("tipsSuccessfulAssignment"),
-					url: "https://techcrunch.com/your-article",
+					url: "https://keysession.jp/media/assigned-abroad/",
 					description: t("digitalEducationGrowth"),
 				},
 			],

@@ -11,11 +11,12 @@ import Image from "next/image";
 import { FaCheckCircle, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt } from "react-icons/fa";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import { Link } from "@/i18n/navigation";
-import "react-phone-input-2/lib/style.css";
-import PhoneInput from "react-phone-input-2";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 // Import useMessages from next-intl (or your custom wrapper)
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
 // NOTE: Make sure the import path above is correct for your project's next-intl setup.
 
 export default function FreeCoachingClient() {
@@ -79,7 +80,7 @@ export default function FreeCoachingClient() {
 
 				// If API returned an error
 				if ("error" in data) {
-					console.error("API error:", data.error, data.details ?? "");
+					toast.error("Error:" + data.error + (data.details ?? ""));
 					setTimes([]);
 					return;
 				}
@@ -112,7 +113,6 @@ export default function FreeCoachingClient() {
 			date: format(selectedDate, "yyyy-MM-dd"),
 			time: selectedTime,
 		};
-
 		try {
 			setLoading(true);
 
@@ -125,17 +125,26 @@ export default function FreeCoachingClient() {
 				body: JSON.stringify(bookingData),
 			});
 
-			const data = await res.json();
-			if (data.error) throw new Error(data.error);
+			let data: Record<string, unknown> = {};
 
+			try {
+				data = await res.json();
+			} catch {
+				throw new Error("Invalid server response");
+			}
+
+			// API returned an error
+			if (!res.ok || data.error) {
+				throw new Error(data.error || "Unexpected error");
+			}
+
+			// SUCCESS
 			next();
 		} catch (err: unknown) {
 			if (err instanceof Error) {
-				// Uses translated alert key
-				alert(t("alerts.booking_failed") + err.message);
+				toast.error(t("alerts.booking_failed") + ": " + err.message);
 			} else {
-				// Uses translated alert key
-				alert(t("alerts.booking_failed_generic"));
+				toast.error(t("alerts.booking_failed_generic"));
 			}
 		}
 	};
@@ -328,25 +337,59 @@ export default function FreeCoachingClient() {
 							</div>
 
 							<form onSubmit={handleSubmit} className="space-y-6">
+								{/* First & Last Name */}
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-									<input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder={t("step3.placeholder_first_name")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-									<input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder={t("step3.placeholder_last_name")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+									{/* First Name */}
+									<div className="relative">
+										<label className="absolute -top-2 left-3 bg-white px-1 text-sm font-medium text-gray-700">
+											{t("step3.placeholder_first_name")}
+											<span className="text-red-500 ml-1">*</span>
+										</label>
+										<input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+									</div>
+
+									{/* Last Name */}
+									<div className="relative">
+										<label className="absolute -top-2 left-3 bg-white px-1 text-sm font-medium text-gray-700">
+											{t("step3.placeholder_last_name")}
+											<span className="text-red-500 ml-1">*</span>
+										</label>
+										<input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+									</div>
 								</div>
-								<input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t("step3.placeholder_email")} required className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
-								<PhoneInput
-									country={"jp"} // default country
-									value={formData.phone}
-									onChange={(phone) => setFormData({ ...formData, phone })}
-									enableSearch={true} // lets user search countries
-									buttonStyle={{ background: "transparent", border: "1px solid transparent", borderRadius: "50%" }}
-									dropdownStyle={{ background: "transparent", border: "1px solid transparent", borderRadius: "50%" }}
-									inputProps={{
-										name: "phone",
-										required: true,
-										className: "w-full px-4 pl-13 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none",
-									}}
-								/>
-								<textarea name="message" value={formData.message} onChange={handleChange} placeholder={t("step3.placeholder_message")} rows={4} className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+
+								{/* Email */}
+								<div className="relative">
+									<label className="absolute -top-2 left-3 bg-white px-1 text-sm font-medium text-gray-700">
+										{t("step3.placeholder_email")}
+										<span className="text-red-500 ml-1">*</span>
+									</label>
+									<input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 border rounded-xl border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+								</div>
+
+								{/* Phone */}
+								<div className="relative">
+									{/* Floating Label */}
+									<label className="absolute -top-2 left-3 rounded-2xl bg-white px-1 text-sm font-medium text-gray-700 z-10">
+										{t("step3.placeholder_phone")} <span className="text-gray-400 font-normal text-xs">{t("step3.optional")}</span>
+									</label>
+
+									{/* Phone Input Wrapper Fix */}
+									<div className="border border-gray-300 phone-wrapper rounded-2xl hover:border-blue-400 focus-within:ring-2 focus-within:ring-blue-500 transition-all">
+										<PhoneInput defaultCountry="jp" className="w-full rounded-2xl p-3" inputClassName="!rounded-xl !p-3 !border-none !focus:outline-none !text-base" />
+									</div>
+								</div>
+
+								{/* Message (Optional) */}
+								<div className="relative">
+									<label className="absolute -top-2 left-3 bg-white px-1 text-sm font-medium text-gray-500">
+										{t("step3.placeholder_message")}
+										<span className="text-gray-400 font-normal text-xs">{t("step3.optional")}</span>
+									</label>
+									<textarea name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+								</div>
+
+								{/* Buttons */}
 								<div className="flex justify-between items-center mt-6">
 									<motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onClick={prev} type="button" className="px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium shadow-sm transition-all">
 										{t("step3.button_back")}

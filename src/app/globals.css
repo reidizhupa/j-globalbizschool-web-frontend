@@ -55,3 +55,6 @@ html,
 body {
 	overflow-x: hidden;
 }
+.phone-wrapper .react-international-phone-country-selector-button {
+	@apply border-none rounded-xl bg-transparent shadow-none;
+}

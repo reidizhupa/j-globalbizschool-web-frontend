@@ -57,6 +57,16 @@ import { google } from "googleapis";
 import type { NextRequest } from "next/server";
 import { Resend } from "resend";
 
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
+
+const redis = Redis.fromEnv();
+
+const limiter = new Ratelimit({
+	redis,
+	limiter: Ratelimit.slidingWindow(3, "1 h"), // 3 requests per hour
+});
+
 function interpolate(template: string, values: Record<string, unknown>) {
 	return template.replace(/\{(\w+)\}/g, (_, key) => String(values[key] ?? ""));
 }
@@ -93,6 +103,12 @@ function interpolate(template: string, values: Record<string, unknown>) {
  * - Includes: Auth (100ms) + Conflict check (200ms) + Insert (300ms) + Email (400ms)
  */
 export async function POST(req: NextRequest) {
+	const ip = req.headers.get("x-forwarded-for") || "unknown";
+
+	const { success } = await limiter.limit(ip);
+	if (!success) {
+		return new Response(JSON.stringify({ error: "Too many requests. Please try again later." }), { status: 429 });
+	}
 	// =========================================================================
 	// 1. LOCALE EXTRACTION FOR INTERNATIONALIZATION
 	// =========================================================================
@@ -384,7 +400,7 @@ Message: ${message || "N/A"}
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://j-globalbizschool.vercel.app/logo.png" alt="Company Logo" style="max-width: 150px;" />
+      <img src="https://j-globalbizschool.vercel.app/logo.avif" alt="Company Logo" style="max-width: 150px;" />
     </div>
 
     <!-- Header -->

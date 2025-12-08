@@ -26,7 +26,7 @@ const FreeTrialSection = () => {
 						</div>
 					)}
 					<div className="text-center">
-						<Link href={getLink("joinPrograms", currentLocale)} className="inline-block text-2xl text-white bg-[#d74100] font-bold py-4 px-13 rounded-full hover:bg-[#f7a520]/90 transition-colors">
+						<Link href={getLink("freeTrial", currentLocale)} className="inline-block text-2xl text-white bg-[#d74100] font-bold py-4 px-13 rounded-full hover:bg-[#f7a520]/90 transition-colors">
 							{t("FreeTrialSection.cta")}
 						</Link>
 					</div>

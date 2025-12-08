@@ -42,10 +42,12 @@
         "placeholder_first_name": "First Name",
         "placeholder_last_name": "Last Name",
         "placeholder_email": "Email",
-        "placeholder_message": "Additional message (optional)",
+        "placeholder_message": "Additional message",
         "button_back": "← Back",
         "button_submit": "Confirm Booking →",
-        "button_submitting": "Booking..."
+        "button_submitting": "Booking...",
+        "placeholder_phone": "Phone Number",
+        "optional": "(optional)"
     },
     "step4": {
         "title": "Booking Confirmed!",

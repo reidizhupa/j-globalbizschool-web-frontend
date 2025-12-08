@@ -37,12 +37,19 @@
  */
 
 import { weeklySlots } from "@/app/utils/slots";
+import { redis } from "@/lib/rate-limit";
+import { Ratelimit } from "@upstash/ratelimit";
 import { google, calendar_v3 } from "googleapis";
 import type { NextRequest } from "next/server";
 
 // ============================================================================
 // TYPE DEFINITIONS
 // ============================================================================
+
+const limiter = new Ratelimit({
+	redis,
+	limiter: Ratelimit.slidingWindow(10, "1m"), // strict
+});
 
 /**
  * Type alias for Google Calendar Event schema
@@ -200,6 +207,24 @@ const getAvailableSlotsForDate = (dateStr: string, events: CalendarEvent[]): str
  */
 export async function POST(req: NextRequest): Promise<Response> {
 	try {
+		// =========================================
+		// RATE LIMITING (Prevents spam requests)
+		// =========================================
+
+		const ip = req.headers.get("x-forwarded-for") || req.headers.get("x-real-ip") || "anonymous";
+
+		const { success, reset } = await limiter.limit(ip);
+
+		if (!success) {
+			return new Response(
+				JSON.stringify({
+					error: "Too many requests. Please try again later.",
+					resetAt: new Date(reset * 1000).toISOString(),
+				}),
+				{ status: 429 }
+			);
+		}
+
 		// =====================================================================
 		// 1. REQUEST VALIDATION
 		// =====================================================================

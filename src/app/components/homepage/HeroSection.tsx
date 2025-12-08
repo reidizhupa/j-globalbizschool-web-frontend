@@ -51,7 +51,7 @@ export default function Page() {
 						})}
 					</h1>
 
-					<div className="mt-8 flex flex-wrap justify-center gap-4 sm:justify-start">
+					<div className="mt-8 flex flex-wrap justify-center gap-10 md:gap-4 sm:justify-start">
 						<div>
 							<Link href={getLink("freeTrial", currentLocale)} className="mt-10 rounded-full bg-[#d74100] px-6 py-3 text-xl font-semibold text-white shadow-lg transition hover:bg-indigo-700">
 								{tHome("HeroSection.heroCTA")}

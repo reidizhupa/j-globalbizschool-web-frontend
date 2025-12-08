@@ -199,7 +199,7 @@ export default function HomePage() {
 				href="/free-coaching"
 				className="
     fixed bottom-6 right-0
-    bg-gradient-to-r from-[#f58766]/80 to-[#fd634b]/80
+    bg-linear-to-r from-[#f58766]/80 to-[#fd634b]/80
     backdrop-blur-md
   
     shadow-lg shadow-blue-500/30
