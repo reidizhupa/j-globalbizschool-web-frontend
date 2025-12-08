@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { format } from "date-fns";
+import { format, Locale } from "date-fns";
+import { ja, enUS } from "date-fns/locale";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
@@ -19,6 +21,12 @@ import { useLocale, useMessages, useTranslations } from "next-intl";
 export default function FreeCoachingClient() {
 	const locale = useLocale();
 	const t = useTranslations("coaching");
+	const localeMap: Record<string, Locale> = {
+		en: enUS,
+		jp: ja,
+	};
+
+	const dateFnsLocale = localeMap[locale] || enUS;
 
 	// 1. Fetch the raw translation messages object
 	const messages = useMessages();
@@ -193,23 +201,6 @@ export default function FreeCoachingClient() {
 
 									{/* Info Sections */}
 									<div className="space-y-6">
-										{/* Important Notice */}
-										<div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 lg:p-8">
-											<div className="flex items-start gap-3">
-												<div className="shrink-0 w-6 h-6 text-orange-600 mt-0.5">
-													<FaExclamationTriangle className="w-full h-full" />
-												</div>
-												<div className="space-y-3">
-													<h3 className="font-semibold text-orange-900 text-lg">{t("step1.notice_title")}</h3>
-													<p className="text-orange-800 leading-relaxed">
-														{t("step1.notice_p_1")}
-														<strong>{t("step1.notice_p_2_bold")}</strong>
-														{t("step1.notice_p_3")}
-													</p>
-												</div>
-											</div>
-										</div>
-
 										{/* Coach Intro */}
 										<div className="bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 shadow-sm">
 											<div className="space-y-4">
@@ -223,22 +214,6 @@ export default function FreeCoachingClient() {
 										</div>
 
 										{/* Session Details */}
-										<div className="bg-white border border-gray-200 rounded-2xl p-6 lg:p-8 shadow-sm">
-											<div className="space-y-4">
-												<h3 className="font-semibold text-gray-900 text-lg">{t("step1.expect_title")}</h3>
-												<ul className="space-y-3 text-gray-700">
-													{/* FIX: Use the 'expectedItems' array fetched via useMessages */}
-													{expectedItems.map((text, i) => (
-														<li key={i} className="flex items-start gap-3">
-															<div className="shrink-0 w-5 h-5 text-green-500 mt-0.5">
-																<FaCheckCircle className="w-full h-full" />
-															</div>
-															<span>{text}</span>
-														</li>
-													))}
-												</ul>
-											</div>
-										</div>
 									</div>
 								</div>
 
@@ -301,6 +276,7 @@ export default function FreeCoachingClient() {
 										// Accessibility translation
 										captionLayout="dropdown"
 										aria-label={t("step2.day_picker_aria_label")}
+										locale={dateFnsLocale} // <-- dynamically set locale
 									/>
 								</div>
 
