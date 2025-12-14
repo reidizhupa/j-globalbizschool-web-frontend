@@ -64,7 +64,7 @@ const redis = Redis.fromEnv();
 
 const limiter = new Ratelimit({
 	redis,
-	limiter: Ratelimit.slidingWindow(3, "1 h"), // 3 requests per hour
+	limiter: Ratelimit.slidingWindow(3, "1h"), // 3 requests per hour
 });
 
 function interpolate(template: string, values: Record<string, unknown>) {

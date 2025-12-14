@@ -135,7 +135,7 @@ export default function FreeCoachingClient() {
 
 			// API returned an error
 			if (!res.ok || data.error) {
-				throw new Error(data.error || "Unexpected error");
+				throw new Error(typeof data.error === "string" ? data.error : "Unexpected error");
 			}
 
 			// SUCCESS
