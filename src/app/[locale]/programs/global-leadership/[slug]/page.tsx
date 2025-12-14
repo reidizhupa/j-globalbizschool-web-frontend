@@ -115,10 +115,14 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 			};
 		});
 
+		const code = slug.includes("-") ? slug.split("-").pop()! : slug;
+
+		const normalizedCode = code.toUpperCase();
+
 		return {
 			title: locale === "jp" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
 			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
-			image: `/img/globals/${slug}.webp`,
+			image: `/img/globals/${normalizedCode}.webp`,
 			purpose: locale === "jp" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
 			participants: locale === "jp" ? record.PartecipantsJ : record.PartecipantsE || fallbackWorkshop.participants,
 			objectives: locale === "jp" ? record.ObjectivesJ : record.ObjectivesE || fallbackWorkshop.objectives,
@@ -139,13 +143,14 @@ export default async function ProgramPage(props: { params: Promise<{ locale: str
 	const finalLocale = locale || "jp";
 
 	// Force proper casing (or map from DB)
-	const properSlug = slug.toUpperCase(); // replace with DB lookup if needed
+	const code = slug.includes("-") ? slug.split("-").pop()! : slug;
 
+	const normalizedCode = code.toUpperCase();
 	// Redirect if slug is not correctly cased
-	if (slug !== properSlug) {
-		redirect(`/${finalLocale}/programs/global-leadership/${properSlug}`);
+	if (slug !== normalizedCode) {
+		redirect(`/${finalLocale}/programs/global-leadership/${normalizedCode}`);
 	}
 
-	const workshop = await fetchWorkshopBySlug(properSlug, finalLocale);
-	return <WorkshopDetail workshop={workshop} code={properSlug} />;
+	const workshop = await fetchWorkshopBySlug(normalizedCode, finalLocale);
+	return <WorkshopDetail workshop={workshop} code={normalizedCode} />;
 }
