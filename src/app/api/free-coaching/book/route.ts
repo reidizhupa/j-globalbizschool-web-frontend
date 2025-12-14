@@ -400,7 +400,7 @@ Message: ${message || "N/A"}
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://j-globalbizschool.vercel.app/logo.avif" alt="Company Logo" style="max-width: 150px;" />
+      <img src="https://j-globalbizschool/logo.avif" alt="Company Logo" style="max-width: 150px;" />
     </div>
 
     <!-- Header -->
