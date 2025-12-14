@@ -4,7 +4,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 const fallbackWorkshop: Workshop = {
 	title: "",
 	subtitle: "",
-	image: "/img/globals/presentation-C04.jpg",
+	image: "/img/globals/C04.webp",
 	purpose: [""],
 	participants: "",
 	objectives: [""],
