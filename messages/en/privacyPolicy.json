@@ -1,0 +1,77 @@
+{
+    "privacy": {
+        "meta": {
+            "title": "Privacy Policy | J-Global Inc.",
+            "description": "This Privacy Policy describes how J-Global Inc. handles personal information in its online learning services."
+        },
+        "title": "Privacy Policy",
+        "intro": "J-Global Inc. (hereinafter referred to as \"the Company\") establishes this Privacy Policy regarding the handling of personal information of users (hereinafter referred to as \"Members\") in the online learning services operated by the Company (hereinafter referred to as \"the Service\").",
+        "article1": {
+            "title": "Article 1 Acquisition of Information",
+            "clause1": "In this Policy, personal information means personal information as defined in Article 2, Paragraph 1 of the Act on the Protection of Personal Information. The personal information acquired from Members by the Company is as follows:",
+            "items": {
+                "name": "Name",
+                "birth": "Date of birth",
+                "company": "Name of the company to which the Member belongs (excluding individual Members)",
+                "email": "Email address",
+                "history": "Attendance and usage history in the Service",
+                "messages": "Messages posted by Members in the Service"
+            }
+        },
+        "article2": {
+            "title": "Article 2 Purpose of Use",
+            "items": {
+                "1": "Provision and operation of the Service",
+                "2": "Public relations and promotional activities for the Service and other services operated by the Company",
+                "3": "Notifications to Members and information regarding the Service and other services operated by the Company (including changes to terms of use and service content)",
+                "4": "Identity verification and authentication of Members",
+                "5": "Responding to inquiries",
+                "6": "Investigation and analysis of content usage, and planning, development, and promotion of new content",
+                "7": "Development of new services and new functions",
+                "8": "System maintenance, improvement, and troubleshooting",
+                "9": "Other purposes incidental to the above purposes of use"
+            }
+        },
+        "article3": {
+            "title": "Article 3 Restrictions on Use of Personal Information",
+            "content": "The Company will not handle personal information beyond the scope necessary to achieve the purpose of use without obtaining the consent of the Member, except as permitted by the Act on the Protection of Personal Information and other applicable laws and regulations. However, this shall not apply in cases where compliance with laws is required, where it is necessary to protect human life, body, or property, where it is necessary to improve public health or promote the sound development of children, or where cooperation with national or local government authorities is required."
+        },
+        "article4": {
+            "title": "Article 4 Proper Acquisition of Personal Information",
+            "content": "The Company will acquire personal information in a proper and lawful manner and will not acquire such information through deception or other improper means."
+        },
+        "article5": {
+            "title": "Article 5 Security Management of Personal Information",
+            "content": "The Company will provide necessary and appropriate supervision to its employees to ensure the safe management of personal information against risks such as loss, destruction, falsification, and leakage. When outsourcing all or part of the handling of personal information, the Company will also provide necessary and appropriate supervision to the outsourced parties. However, Members shall manage their accounts and passwords at their own responsibility in accordance with the terms of use."
+        },
+        "article6": {
+            "title": "Article 6 Provision of Personal Information to Third Parties",
+            "content": "The Company will not provide personal information to third parties without obtaining the prior consent of the Member, except as permitted by applicable laws and regulations. This excludes cases involving outsourcing, business succession, joint use, or other situations permitted by law."
+        },
+        "article7": {
+            "title": "Article 7 Disclosure of Personal Information",
+            "content": "If a Member requests disclosure of personal information based on applicable laws, the Company will confirm the identity of the requesting Member and respond without delay. A handling fee of JPY 1,000 per request will be charged for disclosure."
+        },
+        "article8": {
+            "title": "Article 8 Suspension of Use of Personal Information",
+            "content": "If a Member requests the suspension or deletion of personal information on the grounds that it has been obtained improperly or handled beyond the scope of the stated purpose of use, the Company will investigate the request and take appropriate measures in accordance with applicable laws."
+        },
+        "article9": {
+            "title": "Article 9 Use of Cookies and Similar Technologies",
+            "content": "The Service may use cookies and similar technologies to improve usability and service quality. Members may disable cookies through their browser settings; however, doing so may restrict access to certain features of the Service. No personal information not entered by Members is acquired through the use of cookies."
+        },
+        "article10": {
+            "title": "Article 10 Security Measures",
+            "content": "The Company protects Members' information using passwords and, when necessary, industry-standard security technologies such as SSL encryption to safeguard data transmission."
+        },
+        "article11": {
+            "title": "Article 11 Revisions to this Policy",
+            "content": "The Company will periodically review and improve the handling of personal information and may revise this Policy as necessary. Any material changes will be announced on the Company's website."
+        },
+        "contact": {
+            "title": "Article 12 Contact Information",
+            "content": "For inquiries or concerns regarding privacy, please contact us at support@j-global.com."
+        },
+        "established": "Established: March 15, 2023"
+    }
+}

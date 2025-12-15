@@ -1,0 +1,40 @@
+{
+    "title": "Company Overview",
+    "subtitle": "Key information about J-Global.",
+    "name": {
+        "label": "Company Name",
+        "value": "J-Global"
+    },
+    "address": {
+        "label": "Address",
+        "value": "Yaesu Exit Kaikan B2\n1-7-20 Yaesu, Chuo-ku\nTokyo 103-0028, Japan"
+    },
+    "phone": {
+        "label": "Phone",
+        "value": "+81-3-3281-4303"
+    },
+    "email": {
+        "label": "Email",
+        "value": "contact_us@j-global.com"
+    },
+    "website": {
+        "label": "Website",
+        "value": "<link>https://www.j-globalbizschool.com/</link><link>https://j-global.com</link>"
+    },
+    "established": {
+        "label": "Established",
+        "value": "July 28, 2010"
+    },
+    "business": {
+        "label": "Business Activities",
+        "value": "Corporate globalization support, change management, and facilitation."
+    },
+    "representative": {
+        "label": "Representative",
+        "value": "John James Lynch"
+    },
+    "employees": {
+        "label": "Number of Employees",
+        "value": "23"
+    }
+}

@@ -20,7 +20,7 @@ const FreeTrialSection = () => {
 				</div>
 
 				<div className="max-w-2xl mx-auto relative z-20">
-					{currentLocale === "jp" && (
+					{currentLocale === "ja" && (
 						<div className="block md:flex justify-center gap-6 mb-6">
 							<div className="flex items-center justify-center font-bold text-white text-2xl md:text-3xl mb-3 md:mb-0">{t("FreeTrialSection.feature1")}</div>
 						</div>

@@ -5,7 +5,7 @@ export default createMiddleware(routing);
 export const config = {
 	matcher: [
 		"/", // root redirect
-		"/(jp|en)/:path*", // prefixed locales
+		"/(ja|en)/:path*", // prefixed locales
 		"/((?!_next|_vercel|api|.*\\..*).*)", // <-- exclude /api
 	],
 };

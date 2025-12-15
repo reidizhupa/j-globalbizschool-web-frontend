@@ -163,7 +163,7 @@ export default function WorkshopSessions({ sessions, locale, translations }: Wor
 											const parsedDate = new Date(`${date.date} ${date.startTime}`);
 											const monthNames = [translations.jan, translations.feb, translations.mar, translations.apr, translations.may, translations.jun, translations.jul, translations.aug, translations.sep, translations.oct, translations.nov, translations.dec];
 											const month = monthNames[parsedDate.getMonth()];
-											const day = locale === "jp" ? `${parsedDate.getDate()}日` : parsedDate.getDate();
+											const day = locale === "ja" ? `${parsedDate.getDate()}日` : parsedDate.getDate();
 											let hours = parsedDate.getHours();
 											const minutes = parsedDate.getMinutes().toString().padStart(2, "0");
 											const ampm = locale === "en" ? (hours >= 12 ? "PM" : "AM") : "";

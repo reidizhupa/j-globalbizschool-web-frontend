@@ -1,0 +1,40 @@
+{
+    "title": "会社概要",
+    "subtitle": "J-Global の基本情報をご紹介します。",
+    "name": {
+        "label": "会社名",
+        "value": "J-Global"
+    },
+    "address": {
+        "label": "所在地",
+        "value": "〒103-0028\n東京都中央区八重洲1-7-20\n八重洲口会館 B2"
+    },
+    "phone": {
+        "label": "電話番号",
+        "value": "03-3281-4303"
+    },
+    "email": {
+        "label": "Eメール",
+        "value": "contact_us@j-global.com"
+    },
+    "website": {
+        "label": "Website",
+        "value": "<link>https://www.j-globalbizschool.com/</link><link>https://j-global.com</link>"
+    },
+    "established": {
+        "label": "設立",
+        "value": "2010年7月28日"
+    },
+    "business": {
+        "label": "事業内容",
+        "value": "企業のグローバル化支援、チェンジマネジメント、ファシリテーション"
+    },
+    "representative": {
+        "label": "代表者",
+        "value": "ジョン・ジェームス・リンチ"
+    },
+    "employees": {
+        "label": "従業員数",
+        "value": "23名"
+    }
+}

@@ -17,6 +17,7 @@ import "react-international-phone/style.css";
 // Import useMessages from next-intl (or your custom wrapper)
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
+import Footer from "@/app/components/Footer";
 // NOTE: Make sure the import path above is correct for your project's next-intl setup.
 
 export default function FreeCoachingClient() {
@@ -24,7 +25,7 @@ export default function FreeCoachingClient() {
 	const t = useTranslations("coaching");
 	const localeMap: Record<string, Locale> = {
 		en: enUS,
-		jp: ja,
+		ja: ja,
 	};
 
 	const dateFnsLocale = localeMap[locale] || enUS;
@@ -150,7 +151,7 @@ export default function FreeCoachingClient() {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 py-16">
+		<div className="min-h-screen bg-gray-50 flex flex-col items-center px-4 pt-16">
 			<header className="fixed top-0 left-0 right-0 z-50 mx-auto flex w-full items-center justify-between px-6 py-2 transition-colors duration-300 bg-white shadow-md">
 				<div className="max-w-7xl flex w-full items-center justify-between mx-auto">
 					<Link href="/" className="flex items-center">
@@ -426,6 +427,10 @@ export default function FreeCoachingClient() {
 						</motion.div>
 					)}
 				</AnimatePresence>
+			</div>
+			<div className="mt-10">
+				{" "}
+				<Footer />
 			</div>
 		</div>
 	);

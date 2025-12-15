@@ -1,27 +1,41 @@
 // lib/metadata.ts
 import { getTranslations } from "next-intl/server";
 import type { Metadata, ResolvingMetadata } from "next";
+import { I18N, type AppLocale } from "@/i18n/config";
 
 type PageProps = {
-	params: Promise<{ locale: string }>;
+	params: Promise<{ locale: AppLocale }>;
 };
 
-/**
- * Reusable metadata generator with full SEO support
- * @param props - Page props containing locale
- * @param parent - Parent metadata
- * @param namespace - Translation namespace
- */
-export async function generatePageMetadata(props: PageProps, parent: ResolvingMetadata, namespace: string): Promise<Metadata> {
-	const { params } = props;
-	const resolvedParams = await params;
+const SITE_URL = process.env.NEXT_PUBLIC_APP_URL!;
 
-	const t = await getTranslations({
-		locale: resolvedParams.locale,
-		namespace,
-	});
+function getLocalePrefix(locale: AppLocale) {
+	return locale === I18N.defaultLocale ? "" : `/${locale}`;
+}
+
+export async function generatePageMetadata(props: PageProps, parent: ResolvingMetadata, namespace: string, pathname = ""): Promise<Metadata> {
+	const { locale } = await props.params;
+
+	const t = await getTranslations({ locale, namespace });
+
+	// ✅ THIS is where your snippet is used
+	const languages = Object.fromEntries(
+		I18N.locales.map((loc) => [
+			loc, // ja / en
+			`${SITE_URL}${getLocalePrefix(loc)}${pathname}`,
+		])
+	);
+
+	const canonical = `${SITE_URL}${getLocalePrefix(locale)}${pathname}`;
 
 	return {
+		alternates: {
+			canonical,
+			languages: {
+				...languages,
+				"x-default": `${SITE_URL}${pathname}`,
+			},
+		},
 		title: t("title"),
 		description: t("description"),
 

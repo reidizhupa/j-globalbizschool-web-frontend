@@ -2,6 +2,7 @@
 
 import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
 	const t = useTranslations("homepage.footer"); // Namespace for translations
@@ -49,14 +50,14 @@ export default function Footer() {
 							</a>
 						</li>
 						<li>
-							<a href="#" className="hover:text-blue-600 transition">
+							<Link href="/privacy-policy/" className="hover:text-blue-600 transition">
 								{t("privacyPolicy")}
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a href="#" className="hover:text-blue-600 transition">
+							<Link href="/company-profile/" className="hover:text-blue-600 transition">
 								{t("companyProfile")}
-							</a>
+							</Link>
 						</li>
 					</ul>
 				</div>

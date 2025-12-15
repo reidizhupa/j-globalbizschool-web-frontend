@@ -17,7 +17,7 @@
  * @example Request
  * POST /api/free-coaching/book
  * Content-Type: application/json
- * x-locale: jp
+ * x-locale: ja
  * {
  *   "date": "2025-11-18",
  *   "time": "14:00",
@@ -115,10 +115,10 @@ export async function POST(req: NextRequest) {
 
 	/**
 	 * Extract locale from request header for multi-language email support
-	 * - Default to "jp" if not specified
+	 * - Default to "ja" if not specified
 	 * - Used for email subject and body translations
 	 */
-	const locale = req.headers.get("x-locale") || "jp";
+	const locale = req.headers.get("x-locale") || "ja";
 	const messages = await loadServerMessages(locale);
 
 	try {
@@ -400,7 +400,7 @@ Message: ${message || "N/A"}
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://j-globalbizschool/logo.avif" alt="Company Logo" style="max-width: 150px;" />
+      <img src="https://j-globalbizschool.com/logo.avif" alt="Company Logo" style="max-width: 150px;" />
     </div>
 
     <!-- Header -->
@@ -409,7 +409,7 @@ Message: ${message || "N/A"}
     </h2>
 
     <!-- Greeting -->
-    <p>${interpolate(messages.server.email.hi, { name: locale == "jp" ? lastName : firstName })}</p>
+    <p>${interpolate(messages.server.email.hi, { name: locale == "ja" ? lastName : firstName })}</p>
 
     <!-- Intro -->
     <p>

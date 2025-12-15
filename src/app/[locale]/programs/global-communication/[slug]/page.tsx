@@ -1,4 +1,5 @@
 import WorkshopDetail, { Workshop } from "@/app/components/programs/WorkshopDetails";
+import { AppLocale } from "@/i18n/config";
 import { generatePageMetadata } from "@/lib/seo";
 import type { Metadata, ResolvingMetadata } from "next";
 const fallbackWorkshop: Workshop = {
@@ -49,11 +50,10 @@ type Session = {
 
 type FileMakerPortalData = Record<string, (FileMakerWorkshop | FileMakerEvent)[]>;
 
-export async function generateMetadata(props: { params: Promise<{ locale: string; slug: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
-	const params = await props.params;
+export async function generateMetadata(props: { params: Promise<{ locale: AppLocale; slug: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
+	const { slug } = await props.params;
 
-	// FIX: wrap params back into a Promise for generatePageMetadata
-	return generatePageMetadata({ params: Promise.resolve(params) }, parent, "seo");
+	return generatePageMetadata(props, parent, "seo", `/programs/global-communication/${slug}/`);
 }
 
 // --- Fetch function ---
@@ -89,9 +89,9 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 		const datesArray = (events ? (Object.values(events)[1] as FileMakerEvent[]) : []) ?? [];
 
 		const sessions: Session[] = workshopsArray.map((item: FileMakerWorkshop) => {
-			const title = item[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "") || "";
+			const title = item[locale === "ja" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "") || "";
 
-			const purpose = item[locale === "jp" ? "Workshop::PurposeJ" : "Workshop::PurposeE"] || "";
+			const purpose = item[locale === "ja" ? "Workshop::PurposeJ" : "Workshop::PurposeE"] || "";
 
 			const content = purpose
 				.split(/\r\r/)
@@ -100,7 +100,7 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 
 			const matchingDates = datesArray
 				.filter((event: FileMakerEvent) => {
-					const eventTitle = event[locale === "jp" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "");
+					const eventTitle = event[locale === "ja" ? "Workshop::WorkshopNameJ" : "Workshop::WorkshopNameE"]?.replace(/^\d+\.\s*/, "");
 					return eventTitle === title;
 				})
 				.map((event: FileMakerEvent) => ({
@@ -117,13 +117,13 @@ async function fetchWorkshopBySlug(slug: string, locale: string): Promise<Worksh
 		});
 
 		return {
-			title: locale === "jp" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
-			subtitle: locale === "jp" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
+			title: locale === "ja" ? record["LearningProgramNameJ"] : record["LearningProgramNameE"] || fallbackWorkshop.title,
+			subtitle: locale === "ja" ? record.DescriptionJ : record.DescriptionE || fallbackWorkshop.subtitle,
 			image: `/img/globals/${slug}.webp`,
-			purpose: locale === "jp" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
-			participants: locale === "jp" ? record.PartecipantsJ : record.PartecipantsE || fallbackWorkshop.participants,
-			objectives: locale === "jp" ? record.ObjectivesJ : record.ObjectivesE || fallbackWorkshop.objectives,
-			language: locale === "jp" ? record.LanguageJ : record.LanguageE || fallbackWorkshop.language,
+			purpose: locale === "ja" ? record.BenefitJ : record.BenefitE || fallbackWorkshop.purpose,
+			participants: locale === "ja" ? record.PartecipantsJ : record.PartecipantsE || fallbackWorkshop.participants,
+			objectives: locale === "ja" ? record.ObjectivesJ : record.ObjectivesE || fallbackWorkshop.objectives,
+			language: locale === "ja" ? record.LanguageJ : record.LanguageE || fallbackWorkshop.language,
 			sessions,
 		};
 	} catch (err) {
@@ -137,7 +137,7 @@ import { redirect } from "next/navigation";
 
 export default async function ProgramPage(props: { params: Promise<{ locale: string; slug: string }> }) {
 	const { locale, slug } = await props.params;
-	const finalLocale = locale || "jp";
+	const finalLocale = locale || "ja";
 
 	// Force proper casing (or map from DB)
 	const properSlug = slug.toUpperCase(); // replace with DB lookup if needed

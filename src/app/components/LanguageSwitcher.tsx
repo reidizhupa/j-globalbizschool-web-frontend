@@ -39,7 +39,7 @@ export default function LanguageSwitcher() {
 		switch (localeCode) {
 			case "en":
 				return "English";
-			case "jp":
+			case "ja":
 				return "日本語";
 			default:
 				return localeCode;

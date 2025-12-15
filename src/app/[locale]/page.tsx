@@ -7,7 +7,7 @@ import { BookOpen, Briefcase } from "lucide-react";
 import LecturerIntroduction from "@/app/components/homepage/LecturerIntroduction";
 import Instructors from "@/app/components/homepage/Instructors";
 
-import type { Metadata, ResolvingMetadata } from "next";
+import type { ResolvingMetadata } from "next";
 import { generatePageMetadata } from "@/lib/seo";
 import LogoSection from "../components/homepage/LogoSection";
 import { useTranslations } from "next-intl";
@@ -16,8 +16,10 @@ import Footer from "../components/Footer";
 import JBSWorkshopsBenefits from "../components/homepage/Benefits";
 import JBSWorkshopsStructure from "../components/homepage/WorkshopStructure";
 import { Link } from "@/i18n/navigation";
+import { AppLocale } from "@/i18n/config";
 
-export async function generateMetadata(props: { params: Promise<{ locale: string }> }, parent: ResolvingMetadata): Promise<Metadata> {
+// app/[locale]/page.tsx
+export async function generateMetadata(props: { params: Promise<{ locale: AppLocale }> }, parent: ResolvingMetadata) {
 	/*
 
 	------ CASE OF OVERRIDING SOME PARTS OF THE METADATA
@@ -29,7 +31,6 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   };
   return { ...baseMetadata, ...overrides };
   */
-
 	return generatePageMetadata(props, parent, "seo");
 }
 
