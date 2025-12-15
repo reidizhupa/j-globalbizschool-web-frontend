@@ -1,21 +1,15 @@
 // app/[locale]/privacy-policy/page.tsx
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
+import type { ResolvingMetadata } from "next";
 import { Link } from "@/i18n/navigation";
 import LanguageSwitcher from "@/app/components/LanguageSwitcher";
 import Image from "next/image";
 import Footer from "@/app/components/Footer";
+import { generatePageMetadata } from "@/lib/seo";
+import { AppLocale } from "@/i18n/config";
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-	const t = await getTranslations({
-		locale: params.locale,
-		namespace: "privacy",
-	});
-
-	return {
-		title: t("privacy.meta.title"),
-		description: t("privacy.meta.description"),
-	};
+export async function generateMetadata(props: { params: Promise<{ locale: AppLocale }> }, parent: ResolvingMetadata) {
+	return generatePageMetadata(props, parent, "privacy");
 }
 
 export default async function PrivacyPolicyPage({ params }: { params: { locale: string } }) {
