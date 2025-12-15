@@ -9,12 +9,15 @@ import { generatePageMetadata } from "@/lib/seo";
 import { AppLocale } from "@/i18n/config";
 
 export async function generateMetadata(props: { params: Promise<{ locale: AppLocale }> }, parent: ResolvingMetadata) {
-	return generatePageMetadata(props, parent, "privacy");
+	return generatePageMetadata(props, parent, "seo");
 }
 
-export default async function PrivacyPolicyPage({ params }: { params: { locale: string } }) {
+export default async function PrivacyPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
+	// Await params first
+	const { locale } = await params;
+
 	const t = await getTranslations({
-		locale: params.locale,
+		locale,
 		namespace: "privacy",
 	});
 

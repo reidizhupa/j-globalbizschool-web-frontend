@@ -35,7 +35,6 @@ export async function generateMetadata(props: { params: Promise<{ locale: AppLoc
 }
 
 export default function HomePage() {
-	console.log(typeof window);
 	const tLevels = useTranslations("levels");
 	const tHome = useTranslations("homepage");
 
