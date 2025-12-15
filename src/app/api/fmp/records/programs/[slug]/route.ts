@@ -7,7 +7,7 @@ const FILEMAKER_API_VERSION = "v1";
 
 async function getToken() {
 	if (cachedToken && Date.now() < tokenExpiresAt) {
-		return cachedToken; // ✅ use tokenExpiresAt to validate cache
+		return cachedToken;
 	}
 
 	const { FILEMAKER_USER, FILEMAKER_PASS, FILEMAKER_URL, FILEMAKER_DB } = process.env;
