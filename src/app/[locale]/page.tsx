@@ -213,7 +213,7 @@ export default function HomePage() {
     z-50
   "
 			>
-				<span className="text-sm drop-shadow-md">FREE COACHING</span>
+				<span className="text-sm drop-shadow-md">{tHome("freeCoaching")}</span>
 
 				{/* Curved blue edge */}
 			</Link>
