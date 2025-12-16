@@ -252,12 +252,10 @@ export async function POST(req: NextRequest) {
 			summary: "Free Coaching Session",
 
 			// Description shown in calendar event details
-			description: `
-Name: ${firstName} ${lastName}
+			description: `Free coaching session with ${firstName} ${lastName}
 Email: ${email}
-Phone: ${phone || "N/A"}
-Message: ${message || "N/A"}
-			`,
+${phone?.trim() ? `Phone: ${phone}\n` : ""}${message?.trim() ? `Message: ${message}\n` : ""}
+Zoom link: ${process.env.ZOOM_LINK || ""}`,
 
 			// Event timing in ISO 8601 format with timezone
 			start: {
@@ -421,7 +419,7 @@ Message: ${message || "N/A"}
     <p>
       <strong>${messages.server.email.serviceBooked}:</strong> ${messages.server.email.serviceName}<br/>
       <strong>${messages.server.email.zoomLink}:</strong>
-      <a href="" style="color:#2563eb;">zoomLink</a><br/>
+      <a href="${process.env.ZOOM_LINK || ""}" style="color:#2563eb;">${process.env.ZOOM_LINK || ""}</a><br/>
       <strong>${messages.server.email.staff}:</strong> ${messages.server.email.staffName}
     </p>
 
@@ -454,8 +452,8 @@ Message: ${message || "N/A"}
 		});
 
 		await resend.emails.send({
-			from: "onboarding@resend.dev",
-			to: process.env.LECTURER_EMAIL || "", // ← your email here
+			from: process.env.FROM_EMAIL || "",
+			to: process.env.LECTURER_EMAIL || "",
 			subject: "New Free Coaching Booking Received",
 			html: `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px;">
@@ -466,8 +464,8 @@ Message: ${message || "N/A"}
       <p>
         <strong>Name:</strong> ${firstName} ${lastName || ""}<br/>
         <strong>Email:</strong> ${email}<br/>
-		<strong>Phone Number:</strong>  ${phone || "N/A"} <br/>
-		<strong>Message:</strong>  ${message || "N/A"} <br/>
+		${phone?.trim() ? `<strong>Phone Number:</strong> ${phone}<br/>` : ""}
+		${message?.trim() ? `<strong>Message:</strong> ${message}<br/>` : ""}
         <strong>Date:</strong> ${date}<br/>
         <strong>Time:</strong> ${time} (JST)<br/>
       </p>

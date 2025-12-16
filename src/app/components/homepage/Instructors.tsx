@@ -22,19 +22,14 @@ const Instructors = () => {
 			image: "/img/instructors/graham-lenz.avif",
 		},
 		{
-			name: "Mizuho Shimada",
+			name: "Nana",
 			role: tHome("roles.mizuhoShimada"),
-			image: "/img/instructors/mizuho-shimada.avif",
+			image: "/img/instructors/nana_hero.png",
 		},
 		{
 			name: "Ikem Okoboshi",
 			role: tHome("roles.ikemOkoboshi"),
 			image: "/img/instructors/ikem-okoboshi.png",
-		},
-		{
-			name: "Hisako Miyamori",
-			role: tHome("roles.hisakoMiyamori"),
-			image: "/img/instructors/hisako-miyamori.avif",
 		},
 	];
 
@@ -43,7 +38,7 @@ const Instructors = () => {
 			<div className="max-w-7xl mx-auto text-center">
 				<h2 className="text-3xl font-bold text-gray-800 mb-12">{tHome("otherLectures")}</h2>
 
-				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-0 place-items-center">
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-0 place-items-center">
 					{instructors.map((instructor, index) => (
 						<div key={index} className="flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2 hover:scale-105">
 							<div className="w-24 h-24 lg:w-32 lg:h-32 mb-4 rounded-full overflow-hidden shadow-md ring-2 ring-gray-100">
